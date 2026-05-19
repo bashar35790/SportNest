@@ -12,14 +12,23 @@ import {
 import React, { useState } from "react";
 
 function AddFacility() {
-  const [isPending, setIsPending] = useState<boolean>(false);
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsPending(true);
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
     console.log("Form Data:", data);
-    setIsPending(false);
+    const res = await fetch("http://localhost:5000/add-facility", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      alert("Facility added successfully!");
+    } else {
+      alert("Failed to add facility. Please try again.");
+    }
   };
 
   return (
@@ -60,27 +69,27 @@ function AddFacility() {
               </Select.Trigger>
               <Select.Popover>
                 <ListBox>
-                  <ListBox.Item id="Beach" textValue="Beach">
+                  <ListBox.Item id="Football" textValue="Football">
                     Football
                     <ListBox.ItemIndicator />
                   </ListBox.Item>
-                  <ListBox.Item id="Mountain" textValue="Mountain">
+                  <ListBox.Item id="Badminton" textValue="Badminton">
                     Badminton
                     <ListBox.ItemIndicator />
                   </ListBox.Item>
-                  <ListBox.Item id="City" textValue="City">
+                  <ListBox.Item id="Basketball" textValue="Basketball">
                     Basketball
                     <ListBox.ItemIndicator />
                   </ListBox.Item>
-                  <ListBox.Item id="Adventure" textValue="Adventure">
+                  <ListBox.Item id="Volleyball" textValue="Volleyball">
                     Volleyball
                     <ListBox.ItemIndicator />
                   </ListBox.Item>
-                  <ListBox.Item id="Cultural" textValue="Cultural">
+                  <ListBox.Item id="Tennis" textValue="Tennis">
                     Tennis
                     <ListBox.ItemIndicator />
                   </ListBox.Item>
-                  <ListBox.Item id="Luxury" textValue="Luxury">
+                  <ListBox.Item id="Swimming" textValue="Swimming">
                     Swimming
                     <ListBox.ItemIndicator />
                   </ListBox.Item>
@@ -127,7 +136,7 @@ function AddFacility() {
 
           {/* Available Time Slots  */}
           <div className="md:col-span-2">
-            <TextField name="availableTimeSlots" isRequired>
+            <TextField name="availableTimeSlots" type="text" isRequired>
               <Label>Available Time Slots </Label>
               <Input
                 placeholder="e.g. 08:00 AM - 09:00 AM"
@@ -153,7 +162,7 @@ function AddFacility() {
         <div className="hidden">
           <TextField name="OwnerEmail" isRequired>
             <Label>Owner Email *</Label>
-            <Input placeholder="Enter owner's email"  className="rounded-2xl" />
+            <Input placeholder="Enter owner's email" className="rounded-2xl" />
             <FieldError />
           </TextField>
         </div>
@@ -164,7 +173,7 @@ function AddFacility() {
           variant="outline"
           className=" rounded-none w-full bg-cyan-500 text-white"
         >
-          {isPending ? "Submitting..." : "Add Facility"}
+          Add Facility
         </Button>
       </form>
     </div>
