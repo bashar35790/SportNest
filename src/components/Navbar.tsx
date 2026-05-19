@@ -1,0 +1,142 @@
+"use client";
+
+import { Menu, X, ChevronDown, UserCircle2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import { useState } from "react";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "All Facilities", href: "/facilities" },
+  { name: "My Bookings", href: "/my-bookings" },
+  { name: "Add Facility", href: "/add-facility" },
+  { name: "Manage My Facilities", href: "/manage-facilities" },
+];
+
+export default function Navbar() {
+  const [mobileMenu, setMobileMenu] = useState(false);
+
+  // change this manually for design preview
+  const isLoggedIn = false;
+
+  return (
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-white/75 backdrop-blur-xl">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4  lg:px-8">
+        {/* Logo */}
+        <Link href="/" className="flex items-center">
+          <h2 className="text-3xl letter-spacing-1 font-bold text-brand-primari">
+            SportNest
+          </h2>
+        </Link>
+
+        {/* Desktop Nav */}
+        <div className="hidden items-center gap-2 lg:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="rounded-xl px-4 py-2 text-sm font-medium text-brand-primari transition-all duration-300 hover:text-brand-secoundry"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+
+        {/* Right Side */}
+        <div className="hidden items-center gap-4 lg:flex">
+          {isLoggedIn ? (
+            <div className="group relative">
+              <button className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 transition hover:bg-white/10">
+                <UserCircle2 className="h-8 w-8 text-brand-primari" />
+
+                <div className="text-left">
+                  <p className="text-sm font-semibold text-brand-primari">
+                    Bashar
+                  </p>
+                  <p className="text-xs text-brand-primari">Developer</p>
+                </div>
+
+                <ChevronDown className="h-4 w-4 text-slate-400" />
+              </button>
+
+              {/* Dropdown */}
+              <div className="invisible absolute right-0 top-16 w-64 translate-y-3 rounded-2xl border border-white/10 bg-[#0b1727] p-3 opacity-0 shadow-2xl transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="mb-3 border-b border-white/10 pb-3">
+                  <p className="font-semibold text-white">Md Bashar</p>
+                  <p className="text-sm text-slate-400">bashar@gmail.com</p>
+                </div>
+
+                <div className="space-y-1">
+                  <Link
+                    href="/my-bookings"
+                    className="block rounded-xl px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
+                  >
+                    My Bookings
+                  </Link>
+
+                  <Link
+                    href="/add-facility"
+                    className="block rounded-xl px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
+                  >
+                    Add Facility
+                  </Link>
+
+                  <Link
+                    href="/manage-facilities"
+                    className="block rounded-xl px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
+                  >
+                    Manage My Facilities
+                  </Link>
+
+                  <button className="mt-2 w-full rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]">
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <button className="rounded-2xl bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:scale-[1.03]">
+              Login
+            </button>
+          )}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenu(!mobileMenu)}
+          className="rounded-xl border border-white/10 p-2 text-white lg:hidden"
+        >
+          {mobileMenu ? <X /> : <Menu />}
+        </button>
+      </nav>
+
+      {/* Mobile Menu */}
+      {mobileMenu && (
+        <div className="border-t border-white/10 bg-[#071120] px-4 py-5 lg:hidden">
+          <div className="flex flex-col gap-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            {isLoggedIn ? (
+              <button className="mt-3 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-4 py-3 font-semibold text-white">
+                Logout
+              </button>
+            ) : (
+              <button className="mt-3 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-4 py-3 font-semibold text-white">
+                Login
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}

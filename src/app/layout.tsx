@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Anton, DM_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "../components/Navbar";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const anton = Anton({
+  variable: "--font-anton",
   subsets: ["latin"],
+  weight: "400",
 });
 
-const geistMono = Geist_Mono({
+const dmSans = DM_Sans({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -25,9 +28,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${anton.variable} ${dmSans.variable} h-full antialiased`}
+      data-theme="light"
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body
+        className="min-h-full flex flex-col bg-white"
+        cz-shortcut-listen="true"
+      >
+        <Navbar />
+        <main className="flex-1 py-40 text-center">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
