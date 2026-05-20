@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-white/75 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4  lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <h2 className="text-3xl letter-spacing-1 font-bold text-brand-primari">
@@ -36,7 +36,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="rounded-xl px-4 py-2 text-sm font-medium text-brand-primari transition-all duration-300 hover:text-brand-secoundry"
+              className="rounded-xl px-4 py-2 text-sm font-medium text-brand-primari transition-all duration-300 hover:text-brand-primari"
             >
               {link.name}
             </Link>
@@ -96,9 +96,11 @@ export default function Navbar() {
               </div>
             </div>
           ) : (
-            <button className="rounded-2xl bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:scale-[1.03]">
+             <Link href={"/auth/login"}>
+              <button className="rounded-2xl bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:scale-[1.03]">
               Login
             </button>
+             </Link>
           )}
         </div>
 
