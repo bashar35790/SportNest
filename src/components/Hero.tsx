@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 const STATS = [
   { value: "240+", label: "Facilities" },
   { value: "12K", label: "Bookings" },
@@ -18,36 +16,11 @@ const SPORTS = [
 ];
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  /* Subtle parallax on scroll */
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const glowOrb = section.querySelector<HTMLElement>(".glow-orb");
-      if (glowOrb) glowOrb.style.transform = `translateY(${scrollY * 0.12}px)`;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <>
-      <section
-        ref={sectionRef}
-        className="hero-section"
-        aria-label="Book your sports facility"
-      >
+      <section className="hero-section" aria-label="Book your sports facility">
         {/* ── Backgrounds ── */}
         <div className="hero-bg" aria-hidden="true" />
-        <div className="grid-lines" aria-hidden="true" />
-        <div className="glow-orb" aria-hidden="true" />
-        <div className="turf-arc" aria-hidden="true" />
-        <div className="turf-arc-inner" aria-hidden="true" />
 
         {/* ── Content ── */}
         <div className="hero-content">
@@ -169,58 +142,11 @@ export default function Hero() {
             0% { transform: scale(1.05) translateY(0); }
             100% { transform: scale(1.1) translateY(-2%); }
           }
-          
-          .grid-lines {
-            position: absolute; inset: 0;
-            background-image:
-              linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-            background-size: 52px 52px;
-            z-index: 1;
-            mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
-            -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 80%);
-          }
-          
-          .glow-orb {
-            position: absolute;
-            top: 20%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px; height: 800px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(6,182,212,.15) 0%, transparent 60%);
-            will-change: transform;
-            pointer-events: none;
-            z-index: 1;
-            filter: blur(40px);
-          }
-          
-          .turf-arc {
-            position: absolute;
-            bottom: -150px; left: 50%;
-            transform: translateX(-50%);
-            width: min(1200px, 150vw); height: 400px;
-            border-radius: 50%;
-            border-top: 1.5px solid rgba(6,182,212,.3);
-            background: radial-gradient(ellipse at top, rgba(6,182,212,.1) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 1;
-            box-shadow: 0 -20px 40px rgba(6,182,212,.05);
-          }
-          .turf-arc-inner {
-            position: absolute;
-            bottom: -120px; left: 50%;
-            transform: translateX(-50%);
-            width: min(800px, 100vw); height: 250px;
-            border-radius: 50%;
-            border-top: 1px solid rgba(6,182,212,.15);
-            pointer-events: none;
-            z-index: 1;
-          }
 
           /* ── Content ──────────────────────────────────────── */
           .hero-content {
             position: relative; z-index: 2;
-            padding: 100px 24px 80px;
+            padding: 120px 24px 80px;
             display: flex; flex-direction: column;
             align-items: center; text-align: center;
             gap: 0;
@@ -238,9 +164,9 @@ export default function Hero() {
             padding: 8px 20px;
             font-size: 12px; font-weight: 600;
             color: #22d3ee;
+            margin-bottom: 20px;
             letter-spacing: .1em;
             text-transform: uppercase;
-            margin-bottom: 36px;
             animation: fadeDown .6s cubic-bezier(0.16, 1, 0.3, 1) both;
             box-shadow: 0 4px 20px rgba(6,182,212,.1);
           }
@@ -259,7 +185,7 @@ export default function Hero() {
             line-height: 0.95;
             color: #fff;
             letter-spacing: .02em;
-            margin: 0 0 16px;
+            margin: 0 0 10px;
             animation: fadeDown .7s .1s cubic-bezier(0.16, 1, 0.3, 1) both;
             text-shadow: 0 10px 30px rgba(0,0,0,0.5);
           }
@@ -288,7 +214,7 @@ export default function Hero() {
             color: rgba(255,255,255,.7);
             max-width: 540px;
             line-height: 1.6;
-            margin: 24px 0 44px;
+            margin: 10px 0 20px;
             animation: fadeDown .7s .2s cubic-bezier(0.16, 1, 0.3, 1) both;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
           }
@@ -302,7 +228,7 @@ export default function Hero() {
           .cta-group {
             display: flex; align-items: center; gap: 16px;
             flex-wrap: wrap; justify-content: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             animation: fadeDown .7s .3s cubic-bezier(0.16, 1, 0.3, 1) both;
           }
           .btn-primary {
@@ -349,7 +275,7 @@ export default function Hero() {
           /* ── Stats bar ────────────────────────────────────── */
           .stats-bar {
             display: flex; align-items: stretch;
-            background: rgba(10, 15, 26, 0.6);
+            background: #0F172A;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,.08);

@@ -10,8 +10,7 @@ const steps = [
   {
     icon: CalendarCheck2,
     title: "Book",
-    description:
-      "Choose your slot and pay securely with instant confirmation.",
+    description: "Choose your slot and pay securely with instant confirmation.",
   },
   {
     icon: Trophy,
@@ -27,7 +26,7 @@ export default function HowItWorks() {
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-20">
-          <h2 className="text-white text-4xl md:text-5xl font-semibold">
+          <h2 className="text-white text-4xl md:text-5xl font-semibold highlight-text">
             How It Works
           </h2>
         </div>
@@ -35,7 +34,7 @@ export default function HowItWorks() {
         {/* Steps */}
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
           {/* Connecting Line */}
-          <div className="hidden md:block absolute top-10 left-[16%] right-[16%] h-[1px] bg-emerald-400/20" />
+          <div className="hidden md:block absolute top-10 left-[16%] right-[16%] h-px bg-brand-Cyan400/20" />
 
           {steps.map((step, index) => {
             const Icon = step.icon;
@@ -46,8 +45,11 @@ export default function HowItWorks() {
                 className="relative flex flex-col items-center text-center"
               >
                 {/* Icon Circle */}
-                <div className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border border-emerald-400 bg-[#08233A] shadow-[0_0_25px_rgba(74,222,128,0.15)]">
-                  <Icon className="w-9 h-9 text-emerald-400" strokeWidth={2} />
+                <div className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border border-brand-Cyan400 bg-[#08233A] shadow-[0_0_25px_rgba(74,222,128,0.15)]">
+                  <Icon
+                    className="w-9 h-9 text-brand-Cyan600"
+                    strokeWidth={2}
+                  />
                 </div>
 
                 {/* Title */}
