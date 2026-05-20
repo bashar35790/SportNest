@@ -20,7 +20,19 @@ export default function Hero() {
     <>
       <section className="hero-section" aria-label="Book your sports facility">
         {/* ── Backgrounds ── */}
-        <div className="hero-bg" aria-hidden="true" />
+        <div className="hero-bg" aria-hidden="true">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/hero.jpg"
+            className="hero-video"
+          >
+            <source src="/video/heroVideo.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-overlay" />
+        </div>
 
         {/* ── Content ── */}
         <div className="hero-content">
@@ -127,17 +139,30 @@ export default function Hero() {
           /* ── Background layers ────────────────────────────── */
           .hero-bg {
             position: absolute; inset: 0;
-            background-image:
-              linear-gradient(to bottom, rgba(10, 15, 26, 0.3) 0%, rgba(10, 15, 26, 0.95) 100%),
-              radial-gradient(ellipse 80% 60% at 50% 20%, rgba(6, 182, 212, 0.25) 0%, transparent 60%),
-              url('/hero.jpg');
-            background-size: cover, cover, cover;
-            background-position: center, center, center;
-            background-repeat: no-repeat;
-            opacity: 0.9;
             z-index: 0;
+            overflow: hidden;
+            background: #0a0f1a;
+          }
+
+          .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
             animation: bgPan 30s ease-in-out infinite alternate;
           }
+
+          .hero-overlay {
+            position: absolute; inset: 0;
+            background-image:
+              linear-gradient(to bottom, rgba(10, 15, 26, 0.4) 0%, rgba(10, 15, 26, 0.95) 100%),
+              radial-gradient(ellipse 80% 60% at 50% 20%, rgba(6, 182, 212, 0.25) 0%, transparent 60%);
+            z-index: 1;
+            pointer-events: none;
+          }
+
           @keyframes bgPan {
             0% { transform: scale(1.05) translateY(0); }
             100% { transform: scale(1.1) translateY(-2%); }
