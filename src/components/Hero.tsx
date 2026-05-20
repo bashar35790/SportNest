@@ -149,6 +149,7 @@ export default function Hero() {
             display: flex;
             align-items: center;
             justify-content: center;
+
           }
 
           /* ── Background layers ────────────────────────────── */
@@ -158,6 +159,8 @@ export default function Hero() {
               radial-gradient(ellipse 80% 60% at 68% 38%, rgba(6,182,212,.13) 0%, transparent 60%),
               radial-gradient(ellipse 50% 80% at 20% 80%, rgba(6,182,212,.07) 0%, transparent 60%),
               linear-gradient(160deg, #050b18 0%, #0d1b2a 55%, #091520 100%);
+              url('/hero.jpg') repeat;
+            background-size: cover, cover, cover, 52px 52px;
           }
           .grid-lines {
             position: absolute; inset: 0;
