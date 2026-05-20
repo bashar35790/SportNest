@@ -108,7 +108,7 @@ export default function Feature() {
               {/* Content */}
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-2 gap-4">
-                  <h3 className="text-xl font-bold text-brand-primari leading-tight">
+                  <h3 className="text-xl font-bold text-brand-secoundry leading-tight">
                     {facility.name}
                   </h3>
                   <div className="text-right whitespace-nowrap">
@@ -137,7 +137,7 @@ export default function Feature() {
                   ))}
                 </div>
 
-                <button className="w-full bg-[#08233A] hover:bg-[#0a2f4c] text-white font-medium py-3.5 rounded-xl transition-colors duration-200">
+                <button className="w-full bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-white font-medium py-3.5 rounded-xl transition-colors duration-200">
                   Book Now
                 </button>
               </div>

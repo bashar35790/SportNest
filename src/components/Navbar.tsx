@@ -22,20 +22,18 @@ export default function Navbar() {
   const router = useRouter();
   console.log(sessionPending);
 
-
   const handleLogout = async () => {
     await authClient.signOut();
     router.refresh();
-    router.push("/auth/login")
-
-  }
+    router.push("/auth/login");
+  };
 
   return (
     <header className="fixed text-center top-0 z-50 border-b border-white/10 bg-white backdrop-blur-xl w-full">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <h2 className="text-3xl letter-spacing-1 font-bold text-brand-primari">
+          <h2 className="text-3xl letter-spacing-1 font-bold text-brand-secoundry">
             SportNest
           </h2>
         </Link>
@@ -58,7 +56,10 @@ export default function Navbar() {
           {session ? (
             <div className="group relative">
               <button className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 transition hover:bg-white/10">
-                <Link href="#" className="relative h-10 w-10 md:h-12 md:w-12 rounded-full overflow-hidden shadow-md border-2 border-brand-primari/20 hover:border-brand-primari transition-all">
+                <Link
+                  href="#"
+                  className="relative h-10 w-10 md:h-12 md:w-12 rounded-full overflow-hidden shadow-md border-2 border-brand-primari/20 hover:border-brand-primari transition-all"
+                >
                   <Image
                     src={
                       user?.image?.startsWith("http")
@@ -112,7 +113,8 @@ export default function Navbar() {
                   </Link>
 
                   <Link href={"#"}>
-                    <button className="mt-2 w-full rounded-xl bg-linear-to-r from-brand-primari px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]"
+                    <button
+                      className="mt-2 w-full rounded-xl bg-linear-to-r from-brand-primari px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]"
                       onClick={handleLogout}
                     >
                       Logout
@@ -157,7 +159,6 @@ export default function Navbar() {
               <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari to-brand-primari/40 px-4 py-3 font-semibold text-white">
                 Login
               </button>
-
             ) : (
               <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari px-4 py-3 font-semibold text-white">
                 Logout
