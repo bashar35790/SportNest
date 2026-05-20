@@ -10,17 +10,31 @@ import {
   TextArea,
   Button,
 } from "@heroui/react";
-import React from "react";
+import React, { useState } from "react";
+import { Plus, X } from "lucide-react";
 
 function AddFacility() {
+  const [isPending, setIsPending] = useState<boolean>(false);
+  const [timeSlots, setTimeSlots] = useState<string[]>([]);
+  const [timeSlotInput, setTimeSlotInput] = useState<string>("");
+
+  const handleAddTimeSlot = () => {
+    if (timeSlotInput.trim()) {
+      setTimeSlots([...timeSlots, timeSlotInput.trim()]);
+      setTimeSlotInput("");
+    }
+  };
+
+  const handleRemoveTimeSlot = (indexToRemove: number) => {
+    setTimeSlots(timeSlots.filter((_, index) => index !== indexToRemove));
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsPending(true);
     const formData = new FormData(e.currentTarget as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
+    const data = Object.fromEntries(formData.entries()) as Record<string, any>;
+    data.availableTimeSlots = timeSlots;
     console.log("Form Data:", JSON.stringify(data, null, 2));
-
-    // Show the data in an alert so you can easily see it without opening the browser console
-    alert("Form Data successfully captured:\n" + JSON.stringify(data, null, 2));
 
     const res = await fetch("http://localhost:5000/add-facility", {
       method: "POST",
@@ -34,6 +48,7 @@ function AddFacility() {
     } else {
       alert("Failed to add facility. Please try again.");
     }
+    setIsPending(false);
   };
 
   return (
@@ -143,15 +158,58 @@ function AddFacility() {
 
           {/* Available Time Slots  */}
           <div className="md:col-span-2">
-            <TextField name="availableTimeSlots" type="text" isRequired>
-              <Label>Available Time Slots </Label>
-              <Input
-                name="availableTimeSlots"
-                placeholder="e.g. 08:00 AM - 09:00 AM"
-                className="rounded-2xl"
-              />
-              <FieldError />
-            </TextField>
+            <div>
+              <Label className="text-sm font-medium mb-2 block text-gray-500 uppercase tracking-widest">
+                Available Time Slots *
+              </Label>
+              <div className="flex items-center gap-2">
+                <TextField className="flex-1" aria-label="Available Time Slots">
+                  <Input
+                    value={timeSlotInput}
+                    onChange={(e) => setTimeSlotInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAddTimeSlot();
+                      }
+                    }}
+                    placeholder="e.g. 08:00 AM - 09:00 AM"
+                    className="rounded-2xl"
+                  />
+                  <FieldError />
+                </TextField>
+                <Button
+                  type="button"
+                  isIconOnly
+                  variant="solid"
+                  className="bg-[#10a149] text-white rounded-2xl h-[56px] w-[56px] flex-shrink-0"
+                  onPress={handleAddTimeSlot}
+                >
+                  <Plus size={24} />
+                </Button>
+              </div>
+
+              {/* Chips container */}
+              {timeSlots.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {timeSlots.map((slot, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-1 bg-green-50 text-green-700 px-3 py-1.5 rounded-full border border-green-200 text-sm font-medium"
+                    >
+                      {slot}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveTimeSlot(index)}
+                        className="text-green-600 hover:text-green-800 transition-colors ml-1"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Description */}
@@ -182,7 +240,7 @@ function AddFacility() {
           variant="outline"
           className=" rounded-none w-full bg-cyan-500 text-white"
         >
-          Add Facility
+          {isPending ? "Adding..." : "Add Facility"}
         </Button>
       </Form>
     </div>
