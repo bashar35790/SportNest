@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MapPin, ChevronRight } from "lucide-react";
+import GetFeaturedFacilities from "@/api/GetApi";
 
 const FEATURED_FACILITIES = [
   {
@@ -64,7 +65,28 @@ const FEATURED_FACILITIES = [
   },
 ];
 
-export default function Feature() {
+// {
+//     "_id": "6a0d76c066cc878662ecc2c7",
+//     "name": "Ace Tennis Club",
+//     "facility_type": "Tennis",
+//     "image": "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6",
+//     "location": "Gulshan, Dhaka",
+//     "price_per_hour": 2200,
+//     "capacity": 4,
+//     "available_slots": [
+//         "08:00 AM - 10:00 AM",
+//         "10:00 AM - 12:00 PM",
+//         "04:00 PM - 06:00 PM",
+//         "06:00 PM - 08:00 PM"
+//     ],
+//     "description": "Outdoor tennis court with premium surface quality and night lighting.",
+//     "owner_email": "owner4@sportnest.com",
+//     "booking_count": 10
+// }
+
+export default async function Feature() {
+  const { facilities } = await GetFeaturedFacilities();
+  console.log(facilities);
   return (
     <section className="py-24 bg-[#f8fafc]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -88,9 +110,9 @@ export default function Feature() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {FEATURED_FACILITIES.map((facility) => (
+          {facilities.map((facility: any) => (
             <div
-              key={facility.id}
+              key={facility._id}
               className="bg-white rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 flex flex-col group"
             >
               {/* Image Box */}
@@ -100,8 +122,8 @@ export default function Feature() {
                   alt={facility.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute top-4 right-4 bg-brand-primari text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10 tracking-wide">
-                  {facility.badge}
+                <div className={`absolute top-4 right-4 bg-brand-primari text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10 tracking-wide ${facility.facility_type === "Cricket" ? "bg-green-500" : facility.facility_type === "Football" ? "bg-green-500" : facility.facility_type === "Badminton" ? "bg-green-500" : facility.facility_type === "Basketball" ? "bg-green-500" : facility.facility_type === "Swimming" ? "bg-brand-cyan400" : "bg-brand-secoundry"}`}>
+                  {facility.facility_type}
                 </div>
               </div>
 
@@ -113,7 +135,7 @@ export default function Feature() {
                   </h3>
                   <div className="text-right whitespace-nowrap">
                     <span className="text-lg font-bold text-brand-primari">
-                      $ {facility.price}
+                      $ {facility.price_per_hour}
                     </span>
                     <span className="text-xs text-gray-500 font-medium">
                       /hr
@@ -127,12 +149,12 @@ export default function Feature() {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                  {facility.tags.map((tag) => (
+                  {facility.available_slots.map((slot: any) => (
                     <span
-                      key={tag}
+                      key={slot}
                       className="bg-slate-100 text-slate-700 text-xs font-medium px-3 py-1 rounded-md"
                     >
-                      {tag}
+                      {slot}
                     </span>
                   ))}
                 </div>
