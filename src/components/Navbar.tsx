@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { Menu, X, ChevronDown, UserCircle2 } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,7 @@ const navLinks = [
   { name: "Add Facility", href: "/add-facility" },
   { name: "Manage My Facilities", href: "/manage-facilities" },
 ];
+
 export default function Navbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const { data: session, isPending: sessionPending } = authClient.useSession();
@@ -66,7 +67,7 @@ export default function Navbar() {
                         ? user.image
                         : "/myphoto.png"
                     }
-                    alt={user?.name ?? "User profile image"}
+                    alt={user?.name ?? "User profile"}
                     fill
                     className="object-cover"
                     sizes="48px"

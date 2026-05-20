@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, FieldError, Form, Input, Label, TextField, InputGroup, Description } from "@heroui/react";
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -50,6 +51,12 @@ export default function Signup() {
     }
 
   };
+
+  const handleSocialSignup = async()=>{
+    await authClient.signIn.social({
+    provider: "google",
+  });
+  }
 
   return (
     <div className="py-12 h-dvh md:py-16 mx-auto px-4">
@@ -156,6 +163,10 @@ export default function Signup() {
         </Form>
 
         <h4 className="text-white text-center font-bold">Or</h4>
+        <Button className="w-full" variant="tertiary" onPress={handleSocialSignup}>
+          <Icon icon="devicon:google" />
+          Sign in with Google
+        </Button>
         <div className="w-full flex gap-2 justify-center items-center mt-5">
           <p className="text-white/80 text-sm font-medium">Don&apos;t have any account?</p>
           <Link href="/auth/signup" className="text-white underline decoration-white/60 font-bold transition-all cursor-pointer">Sign up</Link>
