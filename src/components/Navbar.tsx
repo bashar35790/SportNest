@@ -5,8 +5,6 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-
 import { useState } from "react";
 
 const navLinks = [
@@ -33,7 +31,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-white/75 backdrop-blur-xl">
+    <header className="fixed text-center top-0 z-50 border-b border-white/10 bg-white backdrop-blur-xl w-full">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">

@@ -36,7 +36,7 @@ export default function RootLayout({
         cz-shortcut-listen="true"
       >
         <Navbar />
-        <main className="flex-1 py-40 text-center">{children}</main>
+        <main className="flex-1 text-center">{children}</main>
         <Footer />
       </body>
     </html>
