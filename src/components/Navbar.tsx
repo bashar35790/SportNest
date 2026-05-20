@@ -11,10 +11,10 @@ import { useState } from "react";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "All Facilities", href: "/facilities" },
-  { name: "My Bookings", href: "/my-bookings" },
-  { name: "Add Facility", href: "/add-facility" },
-  { name: "Manage My Facilities", href: "/manage-facilities" },
+  { name: "All Facilities", href: "/all-facility" },
+  { name: "My Bookings", href: "/dashboard/my-bookings" },
+  { name: "Add Facility", href: "/dashboard/add-facility" },
+  { name: "Manage My Facilities", href: "/dashboard/manage-facilities" },
 ];
 
 export default function Navbar() {
@@ -93,21 +93,21 @@ export default function Navbar() {
 
                 <div className="space-y-1">
                   <Link
-                    href="/my-bookings"
+                    href="/dashboard/my-bookings"
                     className="block rounded-xl px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
                   >
                     My Bookings
                   </Link>
 
                   <Link
-                    href="/add-facility"
+                    href="/dashboard/add-facility"
                     className="block rounded-xl px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
                   >
                     Add Facility
                   </Link>
 
                   <Link
-                    href="/manage-facilities"
+                    href="/dashboard/manage-facilities"
                     className="block rounded-xl px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
                   >
                     Manage My Facilities
