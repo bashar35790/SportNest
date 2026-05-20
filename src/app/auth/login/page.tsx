@@ -5,7 +5,7 @@ import { Check } from "@gravity-ui/icons";
 import { Button, FieldError, Form, Input, Label, TextField, InputGroup, Description } from "@heroui/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const inputStyles =
   "border border-gray-300 focus-within:border-brand-secoundry focus-within:ring-1 focus-within:ring-brand-secoundry focus:outline-none w-full";
@@ -13,7 +13,15 @@ const inputStyles =
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+  const { data: session, isPending: sessionPending } = authClient.useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data: Record<string, string> = {};
@@ -30,11 +38,11 @@ const Login = () => {
       rememberMe: true,
       callbackURL: "/",
     });
-    if(error){
+    if (error) {
 
-    }else{
-       router.refresh();
-       
+    } else {
+      router.refresh();
+      router.push("/");
     }
   };
 
