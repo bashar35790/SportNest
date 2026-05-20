@@ -6,7 +6,7 @@ function Hero() {
       <Image src="https://i.ibb.co/CKG6wb2b/Hero-Section.png" alt="hero" fill className="object-cover" />
 
       <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="text-white text-5xl font-bold">Hero Section</h1>
+        <h1 className="text-white text-5xl">Book your favorite sports facility instantly</h1>
       </div>
     </section>
   );
