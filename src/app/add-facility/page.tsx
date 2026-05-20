@@ -1,5 +1,6 @@
 "use client";
 import {
+  Form,
   FieldError,
   Input,
   Label,
@@ -9,14 +10,18 @@ import {
   TextArea,
   Button,
 } from "@heroui/react";
-import React, { useState } from "react";
+import React from "react";
 
 function AddFacility() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
-    console.log("Form Data:", data);
+    console.log("Form Data:", JSON.stringify(data, null, 2));
+
+    // Show the data in an alert so you can easily see it without opening the browser console
+    alert("Form Data successfully captured:\n" + JSON.stringify(data, null, 2));
+
     const res = await fetch("http://localhost:5000/add-facility", {
       method: "POST",
       headers: {
@@ -40,13 +45,14 @@ function AddFacility() {
           Fill in the details to add a new facility.
         </p>
       </div>
-      <form className="p-10 space-y-8 text-left" onSubmit={handleSubmit}>
+      <Form className="p-10 space-y-8 text-left" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/*  Name */}
           <div>
             <TextField name="destinationName" isRequired>
               <Label>Facility Name *</Label>
               <Input
+                name="destinationName"
                 placeholder="Enter facility name"
                 className="rounded-2xl"
               />
@@ -103,6 +109,7 @@ function AddFacility() {
             <TextField name="imageUrl" isRequired>
               <Label>Image URL *</Label>
               <Input
+                name="imageUrl"
                 type="url"
                 placeholder="https://example.com/bali-paradise.jpg"
                 className="rounded-2xl"
@@ -115,7 +122,7 @@ function AddFacility() {
           <div>
             <TextField name="location" isRequired>
               <Label>Location *</Label>
-              <Input placeholder="Enter the location" className="rounded-2xl" />
+              <Input name="location" placeholder="Enter the location" className="rounded-2xl" />
               <FieldError />
             </TextField>
           </div>
@@ -123,14 +130,14 @@ function AddFacility() {
           {/* Price */}
           <TextField name="price" type="number" isRequired>
             <Label>Price Per Hour ($) *</Label>
-            <Input type="number" placeholder="30" className="rounded-2xl" />
+            <Input name="price" type="number" placeholder="30" className="rounded-2xl" />
             <FieldError />
           </TextField>
 
           {/* Capacity (Players) * */}
           <TextField name="capacity" type="number" isRequired>
             <Label>Capacity (Players) *</Label>
-            <Input type="number" placeholder="50" className="rounded-2xl" />
+            <Input name="capacity" type="number" placeholder="50" className="rounded-2xl" />
             <FieldError />
           </TextField>
 
@@ -139,6 +146,7 @@ function AddFacility() {
             <TextField name="availableTimeSlots" type="text" isRequired>
               <Label>Available Time Slots </Label>
               <Input
+                name="availableTimeSlots"
                 placeholder="e.g. 08:00 AM - 09:00 AM"
                 className="rounded-2xl"
               />
@@ -151,6 +159,7 @@ function AddFacility() {
             <TextField name="description" isRequired>
               <Label>Description</Label>
               <TextArea
+                name="description"
                 placeholder="Describe the facility..."
                 className="rounded-3xl"
               />
@@ -160,9 +169,9 @@ function AddFacility() {
         </div>
         {/* Auto-fill: Owner Email  */}
         <div className="hidden">
-          <TextField name="OwnerEmail" isRequired>
+          <TextField name="OwnerEmail">
             <Label>Owner Email *</Label>
-            <Input placeholder="Enter owner's email" className="rounded-2xl" />
+            <Input name="OwnerEmail" placeholder="Enter owner's email" className="rounded-2xl" />
             <FieldError />
           </TextField>
         </div>
@@ -175,9 +184,9 @@ function AddFacility() {
         >
           Add Facility
         </Button>
-      </form>
+      </Form>
     </div>
   );
 }
 
-export default AddFacility;
+export default AddFacility; 
