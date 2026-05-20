@@ -64,10 +64,10 @@ function AddFacility() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/*  Name */}
           <div>
-            <TextField name="destinationName" isRequired>
+            <TextField name="facilityName" isRequired>
               <Label>Facility Name *</Label>
               <Input
-                name="destinationName"
+                name="facilityName"
                 placeholder="Enter facility name"
                 className="rounded-2xl"
               />

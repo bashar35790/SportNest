@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
-import { Anton, DM_Sans } from "next/font/google";
+import { DM_Sans,Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "@/components/Footer";
 
-const anton = Anton({
-  variable: "--font-anton",
-  subsets: ["latin"],
-  weight: "400",
-});
+
 
 const dmSans = DM_Sans({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${bebasNeue.variable} ${dmSans.variable} h-full antialiased`}
       data-theme="light"
     >
       <body

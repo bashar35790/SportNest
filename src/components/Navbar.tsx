@@ -46,7 +46,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="rounded-xl px-4 py-2 text-sm font-medium text-brand-primari transition-all duration-300 hover:text-brand-primari"
+              className="rounded-xl px-4 py-2 text-sm font-medium text-brand-secoundry transition-all duration-300 hover:text-brand-primari"
             >
               {link.name}
             </Link>
@@ -112,7 +112,7 @@ export default function Navbar() {
                   </Link>
 
                   <Link href={"#"}>
-                    <button className="mt-2 w-full rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]"
+                    <button className="mt-2 w-full rounded-xl bg-linear-to-r from-brand-primari px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]"
                       onClick={handleLogout}
                     >
                       Logout
@@ -123,7 +123,7 @@ export default function Navbar() {
             </div>
           ) : (
             <Link href={"/auth/login"}>
-              <button className="rounded-2xl bg-linear-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:scale-[1.03]">
+              <button className="rounded-2xl bg-linear-to-r from-brand-primari to-brand-Cyan600 cursor-pointer px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-primari/20 transition hover:scale-[1.03]">
                 Login
               </button>
             </Link>
@@ -133,7 +133,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
-          className="rounded-xl border border-white/10 p-2 text-white lg:hidden"
+          className="rounded-xl border border-brand-primari p-2 text-brand-primari lg:hidden"
         >
           {mobileMenu ? <X /> : <Menu />}
         </button>
@@ -147,19 +147,19 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
+                className="rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-brand-primari"
               >
                 {link.name}
               </Link>
             ))}
 
             {session ? (
-              <button className="mt-3 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-4 py-3 font-semibold text-white">
+              <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari to-brand-primari/40 px-4 py-3 font-semibold text-white">
                 Login
               </button>
 
             ) : (
-              <button className="mt-3 rounded-xl bg-linear-to-r from-cyan-500 to-blue-600 px-4 py-3 font-semibold text-white">
+              <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari px-4 py-3 font-semibold text-white">
                 Logout
               </button>
             )}

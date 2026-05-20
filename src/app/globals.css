@@ -2,16 +2,20 @@
 @import "@heroui/styles";
 
 @theme {
-    --color-brand-primari: #183835;
-    --color-brand-secoundry: #E2EE4F;
-    --font-anton: var(--font-anton);
+    --color-brand-primari: #06b6d4;
+    --color-brand-Cyan400: #22D3EE;
+    --color-brand-Cyan600: #06b6d4;
+    --color-brand-secoundry: #0F172A;
+
+    
+    --font-bebasNeue: var(--font-bebas-neue);
     --font-sans: var(--font-dm-sans);
 }
 
 
 @layer base {
     h1, h2, h3, h4, h5, h6 {
-        font-family: var(--font-anton), serif;
+        font-family: var(--font-bebasNeue), serif;
     }
 
     body {
