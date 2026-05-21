@@ -3,6 +3,17 @@ import { MapPin, ChevronRight, Clock, Users, Calendar } from "lucide-react";
 import Image from "next/image";
 import { GetFeaturedFacilities } from "@/api/GetApi";
 
+interface Facility {
+  _id: string;
+  name: string;
+  image: string;
+  facility_type: string;
+  price_per_hour: number;
+  capacity: number;
+  location: string;
+  available_slots: string[];
+}
+
 export default async function Feature() {
   const { facilities } = await GetFeaturedFacilities();
   return (
@@ -28,7 +39,7 @@ export default async function Feature() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {facilities.map((facility: any) => (
+          {facilities.map((facility: Facility) => (
             <div
               key={facility._id}
               className="bg-white rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 flex flex-col group"
