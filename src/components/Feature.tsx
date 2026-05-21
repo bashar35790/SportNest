@@ -59,9 +59,9 @@ export default async function Feature() {
               </div>
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
+              <div className="p-6 flex flex-col grow">
                 <div className="flex justify-between items-start mb-2 gap-4">
-                  <h3 className="text-xl font-bold text-brand-secoundry leading-tight">
+                  <h3 className="text-xl font-light tracking-wider text-brand-secoundry leading-tight">
                     {facility.name}
                   </h3>
                   <div className="text-right whitespace-nowrap">

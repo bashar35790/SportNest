@@ -149,9 +149,9 @@ export default function AllFacilityPage() {
               </div>
 
               {/* Content */}
-              <div className={`p-6 flex flex-col flex-grow ${viewMode === 'list' ? 'justify-center' : ''}`}>
+              <div className={`p-6 flex flex-col grow ${viewMode === 'list' ? 'justify-center' : ''}`}>
                 <div className="flex justify-between items-start mb-2 gap-4">
-                  <h3 className="text-xl font-bold text-brand-secoundry leading-tight">
+                  <h3 className="text-xl font-light tracking-wider text-brand-secoundry leading-tight">
                     {facility.name}
                   </h3>
                   <div className="text-right whitespace-nowrap">
