@@ -26,15 +26,16 @@ export default function HowItWorks() {
 
   return (
     <section className="relative isolate overflow-hidden w-full bg-linear-to-b from-[#031B2E] to-[#071120] py-24 px-6">
+      <div className="overlay z-0"></div>
       {/* Background Image */}
       <Image
         src={proxyImageUrl}
         alt="Sports Facility"
         fill
         unoptimized
-        className="object-cover transition-transform duration-700 group-hover:scale-110 z-0 opacity-15"
+        className="object-cover transition-transform duration-700 group-hover:scale-110 z-0 opacity-50"
       />
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto z-10 relative">
         {/* Heading */}
         <div className="text-center mb-20">
           <h2 className="text-white text-4xl md:text-5xl font-semibold text-gradient">
