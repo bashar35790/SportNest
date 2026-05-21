@@ -41,7 +41,7 @@ export default function SportsSection() {
         </span>
 
         <h2 className="mt-5 text-4xl font-light tracking-tight text-white sm:text-5xl">
-          Choose Your <span className="italic text-cyan-400">Arena</span>
+          Choose Your <span className="text-gradient">Arena</span>
         </h2>
 
         <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base">
