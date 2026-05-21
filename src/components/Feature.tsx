@@ -5,7 +5,6 @@ import { GetFeaturedFacilities } from "@/api/GetApi";
 
 export default async function Feature() {
   const { facilities } = await GetFeaturedFacilities();
-  console.log(facilities);
   return (
     <section className="py-24 bg-[#f8fafc]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">

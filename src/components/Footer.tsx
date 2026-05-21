@@ -86,7 +86,7 @@ export default function Footer() {
               </div>
               <div>
                 <h2 className="text-xl font-bold tracking-wide text-white">
-                  Sport<span className="text-brand-primari">Nest</span>
+                  Sport<span className=" highlight-text">Nest</span>
                 </h2>
                 <p className="text-xs text-slate-400">Facility Booking</p>
               </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, LogOutIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -35,7 +35,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <h2 className="text-3xl letter-spacing-1 font-bold text-brand-secoundry">
-            Sport<span className="text-brand-primari">Nest</span>
+            Sport<span className=" highlight-text">Nest</span>
           </h2>
         </Link>
 
@@ -75,7 +75,7 @@ export default function Navbar() {
                 </Link>
 
                 <div className="text-left">
-                  <p className="text-sm font-semibold text-brand-primari">
+                  <p className="text-sm font-semibold text-brand-primari uppercase">
                     {user?.name}
                   </p>
                   <p className="text-xs text-brand-primari">{user?.email}</p>
@@ -85,10 +85,10 @@ export default function Navbar() {
               </button>
 
               {/* Dropdown */}
-              <div className="invisible absolute right-0 top-16 w-64 translate-y-3 rounded-2xl border border-white/10 bg-[#0b1727] p-3 opacity-0 shadow-2xl transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="invisible absolute right-0 top-16 w-64 translate-y-3 rounded-2xl border border-white/10 bg-brand-secoundry p-3 opacity-0 shadow-2xl transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
                 <div className="mb-3 border-b border-white/10 pb-3">
-                  <p className="font-semibold text-white">Md Bashar</p>
-                  <p className="text-sm text-slate-400">bashar@gmail.com</p>
+                  <p className="font-semibold text-white uppercase">{user?.name}</p>
+                  <p className="text-sm text-slate-400">{user?.email}</p>
                 </div>
 
                 <div className="space-y-1">
@@ -115,9 +115,10 @@ export default function Navbar() {
 
                   <Link href={"#"}>
                     <button
-                      className="mt-2 w-full rounded-xl bg-linear-to-r from-brand-primari px-4 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]"
+                      className="mt-2 w-full rounded-xl bg-linear-to-r from-brand-primari to-brand-Cyan600 px-4 py-2 text-sm font-semibold text-brand-secoundry transition cursor-pointer flex items-center gap-2 justify-center"
                       onClick={handleLogout}
                     >
+                      <LogOutIcon className="h-4 w-4" />
                       Logout
                     </button>
                   </Link>

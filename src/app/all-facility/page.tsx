@@ -85,7 +85,7 @@ export default function AllFacilityPage() {
             </div>
 
             {/* Filter Button */}
-            <button className="flex items-center justify-center gap-2 rounded-xl bg-brand-secoundry px-6 py-3.5 font-medium text-white shadow-lg shadow-brand-secoundry/20 transition hover:bg-slate-800 cursor-pointer active:translate-y-0">
+            <button className="flex items-center justify-center gap-2 rounded-xl bg-brand-primari px-6 py-3.5 font-medium text-white shadow-lg shadow-brand-secoundry/20 transition hover:bg-brand-Cyan400 cursor-pointer active:translate-y-0">
               <Filter className="h-5 w-5" />
               Filters
             </button>
@@ -108,8 +108,8 @@ export default function AllFacilityPage() {
             <button
               onClick={() => setViewMode("grid")}
               className={`flex h-10 w-10 items-center justify-center rounded-xl transition cursor-pointer ${viewMode === "grid"
-                  ? "bg-blue-50 text-brand-primari ring-1 ring-blue-100"
-                  : "text-slate-400 hover:bg-slate-100 hover:text-brand-primari"
+                ? "bg-blue-50 text-brand-primari ring-1 ring-blue-100"
+                : "text-slate-400 hover:bg-slate-100 hover:text-brand-primari"
                 }`}
             >
               <LayoutGrid className="h-5 w-5" />
@@ -117,8 +117,8 @@ export default function AllFacilityPage() {
             <button
               onClick={() => setViewMode("list")}
               className={`flex h-10 w-10 items-center justify-center rounded-xl transition cursor-pointer ${viewMode === "list"
-                  ? "bg-blue-50 text-brand-primari ring-1 ring-blue-100"
-                  : "text-slate-400 hover:bg-slate-100 hover:text-brand-primari"
+                ? "bg-blue-50 text-brand-primari ring-1 ring-blue-100"
+                : "text-slate-400 hover:bg-slate-100 hover:text-brand-primari"
                 }`}
             >
               <List className="h-5 w-5" />
