@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const REVIEWS = [
   {
@@ -82,7 +83,7 @@ export default function Review() {
         <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 flex items-center gap-3 tracking-tight">
             A little <span className="text-pink-500">💖</span>{" "}
-            <span className=" highlight-text">from our community</span>
+            <span className=" text-gradient">from our community</span>
           </h2>
 
           {/* Controls */}
@@ -124,12 +125,14 @@ export default function Review() {
                   </p>
 
                   <div className="flex items-center gap-4">
-                    <img
+                    <Image
                       src={review.avatar}
                       alt={review.name}
                       className="w-12 h-12 rounded-full object-cover shadow-sm"
+                      width={48}
+                      height={48}
                     />
-                    <div>
+                    <div className=" text-left">
                       <h4 className="font-bold text-[#2A4365] text-sm md:text-base">
                         {review.name}
                       </h4>

@@ -189,7 +189,7 @@ export default function Hero() {
             padding: 8px 20px;
             font-size: 12px; font-weight: 600;
             color: #22d3ee;
-            margin-bottom: 20px;
+            margin-bottom: 60px;
             letter-spacing: .1em;
             text-transform: uppercase;
             animation: fadeDown .6s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -300,10 +300,12 @@ export default function Hero() {
           /* ── Stats bar ────────────────────────────────────── */
           .stats-bar {
             display: flex; align-items: stretch;
-            background: #0F172A;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+             background: rgba(255,255,255,.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
             border: 1px solid rgba(255,255,255,.08);
+            cursor: pointer;
             border-radius: 20px; overflow: hidden;
             width: 100%; max-width: 700px;
             animation: fadeUp .8s .4s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -325,6 +327,9 @@ export default function Hero() {
             font-size: clamp(32px, 5vw, 42px); line-height: 1;
             color: #fff; letter-spacing: .03em;
             text-shadow: 0 2px 10px rgba(0,0,0,.3);
+          }
+          .stats-bar:hover .stat-num{
+            color: #22d3ee;
           }
           .stat-label {
             font-size: 12px; font-weight: 500;

@@ -30,12 +30,12 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed text-center top-0 z-50 border-b border-white/10 bg-white backdrop-blur-xl w-full">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 lg:px-8">
+    <header className="fixed text-center top-0 z-50  w-full">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <h2 className="text-3xl letter-spacing-1 font-bold text-brand-secoundry">
-            Sport<span className=" highlight-text">Nest</span>
+          <h2 className="text-3xl letter-spacing-1 font-bold tracking-tight text-white">
+            Sport<span className="text-gradient">Nest</span>
           </h2>
         </Link>
 
@@ -45,7 +45,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:text-brand-primari ${pathname === link.href ? "text-brand-primari" : "text-brand-secoundry"}`}
+              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:text-brand-primari ${pathname === link.href ? "text-brand-primari" : "text-slate-300"}`}
             >
               {link.name}
             </Link>
@@ -127,7 +127,7 @@ export default function Navbar() {
             </div>
           ) : (
             <Link href={"/auth/login"}>
-              <button className="rounded-2xl bg-linear-to-r from-brand-primari to-brand-Cyan600 cursor-pointer px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-primari/20 transition hover:scale-[1.03]">
+              <button className="rounded-2xl bg-linear-to-r from-brand-primari to-brand-Cyan600 cursor-pointer px-6 py-3 text-sm font-semibold text-brand-secoundry shadow-lg shadow-brand-primari/20 transition hover:scale-[1.03]">
                 Login
               </button>
             </Link>
@@ -158,11 +158,11 @@ export default function Navbar() {
             ))}
 
             {session ? (
-              <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari to-brand-primari/40 px-4 py-3 font-semibold text-white">
+              <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari to-brand-primari/40 px-4 py-3 font-semibold text-brand-secoundry">
                 Login
               </button>
             ) : (
-              <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari px-4 py-3 font-semibold text-white">
+              <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari px-4 py-3 font-semibold text-brand-secoundry" onClick={handleLogout}>
                 Logout
               </button>
             )}

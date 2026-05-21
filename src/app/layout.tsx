@@ -34,7 +34,7 @@ export default function RootLayout({
       data-theme="light"
     >
       <body
-        className="min-h-full flex flex-col bg-white"
+        className="min-h-full flex flex-col "
         cz-shortcut-listen="true"
       >
         <Navbar />

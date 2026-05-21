@@ -1,4 +1,5 @@
 import { Search, CalendarCheck2, Trophy } from "lucide-react";
+import Image from "next/image";
 
 const steps = [
   {
@@ -21,12 +22,22 @@ const steps = [
 ];
 
 export default function HowItWorks() {
+  const proxyImageUrl = `https://wsrv.nl/?url=${encodeURIComponent("https://i.ibb.co.com/q3J6SWmn/sports-man-football-baseball.jpg")}&w=800&q=80&output=webp`;
+
   return (
-    <section className="w-full bg-linear-to-b from-[#031B2E] to-[#071120] py-24 px-6">
+    <section className="relative isolate overflow-hidden w-full bg-linear-to-b from-[#031B2E] to-[#071120] py-24 px-6">
+      {/* Background Image */}
+      <Image
+        src={proxyImageUrl}
+        alt="Sports Facility"
+        fill
+        unoptimized
+        className="object-cover transition-transform duration-700 group-hover:scale-110 z-0 opacity-15"
+      />
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-20">
-          <h2 className="text-white text-4xl md:text-5xl font-semibold highlight-text">
+          <h2 className="text-white text-4xl md:text-5xl font-semibold text-gradient">
             How It Works
           </h2>
         </div>
@@ -45,7 +56,7 @@ export default function HowItWorks() {
                 className="relative flex flex-col items-center text-center"
               >
                 {/* Icon Circle */}
-                <div className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border border-brand-Cyan400 bg-[#08233A] shadow-[0_0_25px_rgba(74,222,128,0.15)]">
+                <div className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border border-brand-Cyan400 bg-brand-Cyan400/20 shadow-[0_0_25px_rgba(74,222,128,0.15)]">
                   <Icon
                     className="w-9 h-9 text-brand-Cyan600"
                     strokeWidth={2}
@@ -58,7 +69,7 @@ export default function HowItWorks() {
                 </h3>
 
                 {/* Description */}
-                <p className="mt-4 max-w-sm text-gray-400 leading-relaxed text-base">
+                <p className="mt-4 max-w-sm text-white leading-relaxed text-base">
                   {step.description}
                 </p>
               </div>
