@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Filter, LayoutGrid, List, MapPin, ChevronDown, X, Star, Calendar, Clock, Users } from 'lucide-react';
 import Image from 'next/image';
 import { GetAllFacilities } from '@/api/GetApi';
+import Link from 'next/link';
 
 export default function AllFacilityPage() {
   const [facilities, setFacilities] = useState([]);
@@ -183,9 +184,11 @@ export default function AllFacilityPage() {
                 </div>
 
                 <div className={`mt-auto ${viewMode === 'list' ? 'max-w-[200px]' : ''}`}>
-                  <button className="w-full flex items-center justify-center gap-2 bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-brand-secoundry font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
-                    Book Now <Calendar className="h-4 w-4 ml-0.5" />
-                  </button>
+                  <Link href={`/all-facility/${facility._id}`}>
+                    <button className="w-full flex items-center justify-center gap-2 bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-brand-secoundry font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
+                      Book Now <Calendar className="h-4 w-4 ml-0.5" />
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

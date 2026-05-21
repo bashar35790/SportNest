@@ -82,9 +82,11 @@ export default async function Feature() {
                   </div>
                 </div>
 
-                <button className="w-full flex items-center justify-center gap-2 bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-brand-secoundry font-medium py-3.5 rounded-xl transition-colors duration-200">
-                  Book Now <Calendar className="h-4 w-4 ml-0.5" />
-                </button>
+                <Link href={`/all-facility/${facility._id}`}>
+                  <button className="w-full flex items-center justify-center gap-2 bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-brand-secoundry font-medium py-3.5 rounded-xl transition-colors duration-200">
+                    Book Now <Calendar className="h-4 w-4 ml-0.5" />
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
