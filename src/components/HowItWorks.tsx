@@ -56,15 +56,15 @@ export default function HowItWorks() {
                 className="relative flex flex-col items-center text-center"
               >
                 {/* Icon Circle */}
-                <div className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border border-brand-Cyan400 bg-brand-Cyan400/20 shadow-[0_0_25px_rgba(74,222,128,0.15)]">
+                <div className="relative z-10 flex items-center justify-center w-20 h-20 rounded-full border border-brand-Cyan400 bg-brand-primari shadow-[0_0_25px_rgba(74,222,128,0.15)]">
                   <Icon
-                    className="w-9 h-9 text-brand-Cyan600"
+                    className="w-9 h-9 text-white"
                     strokeWidth={2}
                   />
                 </div>
 
                 {/* Title */}
-                <h3 className="mt-8 text-2xl font-semibold text-white">
+                <h3 className="mt-8 text-2xl font-light text-white">
                   {step.title}
                 </h3>
 

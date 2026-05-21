@@ -64,3 +64,20 @@
   z-index: 1;
   pointer-events: none;
 }
+.overlay2 {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(10, 15, 26, 0.4) 0%,
+      rgba(10, 15, 26, 0.95) 100%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 50% 20%,
+      rgba(6, 182, 212, 0.25) 0%,
+      transparent 60%
+    );
+  z-index: 1;
+  pointer-events: none;
+}

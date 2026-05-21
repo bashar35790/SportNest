@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
+import Image from "next/image";
 
 const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -74,9 +75,21 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function Footer() {
+  // Use an external image proxy (weserv.nl) to resize massive 20MB+ images on the fly.
+  const proxyImageUrl = `https://wsrv.nl/?url=${encodeURIComponent("https://i.ibb.co.com/xqFQYbSJ/variety-sports-equipment-lush-green-setting.jpg")}&w=800&q=80&output=webp`;
+
   return (
-    <footer className="border-t border-white/10 bg-brand-secoundry pt-16 pb-8 text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
+    <footer className=" pt-16 pb-8 text-slate-300 relative isolate overflow-hidden">
+      <div className="overlay z-0"></div>
+      {/* Background Image */}
+      <Image
+        src={proxyImageUrl}
+        alt="Sports Facility"
+        fill
+        unoptimized
+        className="object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+      <div className="mx-auto max-w-7xl px-4 lg:px-8 z-10 relative">
         <div className="grid gap-8 lg:grid-cols-4 lg:gap-12">
           {/* Brand & Description */}
           <div className="space-y-4 lg:col-span-1">
@@ -88,10 +101,10 @@ export default function Footer() {
                 <h2 className="text-xl font-bold tracking-wide text-white">
                   Sport<span className="text-gradient">Nest</span>
                 </h2>
-                <p className="text-xs text-slate-400">Facility Booking</p>
+                <p className="text-xs text-white">Facility Booking</p>
               </div>
             </Link>
-            <p className="text-sm leading-relaxed text-slate-400">
+            <p className="text-sm leading-relaxed text-slate-50">
               Your ultimate destination for booking premium sports facilities.
               Experience seamless reservations and elevate your game today.
             </p>
@@ -116,7 +129,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="rounded-full bg-white/5 p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-cyan-400"
+                className="rounded-full bg-white/5 p-2 text-slate-50 transition-colors hover:bg-white/10 hover:text-cyan-400"
               >
                 <LinkedinIcon className="h-5 w-5" />
               </a>
@@ -231,7 +244,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 md:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-50 md:flex-row">
           <p>© {new Date().getFullYear()} SportNest. All rights reserved.</p>
           <div className="flex gap-6">
             <Link

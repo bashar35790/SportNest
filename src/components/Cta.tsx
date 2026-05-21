@@ -9,6 +9,7 @@ export default function CTASection() {
   return (
     <section className="mx-auto  px-5 py-20 sm:px-8 lg:px-14 relative isolate overflow-hidden">
       {/* Background Image */}
+       <div className="overlay2 z-0"></div>
       <Image
         src={proxyImageUrl}
         alt="Sports Facility"
