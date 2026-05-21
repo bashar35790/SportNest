@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { MapPin, ChevronRight, Clock, Users } from "lucide-react";
-import GetFeaturedFacilities from "@/api/GetApi";
+import { MapPin, ChevronRight, Clock, Users, Calendar } from "lucide-react";
 import Image from "next/image";
+import { GetFeaturedFacilities } from "@/api/GetApi";
 
 export default async function Feature() {
   const { facilities } = await GetFeaturedFacilities();
@@ -83,8 +83,8 @@ export default async function Feature() {
                   </div>
                 </div>
 
-                <button className="w-full bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-white font-medium py-3.5 rounded-xl transition-colors duration-200">
-                  Book Now
+                <button className="w-full flex items-center justify-center gap-2 bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-brand-secoundry font-medium py-3.5 rounded-xl transition-colors duration-200">
+                  Book Now <Calendar className="h-4 w-4 ml-0.5" />
                 </button>
               </div>
             </div>
