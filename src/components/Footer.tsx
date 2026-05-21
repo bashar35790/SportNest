@@ -75,18 +75,18 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-[#071120] pt-16 pb-8 text-slate-300">
+    <footer className="border-t border-white/10 bg-brand-secoundry pt-16 pb-8 text-slate-300">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-4 lg:gap-12">
           {/* Brand & Description */}
           <div className="space-y-4 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 text-xl font-bold text-white shadow-lg shadow-cyan-500/20">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-r from-brand-primari to-brand-Cyan600 text-xl font-bold shadow-lg shadow-cyan-500/20 text-brand-secoundry">
                 S
               </div>
               <div>
                 <h2 className="text-xl font-bold tracking-wide text-white">
-                  SportNest
+                  Sport<span className="text-brand-primari">Nest</span>
                 </h2>
                 <p className="text-xs text-slate-400">Facility Booking</p>
               </div>

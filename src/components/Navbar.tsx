@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const navLinks = [
@@ -16,11 +16,12 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [mobileMenu, setMobileMenu] = useState(false);
   const { data: session, isPending: sessionPending } = authClient.useSession();
   const user = session?.user;
   const router = useRouter();
-  console.log(sessionPending);
+
 
   const handleLogout = async () => {
     await authClient.signOut();
@@ -30,21 +31,21 @@ export default function Navbar() {
 
   return (
     <header className="fixed text-center top-0 z-50 border-b border-white/10 bg-white backdrop-blur-xl w-full">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <h2 className="text-3xl letter-spacing-1 font-bold text-brand-secoundry">
-            SportNest
+            Sport<span className="text-brand-primari">Nest</span>
           </h2>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="rounded-xl px-4 py-2 text-sm font-medium text-brand-secoundry transition-all duration-300 hover:text-brand-primari"
+              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:text-brand-primari ${pathname === link.href ? "text-brand-primari" : "text-brand-secoundry"}`}
             >
               {link.name}
             </Link>
@@ -149,7 +150,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-brand-primari"
+                className={`rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-white/10 hover:text-brand-primari ${pathname === link.href ? "text-brand-primari bg-white/5" : "text-slate-300"}`}
               >
                 {link.name}
               </Link>

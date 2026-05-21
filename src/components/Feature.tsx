@@ -1,88 +1,7 @@
 import Link from "next/link";
-import { MapPin, ChevronRight } from "lucide-react";
+import { MapPin, ChevronRight, Clock, Users } from "lucide-react";
 import GetFeaturedFacilities from "@/api/GetApi";
-
-const FEATURED_FACILITIES = [
-  {
-    id: 1,
-    name: "Ace Center Arena",
-    price: 45,
-    location: "Downtown District",
-    image:
-      "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&q=80&w=800",
-    badge: "Indoor",
-    tags: ["Tennis", "4 Courts"],
-  },
-  {
-    id: 2,
-    name: "Elite Football Turf",
-    price: 60,
-    location: "North Park Area",
-    image:
-      "https://images.unsplash.com/photo-1459865264687-1590b5a1caeb?auto=format&fit=crop&q=80&w=800",
-    badge: "24/7",
-    tags: ["Football", "Floodlights"],
-  },
-  {
-    id: 3,
-    name: "SkyHigh Hoops",
-    price: 35,
-    location: "East Side Plaza",
-    image:
-      "https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=800",
-    badge: "Premium",
-    tags: ["Basketball", "Locker Rooms"],
-  },
-  {
-    id: 4,
-    name: "Shuttle Masters",
-    price: 20,
-    location: "South Sports Hub",
-    image:
-      "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&q=80&w=800",
-    badge: "Hurry!",
-    tags: ["Badminton", "6 Courts"],
-  },
-  {
-    id: 5,
-    name: "Aqua Pulse Center",
-    price: 50,
-    location: "Marina Waterfront",
-    image:
-      "https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?auto=format&fit=crop&q=80&w=800",
-    badge: "Heated",
-    tags: ["Swimming", "Olympic Size"],
-  },
-  {
-    id: 6,
-    name: "Padel Point Elite",
-    price: 40,
-    location: "City West Complex",
-    image:
-      "https://images.unsplash.com/photo-1622227432807-91eb590c37ad?auto=format&fit=crop&q=80&w=800",
-    badge: "New",
-    tags: ["Padel", "Panoramic"],
-  },
-];
-
-// {
-//     "_id": "6a0d76c066cc878662ecc2c7",
-//     "name": "Ace Tennis Club",
-//     "facility_type": "Tennis",
-//     "image": "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6",
-//     "location": "Gulshan, Dhaka",
-//     "price_per_hour": 2200,
-//     "capacity": 4,
-//     "available_slots": [
-//         "08:00 AM - 10:00 AM",
-//         "10:00 AM - 12:00 PM",
-//         "04:00 PM - 06:00 PM",
-//         "06:00 PM - 08:00 PM"
-//     ],
-//     "description": "Outdoor tennis court with premium surface quality and night lighting.",
-//     "owner_email": "owner4@sportnest.com",
-//     "booking_count": 10
-// }
+import Image from "next/image";
 
 export default async function Feature() {
   const { facilities } = await GetFeaturedFacilities();
@@ -109,7 +28,7 @@ export default async function Feature() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {facilities.map((facility: any) => (
             <div
               key={facility._id}
@@ -117,9 +36,11 @@ export default async function Feature() {
             >
               {/* Image Box */}
               <div className="relative h-64 w-full overflow-hidden">
-                <img
+                <Image
                   src={facility.image}
                   alt={facility.name}
+                  height={400}
+                  width={400}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className={`absolute top-4 right-4 bg-brand-primari text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10 tracking-wide ${facility.facility_type === "Cricket" ? "bg-green-500" : facility.facility_type === "Football" ? "bg-green-500" : facility.facility_type === "Badminton" ? "bg-green-500" : facility.facility_type === "Basketball" ? "bg-green-500" : facility.facility_type === "Swimming" ? "bg-brand-cyan400" : "bg-brand-secoundry"}`}>
@@ -143,20 +64,23 @@ export default async function Feature() {
                   </div>
                 </div>
 
-                <div className="flex items-center text-gray-500 text-sm mb-5">
-                  <MapPin className="w-4 h-4 mr-1.5 text-gray-400 shrink-0" />
-                  <span className="truncate">{facility.location}</span>
-                </div>
+                <div className=" flex flex-col gap-2">
+                  <div className="flex items-center text-gray-500 text-sm">
+                    <Users className="w-4 h-4 mr-1.5 shrink-0 text-brand-primari" />
+                    <span className="truncate">Up to {facility.capacity} people</span>
+                  </div>
 
-                <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                  {facility.available_slots.map((slot: any) => (
-                    <span
-                      key={slot}
-                      className="bg-slate-100 text-slate-700 text-xs font-medium px-3 py-1 rounded-md"
-                    >
-                      {slot}
+                  <div className="flex items-center text-gray-500 text-sm">
+                    <MapPin className="w-4 h-4 mr-1.5 shrink-0 text-brand-primari" />
+                    <span className="truncate">{facility.location}</span>
+                  </div>
+
+                  <div className="flex items-center text-gray-500 text-sm mb-5">
+                    <Clock className="w-4 h-4 mr-1.5 shrink-0 text-brand-primari" />
+                    <span className="truncate ">
+                      {facility.available_slots.length} slots available
                     </span>
-                  ))}
+                  </div>
                 </div>
 
                 <button className="w-full bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-white font-medium py-3.5 rounded-xl transition-colors duration-200">
