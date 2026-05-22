@@ -48,7 +48,7 @@ export default function Navbar() {
 
   return (
     <header className={`fixed text-center top-0 z-50 w-full transition-all duration-300 ${isLight ? "bg-white shadow-sm" : "bg-transparent"}`}>
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <h2 className={`text-3xl letter-spacing-1 font-bold tracking-tight transition-all duration-300 ${isLight ? "text-brand-secoundry" : "text-white"}`}>
@@ -108,7 +108,7 @@ export default function Navbar() {
                   <p className="text-sm text-slate-400">{user?.email}</p>
                 </div>
 
-                <div className="space-y-1">
+                <div className="space-y-1 text-left">
                   <Link
                     href="/dashboard/my-bookings"
                     className="block rounded-xl px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-cyan-400"
@@ -132,7 +132,7 @@ export default function Navbar() {
 
                   <Link href={"#"}>
                     <button
-                      className="mt-2 w-full rounded-xl bg-linear-to-r from-brand-primari to-brand-Cyan600 px-4 py-2 text-sm font-semibold text-brand-secoundry transition cursor-pointer flex items-center gap-2 justify-center"
+                      className="mt-2 w-full rounded-xl bg-brand-primari px-4 py-2 text-sm font-semibold text-brand-secoundry transition cursor-pointer flex items-center gap-2 justify-center"
                       onClick={handleLogout}
                     >
                       <LogOutIcon className="h-4 w-4" />

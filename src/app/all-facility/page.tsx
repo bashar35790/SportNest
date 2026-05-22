@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Search, Filter, LayoutGrid, List, MapPin, ChevronDown, X, Star, Calendar, Clock, Users } from 'lucide-react';
+import { Search, Filter, LayoutGrid, List, MapPin, ChevronDown, Calendar, Clock, Users } from 'lucide-react';
 import Image from 'next/image';
 import { GetAllFacilities } from '@/api/GetApi';
 import Link from 'next/link';
@@ -45,7 +45,7 @@ export default function AllFacilityPage() {
   const displayedFacilities = filteredFacilities.slice(0, visibleCount);
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] pt-28 pb-20">
+    <main className="min-h-screen bg-[#f8fafc] pt-36 pb-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
 
         {/* Search & Filter Bar */}

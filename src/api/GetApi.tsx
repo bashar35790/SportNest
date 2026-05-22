@@ -11,4 +11,12 @@ const GetAllFacilities = async (search = "") => {
     return data;
 }
 
-export { GetFeaturedFacilities, GetAllFacilities };
+const GetOneFacility = async (id: string) => {
+    console.log(id);
+    const url = `http://localhost:5000/all-facility/${id}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
+
+export { GetFeaturedFacilities, GetAllFacilities, GetOneFacility };
