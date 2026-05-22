@@ -29,6 +29,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Pages with white background — nav should always use brand-secondary text
+  const whiteBgPages = [
+    "/all-facility",
+    "/dashboard/my-bookings",
+    "/dashboard/add-facility",
+    "/dashboard/manage-facilities",
+  ];
+  const isWhiteBgPage = whiteBgPages.some((p) => pathname.startsWith(p));
+  const isLight = scrolled || isWhiteBgPage;
+
 
   const handleLogout = async () => {
     await authClient.signOut();
@@ -37,11 +47,11 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed text-center top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-white shadow-lg" : "bg-transparent"}`}>
+    <header className={`fixed text-center top-0 z-50 w-full transition-all duration-300 ${isLight ? "bg-white shadow-sm" : "bg-transparent"}`}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <h2 className={`text-3xl letter-spacing-1 font-bold tracking-tight transition-all duration-300 ${scrolled ? "text-brand-secoundry" : "text-white"}`}>
+          <h2 className={`text-3xl letter-spacing-1 font-bold tracking-tight transition-all duration-300 ${isLight ? "text-brand-secoundry" : "text-white"}`}>
             Sport<span className="text-gradient">Nest</span>
           </h2>
         </Link>
@@ -52,7 +62,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:text-brand-primari ${pathname === link.href ? "text-brand-primari" : scrolled ? "text-brand-secoundry" : "text-slate-300"}`}
+              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:text-brand-primari ${pathname === link.href ? "text-brand-primari" : isLight ? "text-brand-secoundry" : "text-slate-300"}`}
             >
               {link.name}
             </Link>
@@ -134,7 +144,7 @@ export default function Navbar() {
             </div>
           ) : (
             <Link href={"/auth/login"}>
-              <button className="rounded-2xl bg-linear-to-r from-brand-primari to-brand-Cyan600 cursor-pointer px-6 py-3 text-sm font-semibold text-brand-secoundry shadow-lg shadow-brand-primari/20 transition hover:scale-[1.03]">
+              <button className={`rounded-2xl cursor-pointer px-6 py-3 text-sm font-semibold  shadow-lg shadow-brand-primari/20 transition hover:scale-[1.03] ${scrolled ? "bg-brand-primari text-brand-secoundry" : "bg-brand-secoundry text-white"}`}>
                 Login
               </button>
             </Link>
@@ -144,7 +154,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
-          className={`rounded-xl border border-brand-primari p-2 lg:hidden transition-all duration-300 ${scrolled ? "text-brand-secoundry" : "text-brand-primari"}`}
+          className={`rounded-xl border border-brand-primari p-2 lg:hidden transition-all duration-300 ${isLight ? "text-brand-secoundry" : "text-brand-primari"}`}
         >
           {mobileMenu ? <X /> : <Menu />}
         </button>
