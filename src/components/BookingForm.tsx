@@ -24,9 +24,8 @@ import React from "react";
 
 const PRICE_PER_HOUR = 40;
 const STOCK_AVAILABLE = 8;
-const FACILITY_NAME = "Wembley Badminton Arena";
 
-export function BookingForm() {
+export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: string, AvailableSlots: string[] }) {
     // Controlled state for fields that don't bind to FormData 
     const [bookingDate, setBookingDate] = React.useState<DateValue | null>(null);
     const [timeSlot, setTimeSlot] = React.useState<string>("");
@@ -52,8 +51,8 @@ export function BookingForm() {
 
         const data = {
             facilityName: formData.get("facilityName") as string,
-            date: bookingDate.toString(),               // e.g. "2025-06-15"
-            timeSlot,                                   // e.g. "09:00 AM"
+            date: bookingDate.toString(),
+            timeSlot,
             duration: duration ?? 1,
             totalPrice,
         };
@@ -80,7 +79,7 @@ export function BookingForm() {
                             <TextField isRequired name="facilityName">
                                 <Label>Facility Name</Label>
                                 <Input
-                                    value={FACILITY_NAME}
+                                    value={FacilityName}
                                     variant="secondary"
                                     className="cursor-not-allowed"
                                     disabled
@@ -92,10 +91,8 @@ export function BookingForm() {
                             <DatePicker
                                 className="w-full"
                                 value={bookingDate}
-                                onChange={setBookingDate}          // ← controlled
+                                onChange={setBookingDate}
                                 minValue={today(getLocalTimeZone())}
-                            // No `name` prop — React Aria DatePicker doesn't
-                            // reliably write to FormData; we capture via state.
                             >
                                 <Label>
                                     Date
@@ -158,29 +155,18 @@ export function BookingForm() {
                                 </Select.Trigger>
                                 <Select.Popover>
                                     <ListBox>
-                                        <ListBox.Item id="09:00 AM" textValue="09:00 AM">
-                                            09:00 AM <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="10:00 AM" textValue="10:00 AM">
-                                            10:00 AM <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="11:00 AM" textValue="11:00 AM">
-                                            11:00 AM <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="12:00 PM" textValue="12:00 PM">
-                                            12:00 PM <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="01:00 PM" textValue="01:00 PM">
-                                            01:00 PM <ListBox.ItemIndicator />
-                                        </ListBox.Item>
-                                        <ListBox.Item id="02:00 PM" textValue="02:00 PM">
-                                            02:00 PM <ListBox.ItemIndicator />
-                                        </ListBox.Item>
+                                        {
+                                            AvailableSlots?.map((slot) => (
+                                                <ListBox.Item key={slot} id={slot} textValue={slot}>
+                                                    {slot} <ListBox.ItemIndicator />
+                                                </ListBox.Item>
+                                            ))
+                                        }
                                     </ListBox>
                                 </Select.Popover>
                             </Select>
 
-                            {/* ── DURATION ── */}
+                            {/* Duration */}
                             <NumberField
                                 isRequired
                                 isInvalid={isOutOfStock}
@@ -204,7 +190,7 @@ export function BookingForm() {
                             </NumberField>
                         </Fieldset.Group>
 
-                        {/* ── Price Summary ── */}
+                        {/* Price Summary */}
                         <div className="bg-brand-primari/20 rounded-xl px-4 py-3.5 border border-green-100 w-full">
                             <div className="flex justify-between items-center text-sm text-gray-500 mb-1">
                                 <span>

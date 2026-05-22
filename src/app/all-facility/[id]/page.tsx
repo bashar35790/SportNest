@@ -1,3 +1,4 @@
+
 import { GetOneFacility } from "@/api/GetApi";
 import { BookingForm } from "@/components/BookingForm";
 import {
@@ -12,45 +13,59 @@ import {
     ParkingCircle,
 } from "lucide-react";
 
-interface FacilityApiResponse {
-    _id: string;
+
+
+interface Facility {
+    id: string;
     name: string;
-    facility_type: string;
-    image: string;
+    sport: string;
     location: string;
-    price_per_hour: number;
-    capacity: number;
-    available_slots: string[];
+    capacity: string;
+    pricePerHour: number;
+    availableSlots: number;
+    rating: number;
+    reviewCount: number;
     description: string;
-    owner_email: string;
-    booking_count: number;
+    amenities: string[];
+    imageUrl: string;
 }
 
-const amenityIcons: Record<string, React.ReactNode> = {
-    "Free WiFi": <Wifi size={14} />,
-    Parking: <ParkingCircle size={14} />,
-    "Changing Rooms": <Shield size={14} />,
-    "Equipment Rental": <Star size={14} />,
-};
 
-export default async function FacilityDetailsPage({
-    params,
-}: {
-    params: { id: string };
-}) {
-    const { id } = params;
 
-    const facility: FacilityApiResponse = await GetOneFacility(id);
+// {
+//     "_id": "6a0d76c066cc878662ecc2c6",
+//     "name": "Blue Wave Swimming Pool",
+//     "facility_type": "Swimming",
+//     "image": "https://images.unsplash.com/photo-1519315901367-f34ff9154487",
+//     "location": "Banani, Dhaka",
+//     "price_per_hour": 1800,
+//     "capacity": 10,
+//     "available_slots": [
+//         "06:00 AM - 08:00 AM",
+//         "08:00 AM - 10:00 AM",
+//         "03:00 PM - 05:00 PM",
+//         "05:00 PM - 07:00 PM"
+//     ],
+//     "description": "Olympic-size swimming pool with clean water filtration and separate changing rooms.",
+//     "owner_email": "owner3@sportnest.com",
+//     "booking_count": 15
+// }
 
+
+export default async function FacilityDetailsPage({ params }: { params: { id: string } }) {
+    const { id } = await params;
+    const data = await GetOneFacility(id);
+    console.log(typeof id);
+    console.log(data);
     return (
         <div className="min-h-screen bg-gray-50 font-sans py-30">
-            {/* Top Nav */}
-            <div>
+            {/* Top Nav  */}
+            <div className="">
                 <div className="max-w-6xl mx-auto px-6 py-4">
-                    <button className="flex items-center gap-2 text-sm font-semibold transition-colors group cursor-pointer text-brand-secoundry hover:text-brand-primari">
+                    <button className="flex items-center gap-2 text-sm font-semibol transition-colors group cursor-pointer text-brand-secoundry hover:text-brand-primari">
                         <ArrowLeft
                             size={16}
-                            className="group-hover:-translate-x-0.5 transition-transform"
+                            className="group-hover:-translate-x-0.5 transition-transform "
                         />
                         Back to Facilities
                     </button>
@@ -61,55 +76,51 @@ export default async function FacilityDetailsPage({
             <div className="max-w-6xl mx-auto px-6 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10 items-start">
 
-                    {/* Left Side */}
+                    {/* left side content  */}
                     <div className="space-y-6">
 
                         {/* Hero Image */}
                         <div className="relative rounded-2xl overflow-hidden shadow-sm aspect-[16/9] bg-gray-200">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                src={facility.image}
-                                alt={facility.name}
+                                src={data.image}
+                                alt={data.name}
                                 className="w-full h-full object-cover"
                             />
-
-                            {/* Sport Badge */}
+                            {/* Sport badge */}
                             <span className="absolute top-4 left-4 bg-green-600 text-white text-xs font-bold tracking-widest px-3 py-1.5 rounded-full uppercase">
-                                {facility.facility_type}
+                                {data.facility_type}
                             </span>
                         </div>
 
-                        {/* Title */}
+                        {/* Facility Title */}
                         <div>
                             <h1 className="text-3xl font-normal text-brand-secoundry text-left tracking-tight">
-                                {facility.name}
+                                {data.name}
                             </h1>
                         </div>
 
-                        {/* Info Cards */}
+                        {/* Info Cards Grid */}
                         <div className="grid grid-cols-2 gap-4 text-left">
                             <InfoCard
                                 icon={<MapPin size={15} className="text-brand-primari" />}
                                 label="Location"
-                                value={facility.location}
+                                value={data.location}
                             />
-
                             <InfoCard
                                 icon={<Users size={15} className="text-brand-primari" />}
                                 label="Capacity"
-                                value={`${facility.capacity} Players`}
+                                value={data.capacity}
                             />
-
                             <InfoCard
                                 icon={<DollarSign size={15} className="text-brand-primari" />}
                                 label="Price"
-                                value={`৳${facility.price_per_hour}/hour`}
+                                value={`$${data.price_per_hour}/hour`}
                             />
-
                             <InfoCard
                                 icon={<Clock size={15} className="text-brand-primari" />}
                                 label="Slots"
-                                value={`${facility.available_slots.length} available`}
+                                value={`${data.available_slots.length} available`}
                             />
                         </div>
 
@@ -118,52 +129,14 @@ export default async function FacilityDetailsPage({
                             <h2 className="text-base font-normal text-brand-secoundry text-left mb-2">
                                 About this facility
                             </h2>
-
                             <p className="text-sm text-brand-secoundry text-left leading-relaxed">
-                                {facility.description}
+                                {data.description}
                             </p>
-                        </div>
-
-                        {/* Available Slots */}
-                        <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                            <h2 className="text-base font-normal text-brand-secoundry text-left mb-4">
-                                Available Slots
-                            </h2>
-
-                            <div className="flex flex-wrap gap-2">
-                                {facility.available_slots.map((slot) => (
-                                    <span
-                                        key={slot}
-                                        className="bg-brand-primari/10 text-brand-secoundry text-sm px-3 py-2 rounded-full border border-green-100"
-                                    >
-                                        {slot}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Amenities */}
-                        <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                            <h2 className="text-base font-normal text-brand-secoundry text-left mb-4">
-                                Amenities
-                            </h2>
-
-                            <div className="flex flex-wrap gap-2">
-                                {Object.keys(amenityIcons).map((a) => (
-                                    <span
-                                        key={a}
-                                        className="inline-flex items-center gap-1.5 bg-brand-primari text-brand-secoundry text-xs font-medium px-3 py-1.5 rounded-full border border-green-100"
-                                    >
-                                        {amenityIcons[a]}
-                                        {a}
-                                    </span>
-                                ))}
-                            </div>
                         </div>
                     </div>
 
-                    {/* Right Side */}
-                    <BookingForm />
+                    {/* right side content */}
+                    <BookingForm FacilityName={data.name} AvailableSlots={data.available_slots} />
                 </div>
             </div>
         </div>
@@ -185,10 +158,7 @@ function InfoCard({
                 {icon}
                 <span>{label}</span>
             </div>
-
-            <p className="text-sm font-bold text-gray-800">
-                {value}
-            </p>
+            <p className="text-sm font-bold text-gray-800">{value}</p>
         </div>
     );
 }
