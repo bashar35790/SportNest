@@ -5,7 +5,7 @@ import { Menu, X, ChevronDown, LogOutIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -18,9 +18,16 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { data: session, isPending: sessionPending } = authClient.useSession();
   const user = session?.user;
   const router = useRouter();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
 
   const handleLogout = async () => {
@@ -30,11 +37,11 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed text-center top-0 z-50  w-full">
+    <header className={`fixed text-center top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-white shadow-lg" : "bg-transparent"}`}>
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <h2 className="text-3xl letter-spacing-1 font-bold tracking-tight text-white">
+          <h2 className={`text-3xl letter-spacing-1 font-bold tracking-tight transition-all duration-300 ${scrolled ? "text-brand-secoundry" : "text-white"}`}>
             Sport<span className="text-gradient">Nest</span>
           </h2>
         </Link>
@@ -45,7 +52,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:text-brand-primari ${pathname === link.href ? "text-brand-primari" : "text-slate-300"}`}
+              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:text-brand-primari ${pathname === link.href ? "text-brand-primari" : scrolled ? "text-brand-secoundry" : "text-slate-300"}`}
             >
               {link.name}
             </Link>
@@ -137,7 +144,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenu(!mobileMenu)}
-          className="rounded-xl border border-brand-primari p-2 text-brand-primari lg:hidden"
+          className={`rounded-xl border border-brand-primari p-2 lg:hidden transition-all duration-300 ${scrolled ? "text-brand-secoundry" : "text-brand-primari"}`}
         >
           {mobileMenu ? <X /> : <Menu />}
         </button>
