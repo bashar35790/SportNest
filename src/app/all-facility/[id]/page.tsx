@@ -7,50 +7,8 @@ import {
     Users,
     DollarSign,
     Clock,
-    Star,
-    Shield,
-    Wifi,
-    ParkingCircle,
 } from "lucide-react";
-
-
-
-interface Facility {
-    id: string;
-    name: string;
-    sport: string;
-    location: string;
-    capacity: string;
-    pricePerHour: number;
-    availableSlots: number;
-    rating: number;
-    reviewCount: number;
-    description: string;
-    amenities: string[];
-    imageUrl: string;
-}
-
-
-
-// {
-//     "_id": "6a0d76c066cc878662ecc2c6",
-//     "name": "Blue Wave Swimming Pool",
-//     "facility_type": "Swimming",
-//     "image": "https://images.unsplash.com/photo-1519315901367-f34ff9154487",
-//     "location": "Banani, Dhaka",
-//     "price_per_hour": 1800,
-//     "capacity": 10,
-//     "available_slots": [
-//         "06:00 AM - 08:00 AM",
-//         "08:00 AM - 10:00 AM",
-//         "03:00 PM - 05:00 PM",
-//         "05:00 PM - 07:00 PM"
-//     ],
-//     "description": "Olympic-size swimming pool with clean water filtration and separate changing rooms.",
-//     "owner_email": "owner3@sportnest.com",
-//     "booking_count": 15
-// }
-
+import Link from "next/link";
 
 export default async function FacilityDetailsPage({ params }: { params: { id: string } }) {
     const { id } = await params;
@@ -62,13 +20,16 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
             {/* Top Nav  */}
             <div className="">
                 <div className="max-w-6xl mx-auto px-6 py-4">
-                    <button className="flex items-center gap-2 text-sm font-semibol transition-colors group cursor-pointer text-brand-secoundry hover:text-brand-primari">
-                        <ArrowLeft
-                            size={16}
-                            className="group-hover:-translate-x-0.5 transition-transform "
-                        />
-                        Back to Facilities
-                    </button>
+                    <Link href="/all-facility">
+                        <button className="flex items-center gap-2 text-sm font-semibol transition-colors group cursor-pointer text-brand-secoundry hover:text-brand-primari">
+                            <ArrowLeft
+                                size={16}
+                                className="group-hover:-translate-x-0.5 transition-transform "
+                            />
+                            Back to Facilities
+                        </button>
+                    </Link>
+
                 </div>
             </div>
 
@@ -83,20 +44,20 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
                         <div className="relative rounded-2xl overflow-hidden shadow-sm aspect-[16/9] bg-gray-200">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                src={data.image}
-                                alt={data.name}
+                                src={data?.image}
+                                alt={data?.name}
                                 className="w-full h-full object-cover"
                             />
                             {/* Sport badge */}
                             <span className="absolute top-4 left-4 bg-green-600 text-white text-xs font-bold tracking-widest px-3 py-1.5 rounded-full uppercase">
-                                {data.facility_type}
+                                {data?.facility_type}
                             </span>
                         </div>
 
                         {/* Facility Title */}
                         <div>
                             <h1 className="text-3xl font-normal text-brand-secoundry text-left tracking-tight">
-                                {data.name}
+                                {data?.name}
                             </h1>
                         </div>
 
@@ -105,22 +66,22 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
                             <InfoCard
                                 icon={<MapPin size={15} className="text-brand-primari" />}
                                 label="Location"
-                                value={data.location}
+                                value={data?.location}
                             />
                             <InfoCard
                                 icon={<Users size={15} className="text-brand-primari" />}
                                 label="Capacity"
-                                value={data.capacity}
+                                value={data?.capacity}
                             />
                             <InfoCard
                                 icon={<DollarSign size={15} className="text-brand-primari" />}
                                 label="Price"
-                                value={`$${data.price_per_hour}/hour`}
+                                value={`$${data?.price_per_hour}/hour`}
                             />
                             <InfoCard
                                 icon={<Clock size={15} className="text-brand-primari" />}
                                 label="Slots"
-                                value={`${data.available_slots.length} available`}
+                                value={`${data?.available_slots?.length} available`}
                             />
                         </div>
 

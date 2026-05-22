@@ -1,6 +1,7 @@
 "use client";
 
 import { PostBooking } from "@/api/PostApi";
+import { authClient } from "@/lib/auth-client";
 import { ChevronsExpandVertical } from "@gravity-ui/icons";
 import {
     Button,
@@ -22,6 +23,7 @@ import {
 import { type DateValue, getLocalTimeZone, today } from "@internationalized/date";
 import { Save } from "lucide-react";
 import React from "react";
+import toast from "react-hot-toast";
 
 const PRICE_PER_HOUR = 40;
 const STOCK_AVAILABLE = 8;
@@ -31,6 +33,7 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
     const [bookingDate, setBookingDate] = React.useState<DateValue | null>(null);
     const [timeSlot, setTimeSlot] = React.useState<string>("");
     const [duration, setDuration] = React.useState<number | undefined>(1);
+    const { data: session } = authClient.useSession();
 
     const isOutOfStock = duration !== undefined && duration > STOCK_AVAILABLE;
     const totalPrice = (duration ?? 1) * PRICE_PER_HOUR;
@@ -39,11 +42,11 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
         e.preventDefault();
         // Validate fields that aren't covered by HTML required
         if (!bookingDate) {
-            alert("Please select a booking date.");
+            toast.error("Please select a booking date.");
             return;
         }
         if (!timeSlot) {
-            alert("Please select a time slot.");
+            toast.error("Please select a time slot.");
             return;
         }
 
@@ -51,6 +54,7 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
         const formData = new FormData(e.currentTarget);
 
         const data = {
+            userId: session?.user?.id,
             facilityName: formData.get("facilityName") as string,
             date: bookingDate.toString(),
             timeSlot,
@@ -58,9 +62,7 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
             totalPrice,
         };
 
-        console.log("Booking payload ", data);
-        // TODO: await fetch("/api/bookings", { method: "POST", body: JSON.stringify(data) })
-        alert("Booking confirmed!\n" + JSON.stringify(data, null, 2));
+        toast.success("Booking confirmed!");
         PostBooking(data);
         reset();
     };

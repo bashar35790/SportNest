@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { DM_Sans,Bebas_Neue } from "next/font/google";
+import { DM_Sans, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -40,6 +41,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1 text-center">{children}</main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

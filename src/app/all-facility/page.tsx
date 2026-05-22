@@ -5,6 +5,22 @@ import Image from 'next/image';
 import { GetAllFacilities } from '@/api/GetApi';
 import Link from 'next/link';
 
+interface Facility {
+  _id: string;
+  name: string;
+  facility_type: string;
+  image: string;
+  location: string;
+  price_per_hour: number;
+  capacity: number;
+  available_slots: string[];
+  description: string;
+  owner_email: string;
+  booking_count: number;
+  created_at?: string;
+}
+
+
 export default function AllFacilityPage() {
   const [facilities, setFacilities] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,6 +36,7 @@ export default function AllFacilityPage() {
         const data = await GetAllFacilities(searchTerm);
         setFacilities(data);
         setVisibleCount(6); // reset on search
+        console.log(data);
       } catch (error) {
         console.error("Error fetching facilities:", error);
       } finally {
@@ -40,7 +57,7 @@ export default function AllFacilityPage() {
 
   const filteredFacilities = selectedSport === "All Sports"
     ? facilities
-    : facilities.filter((fac: any) => fac.facility_type === selectedSport);
+    : facilities.filter((fac: Facility) => fac.facility_type === selectedSport);
 
   const displayedFacilities = filteredFacilities.slice(0, visibleCount);
 
@@ -129,7 +146,7 @@ export default function AllFacilityPage() {
 
         {/* Grid/List */}
         <div className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-4"}>
-          {displayedFacilities.map((facility: any) => (
+          {displayedFacilities.map((facility: Facility) => (
             <div
               key={facility._id}
               className={`bg-white rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 flex group hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(0,0,0,0.15)] hover:ring-1 hover:ring-brand-primari/20 ${viewMode === 'grid' ? 'flex-col' : 'flex-col md:flex-row'}`}
