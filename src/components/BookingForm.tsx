@@ -1,5 +1,6 @@
 "use client";
 
+import { PostBooking } from "@/api/PostApi";
 import { ChevronsExpandVertical } from "@gravity-ui/icons";
 import {
     Button,
@@ -57,10 +58,20 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
             totalPrice,
         };
 
-        console.log("Booking payload →", data);
+        console.log("Booking payload ", data);
         // TODO: await fetch("/api/bookings", { method: "POST", body: JSON.stringify(data) })
         alert("Booking confirmed!\n" + JSON.stringify(data, null, 2));
+        PostBooking(data);
+        reset();
     };
+
+    const reset = () => {
+        setBookingDate(null);
+        setTimeSlot("");
+        setDuration(1);
+    };
+
+
 
     return (
         <div className="flex items-center justify-center rounded-3xl bg-surface p-6 text-left shadow-sm">
@@ -82,7 +93,7 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
                                     value={FacilityName}
                                     variant="secondary"
                                     className="cursor-not-allowed"
-                                    disabled
+                                    readOnly
                                 />
                                 <FieldError />
                             </TextField>
