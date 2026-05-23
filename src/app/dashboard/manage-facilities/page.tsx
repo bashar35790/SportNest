@@ -13,6 +13,7 @@ import {
 import { GetUserAddFacilities } from "@/api/GetApi";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { ModalForm } from "@/components/ModalForm";
 
 type Facility = {
   _id: string;
@@ -146,10 +147,7 @@ export default async function ManageFacilities() {
                 {/* Actions */}
                 <div className="flex items-center gap-4 xl:flex-col xl:items-start">
                   {/* Edit */}
-                  <button className="flex items-center gap-2 rounded-2xl px-4 py-3 text-lg font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-50 cursor-pointer">
-                    <Pencil size={20} />
-                    Edit
-                  </button>
+                  <ModalForm />
 
                   {/* Delete */}
                   <button className="flex items-center gap-2 rounded-2xl px-4 py-3 text-lg font-semibold text-red-500 transition-all duration-300 hover:bg-red-50 cursor-pointer">
