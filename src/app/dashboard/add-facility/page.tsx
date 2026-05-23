@@ -13,8 +13,11 @@ import {
 } from "@heroui/react";
 import React, { useState } from "react";
 import { Plus, X } from "lucide-react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 function AddFacility() {
+  const router = useRouter();
   const [isPending, setIsPending] = useState<boolean>(false);
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
   const [slotInput, setSlotInput] = useState<string>("");
@@ -69,38 +72,44 @@ function AddFacility() {
       });
 
       if (res.ok) {
-        alert("Facility added successfully!");
+        toast.success("Facility added successfully!");
+        router.push("/dashboard/manage-facilities")
+        router.refresh();
       } else {
-        alert("Failed to add facility!");
+        toast.error("Failed to add facility!");
       }
     } catch (error) {
       console.error(error);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
     } finally {
       setIsPending(false);
     }
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 text-left">
       {/* Heading */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold">Add Facility</h1>
-        <p className="text-gray-600 mt-2">
-          Fill in the details to add a new sports facility.
+      <div className="mb-8 sm:mb-10">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient tracking-wide">
+          Add Facility
+        </h1>
+
+        <p className="text-sm sm:text-base text-slate-500 mt-3 max-w-2xl leading-relaxed">
+          Create and manage your sports facility with detailed information,
+          pricing, availability, and booking slots.
         </p>
       </div>
 
       {/* Form */}
       <Form className="space-y-8" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 w-full">
           {/* Facility Name */}
           <TextField name="name" isRequired>
             <Label>Facility Name *</Label>
             <Input
               name="name"
               placeholder="Enter facility name"
-              className="rounded-2xl"
+              className="rounded-2xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
             />
             <FieldError />
           </TextField>
@@ -114,7 +123,7 @@ function AddFacility() {
           >
             <Label>Facility Type *</Label>
 
-            <Select.Trigger className="rounded-2xl">
+            <Select.Trigger className="rounded-2xl border border-slate-200 transition-all duration-300 focus:border-brand-primari">
               <Select.Value />
               <Select.Indicator />
             </Select.Trigger>
@@ -161,7 +170,7 @@ function AddFacility() {
               name="image"
               type="url"
               placeholder="https://example.com/image.jpg"
-              className="rounded-2xl"
+              className="rounded-2xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
             />
             <FieldError />
           </TextField>
@@ -172,7 +181,7 @@ function AddFacility() {
             <Input
               name="location"
               placeholder="Enter facility location"
-              className="rounded-2xl"
+              className="rounded-2xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
             />
             <FieldError />
           </TextField>
@@ -184,7 +193,7 @@ function AddFacility() {
               name="price_per_hour"
               type="number"
               placeholder="2500"
-              className="rounded-2xl"
+              className="rounded-2xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
             />
             <FieldError />
           </TextField>
@@ -196,7 +205,7 @@ function AddFacility() {
               name="capacity"
               type="number"
               placeholder="14"
-              className="rounded-2xl"
+              className="rounded-2xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
             />
             <FieldError />
           </TextField>
@@ -207,7 +216,7 @@ function AddFacility() {
               Available Time Slots *
             </Label>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <TextField className="flex-1">
                 <Input
                   value={slotInput}
@@ -219,14 +228,14 @@ function AddFacility() {
                     }
                   }}
                   placeholder="08:00 AM - 10:00 AM"
-                  className="rounded-2xl"
+                  className="rounded-2xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
                 />
               </TextField>
 
               <Button
                 type="button"
                 isIconOnly
-                className="bg-green-600 text-white rounded-2xl h-[56px] w-[56px]"
+                className="bg-brand-primari hover:bg-cyan-600 transition-all duration-300 text-white rounded-2xl h-[56px] min-w-[56px] shadow-lg shadow-cyan-500/20"
                 onPress={handleAddSlot}
               >
                 <Plus size={22} />
@@ -239,14 +248,15 @@ function AddFacility() {
                 {availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-1 bg-green-50 text-green-700 px-3 py-1.5 rounded-full border border-green-200 text-sm font-medium"
+                    className="group flex items-center gap-2 bg-cyan-50 text-cyan-700 px-4 py-2 rounded-full border border-cyan-200 text-sm font-medium transition-all duration-300 hover:shadow-md"
                   >
                     {slot}
 
                     <button
                       type="button"
                       onClick={() => handleRemoveSlot(index)}
-                      className="ml-1 text-green-700 hover:text-red-500 transition"
+                      className="text-cyan-700 hover:text-red-500 transition-all duration-300 cursor-pointer
+                      "
                     >
                       <X size={14} />
                     </button>
@@ -259,12 +269,12 @@ function AddFacility() {
           {/* Description */}
           <div className="md:col-span-2">
             <TextField name="description" isRequired>
-              <Label>Description *</Label>
+              <Label>Description </Label>
 
               <TextArea
                 name="description"
                 placeholder="Describe the facility..."
-                className="rounded-3xl"
+                className="rounded-3xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
               />
 
               <FieldError />

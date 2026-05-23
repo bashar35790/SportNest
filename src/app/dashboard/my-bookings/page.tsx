@@ -54,6 +54,7 @@ async function MyBookingPage() {
             {bookings.map((booking: Booking) => (
               <BookingCard
                 key={booking._id}
+                bookingId={booking._id}
                 facilityName={booking.facilityName}
                 location="Dhaka, Bangladesh"
                 date={booking.date}

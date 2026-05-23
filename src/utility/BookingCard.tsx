@@ -1,13 +1,13 @@
-import Image from "next/image";
 import {
     CalendarDays,
     Clock3,
     DollarSign,
     MapPin,
-    Trash2,
 } from "lucide-react";
+import { DeleteButton } from "./DeleteButton";
 
 interface BookingCardProps {
+    bookingId: string;
     facilityName: string;
     location: string;
     date: string;
@@ -18,6 +18,7 @@ interface BookingCardProps {
 }
 
 export default function BookingCard({
+    bookingId,
     facilityName,
     location,
     date,
@@ -26,8 +27,9 @@ export default function BookingCard({
     price,
     status,
 }: BookingCardProps) {
+
     return (
-        <div className="flex items-start justify-between gap-6 rounded-[32px] border border-gray-100 bg-white p-8 shadow-sm">
+        <div className="flex items-start justify-between gap-4 rounded-[32px] border border-gray-100 bg-white p-8 shadow-sm">
 
             {/* Left Content */}
             <div className="flex gap-10">
@@ -42,7 +44,7 @@ export default function BookingCard({
                         </h2>
 
                         <span
-                            className={`rounded-2xl border px-5 py-2 text-lg font-bold uppercase tracking-wide
+                            className={`rounded-2xl border px-5 py-2 text-md font-bold uppercase tracking-wide
               ${status === "Pending"
                                     ? "border-yellow-200 bg-yellow-100 text-yellow-700"
                                     : status === "Confirmed"
@@ -89,10 +91,7 @@ export default function BookingCard({
             </div>
 
             {/* Cancel Button */}
-            <button className="flex items-center gap-3 rounded-2xl px-5 py-3 text-red-500 transition-colors hover:bg-red-50 cursor-pointer">
-                <Trash2 size={24} />
-                <span className="text-2xl font-medium">Cancel</span>
-            </button>
+            <DeleteButton bookingId={bookingId} />
         </div>
     );
 }
