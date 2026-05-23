@@ -45,4 +45,16 @@ const GetOneFacility = async (id: string) => {
     }
 }
 
-export { GetFeaturedFacilities, GetAllFacilities, GetOneFacility, GetMyBookings };
+const GetUserAddFacilities = async (userId: string) => {
+    try {
+        const url = `http://localhost:5000/facilities/user/${userId}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.facilities;
+    } catch (error) {
+        console.error('Failed to fetch user facilities:', error);
+        return [];
+    }
+}
+
+export { GetFeaturedFacilities, GetAllFacilities, GetOneFacility, GetMyBookings, GetUserAddFacilities };

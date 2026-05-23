@@ -15,12 +15,16 @@ import React, { useState } from "react";
 import { Plus, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 function AddFacility() {
   const router = useRouter();
   const [isPending, setIsPending] = useState<boolean>(false);
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
   const [slotInput, setSlotInput] = useState<string>("");
+  const { data: session, isPending: sessionPending } = authClient.useSession();
+  const user = session?.user;
+  console.log(user);
 
   // Add Time Slot
   const handleAddSlot = () => {
@@ -47,6 +51,7 @@ function AddFacility() {
 
     // Final Facility Object
     const facilityData = {
+      userId: user?.id,
       name: data.name,
       facility_type: data.facility_type,
       image: data.image,
@@ -55,12 +60,10 @@ function AddFacility() {
       capacity: Number(data.capacity),
       available_slots: availableSlots,
       description: data.description,
-      owner_email: data.owner_email,
+      owner_email: user?.email,
       booking_count: 0,
       created_at: new Date(),
     };
-
-    console.log(facilityData);
 
     try {
       const res = await fetch("http://localhost:5000/add-facility", {
@@ -283,7 +286,7 @@ function AddFacility() {
         </div>
 
         {/* Hidden Owner Email */}
-        <input type="hidden" name="owner_email" value="owner@sportnest.com" />
+        <input type="hidden" name="owner_email" value={user?.email} />
 
         {/* Submit Button */}
         <Button
