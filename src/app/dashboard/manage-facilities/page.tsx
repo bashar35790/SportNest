@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   MapPin,
   Users,
-  Pencil,
   Trash2,
   DollarSign,
   Plus,
@@ -14,6 +13,7 @@ import { GetUserAddFacilities } from "@/api/GetApi";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { ModalForm } from "@/components/ModalForm";
+import { DeleteFacilityButton } from "@/components/DeleteFacilityButton";
 
 type Facility = {
   _id: string;
@@ -147,13 +147,10 @@ export default async function ManageFacilities() {
                 {/* Actions */}
                 <div className="flex items-center gap-4 xl:flex-col xl:items-start">
                   {/* Edit */}
-                  <ModalForm />
+                  <ModalForm facility={facility} />
 
                   {/* Delete */}
-                  <button className="flex items-center gap-2 rounded-2xl px-4 py-3 text-lg font-semibold text-red-500 transition-all duration-300 hover:bg-red-50 cursor-pointer">
-                    <Trash2 size={20} />
-                    Delete
-                  </button>
+                  <DeleteFacilityButton facilityId={facility._id} />
                 </div>
               </div>
             </div>

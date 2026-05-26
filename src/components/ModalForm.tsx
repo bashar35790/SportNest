@@ -8,10 +8,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
-export function ModalForm() {
+export function ModalForm({ facility }: { facility: any }) {
     const router = useRouter();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [isPending, setIsPending] = useState<boolean>(false);
-    const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+    const [availableSlots, setAvailableSlots] = useState<string[]>(facility?.available_slots || []);
     const [slotInput, setSlotInput] = useState<string>("");
     const { data: session, isPending: sessionPending } = authClient.useSession();
     const user = session?.user;
@@ -55,13 +56,15 @@ export function ModalForm() {
             booking_count: 0,
             created_at: new Date(),
         };
-        await UpdateFacilityApi(user?.id as string, updatedFacilityData);
-        router.push('/dashboard/manage-facilities');
+        await UpdateFacilityApi(facility?._id as string, updatedFacilityData);
+        setIsOpen(false);
+        setIsPending(false);
+        router.refresh();
     };
 
     return (
-        <Modal>
-            <Button variant="secondary" className="text-lg font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-50 cursor-pointer bg-brand-primari/30"><Pencil size={20} /> Edit</Button>
+        <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
+            <Button onPress={() => setIsOpen(true)} variant="secondary" className="text-lg font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-50 cursor-pointer bg-brand-primari/30"><Pencil size={20} /> Edit</Button>
             <Modal.Backdrop>
                 <Modal.Container placement="auto">
                     <Modal.Dialog className="sm:max-w-md">
@@ -76,7 +79,7 @@ export function ModalForm() {
                                 <Form className="space-y-8" onSubmit={handleSubmit}>
                                     <div className="flex flex-col gap-5 sm:gap-6 lg:gap-8 w-full">
                                         {/* Facility Name */}
-                                        <TextField name="name" isRequired>
+                                        <TextField name="name" isRequired defaultValue={facility?.name}>
                                             <Label>Facility Name *</Label>
                                             <Input
                                                 name="name"
@@ -92,11 +95,12 @@ export function ModalForm() {
                                             isRequired
                                             className="w-full"
                                             placeholder="Select facility type"
+                                            defaultSelectedKey={facility?.facility_type}
                                         >
                                             <Label>Facility Type *</Label>
 
                                             <Select.Trigger className="rounded-2xl border border-slate-200 transition-all duration-300 focus:border-brand-primari">
-                                                <Select.Value />
+                                                <Select.Value placeholder={facility?.facility_type || "Select type"} />
                                                 <Select.Indicator />
                                             </Select.Trigger>
 
@@ -136,7 +140,7 @@ export function ModalForm() {
                                         </Select>
 
                                         {/* Image URL */}
-                                        <TextField name="image" isRequired>
+                                        <TextField name="image" isRequired defaultValue={facility?.image}>
                                             <Label>Image URL *</Label>
                                             <Input
                                                 name="image"
@@ -148,7 +152,7 @@ export function ModalForm() {
                                         </TextField>
 
                                         {/* Location */}
-                                        <TextField name="location" isRequired>
+                                        <TextField name="location" isRequired defaultValue={facility?.location}>
                                             <Label>Location *</Label>
                                             <Input
                                                 name="location"
@@ -159,7 +163,7 @@ export function ModalForm() {
                                         </TextField>
 
                                         {/* Price Per Hour */}
-                                        <TextField name="price_per_hour" type="number" isRequired>
+                                        <TextField name="price_per_hour" type="number" isRequired defaultValue={facility?.price_per_hour?.toString()}>
                                             <Label>Price Per Hour ($) *</Label>
                                             <Input
                                                 name="price_per_hour"
@@ -171,7 +175,7 @@ export function ModalForm() {
                                         </TextField>
 
                                         {/* Capacity */}
-                                        <TextField name="capacity" type="number" isRequired>
+                                        <TextField name="capacity" type="number" isRequired defaultValue={facility?.capacity?.toString()}>
                                             <Label>Capacity *</Label>
                                             <Input
                                                 name="capacity"
@@ -240,7 +244,7 @@ export function ModalForm() {
 
                                         {/* Description */}
                                         <div className="md:col-span-2">
-                                            <TextField name="description" isRequired>
+                                            <TextField name="description" isRequired defaultValue={facility?.description}>
                                                 <Label>Description </Label>
 
                                                 <TextArea
