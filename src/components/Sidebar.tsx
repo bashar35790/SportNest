@@ -8,6 +8,8 @@ import {
     PlusSquare,
     Settings,
 } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
 
 const sidebarLinks = [
     {
@@ -29,9 +31,12 @@ const sidebarLinks = [
 
 export default function Sidebar() {
     const pathname = usePathname();
+    const { data: session, isPending: sessionPending } = authClient.useSession();
+    const user = session?.user;
+    console.log(user);
 
     return (
-        <aside className="w-[320px] h-fit bg-white border-r border-gray-100 flex flex-col justify-between items-start">
+        <aside className="w-[320px] bg-[#fafafa] flex flex-col justify-between items-start ">
 
             {/* Top Content */}
             <div>
@@ -95,11 +100,27 @@ export default function Sidebar() {
             {/* Bottom Section */}
             <div className="p-6">
                 <div className="rounded-3xl border border-gray-100 bg-gray-50 p-5">
-                    <h4 className="mt-1 text-md font-semibold text-brand-secoundry">
-                        Manage your sports facilities easily
-                    </h4>
+                    <div className="flex items-center gap-4">
+                        <div className="relative h-10 w-10 md:h-12 md:w-12 rounded-full overflow-hidden shadow-md border-2 border-brand-primari/20 hover:border-brand-primari transition-all">
+                            <Image
+                                src={
+                                    user?.image?.startsWith("http")
+                                        ? user.image
+                                        : "/myphoto.png"
+                                }
+                                alt={user?.name ?? "User profile"}
+                                fill
+                                className="object-cover"
+                                sizes="48px"
+                            />
+                        </div>
+                        <h4 className="mt-1 text-md font-semibold text-brand-secoundry">
+                            {user?.name}
+                        </h4>
+                    </div>
+
                     <p className="text-sm font-medium text-slate-500">
-                        SportNest Dashboard
+                        {user?.email}
                     </p>
                 </div>
             </div>

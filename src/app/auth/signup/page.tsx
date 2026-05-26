@@ -115,10 +115,10 @@ export default function Signup() {
           </TextField>
 
           {/* password */}
-          <TextField 
-            isRequired 
-            minLength={6} 
-            name="password" 
+          <TextField
+            isRequired
+            minLength={6}
+            name="password"
             type="password"
             validate={(value) => {
               if (value.length < 6) return "Password must be at least 6 characters";
