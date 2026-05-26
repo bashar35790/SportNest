@@ -45,11 +45,11 @@ export default async function ManageFacilities() {
         {/* Header */}
         <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between text-left">
           <div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-slate-900">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-slate-900 dark:text-white">
               Manage My Facilities
             </h1>
 
-            <p className="mt-2 text-base sm:text-lg text-slate-500">
+            <p className="mt-2 text-base sm:text-lg text-slate-500 dark:text-slate-400">
               Edit or remove your listed venues
             </p>
           </div>
@@ -67,7 +67,7 @@ export default async function ManageFacilities() {
           {addedFacilities.map((facility: Facility) => (
             <div
               key={facility._id}
-              className="group rounded-[32px] border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300"
+              className="group rounded-[32px] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 p-4 shadow-sm transition-all duration-300"
             >
               <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
                 {/* Left Content */}
@@ -87,7 +87,7 @@ export default async function ManageFacilities() {
                   <div className="flex-1">
                     {/* Top */}
                     <div className="flex flex-wrap items-center gap-3">
-                      <h2 className="text-2xl sm:text-3xl font-black text-brand-secoundry">
+                      <h2 className="text-2xl sm:text-3xl font-black text-brand-secoundry dark:text-white">
                         {facility.name}
                       </h2>
 
@@ -97,7 +97,7 @@ export default async function ManageFacilities() {
                     </div>
 
                     {/* Bottom Info */}
-                    <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-4 text-slate-500">
+                    <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-4 text-slate-500 dark:text-slate-400">
                       {/* Location */}
                       <div className="flex items-center gap-2">
                         <MapPin

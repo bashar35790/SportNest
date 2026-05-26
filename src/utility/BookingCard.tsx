@@ -29,7 +29,7 @@ export default function BookingCard({
 }: BookingCardProps) {
 
     return (
-        <div className="flex items-start justify-between gap-4 rounded-[32px] border border-gray-100 bg-white p-8 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-4 rounded-[32px] border border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800 p-6 sm:p-8 shadow-sm transition-colors duration-300">
 
             {/* Left Content */}
             <div className="flex gap-10">
@@ -38,8 +38,8 @@ export default function BookingCard({
                 <div className="space-y-5">
 
                     {/* Title + Badge */}
-                    <div className="flex items-center gap-4">
-                        <h2 className="text-2xl text-slate-900">
+                    <div className="flex flex-wrap items-center gap-4">
+                        <h2 className="text-2xl text-slate-900 dark:text-white">
                             {facilityName}
                         </h2>
 
@@ -57,7 +57,7 @@ export default function BookingCard({
                     </div>
 
                     {/* Details */}
-                    <div className="flex flex-wrap items-center gap-4 text-[18px] text-slate-500">
+                    <div className="flex flex-wrap items-center gap-4 text-[18px] text-slate-500 dark:text-slate-400">
 
                         {/* Location */}
                         <div className="flex items-center gap-2">

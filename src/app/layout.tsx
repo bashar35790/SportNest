@@ -3,6 +3,7 @@ import { DM_Sans, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "react-hot-toast";
 
 
@@ -31,17 +32,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${bebasNeue.variable} ${dmSans.variable} h-full antialiased`}
-      data-theme="light"
     >
       <body
-        className="min-h-full flex flex-col "
+        className="min-h-full flex flex-col bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 transition-colors duration-300"
         cz-shortcut-listen="true"
       >
-        <Navbar />
-        <main className="flex-1 text-center">{children}</main>
-        <Footer />
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
+          <main className="flex-1 text-center">{children}</main>
+          <Footer />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

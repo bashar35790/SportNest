@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
+import { ThemeToggle } from "./ThemeToggle";
 
 const sidebarLinks = [
     {
@@ -36,7 +37,7 @@ export default function Sidebar() {
     console.log(user);
 
     return (
-        <aside className="w-[320px] bg-[#fafafa] flex flex-col justify-between items-start ">
+        <aside className="w-[320px] bg-[#fafafa] dark:bg-[#0f172a] border-r border-gray-100 dark:border-white/10 flex flex-col justify-between items-start transition-colors duration-300">
 
             {/* Top Content */}
             <div>
@@ -45,7 +46,7 @@ export default function Sidebar() {
                 <div className="border-b border-gray-100 px-8 py-10">
                     <Link href="/" className="flex items-center gap-4">
                         <h1 className="text-5xl font-extrabold tracking-tight">
-                            <span className="text-slate-900">Sport</span>
+                            <span className="text-slate-900 dark:text-white">Sport</span>
                             <span className="text-gradient">Nest</span>
                         </h1>
                     </Link>
@@ -80,13 +81,13 @@ export default function Sidebar() {
                                     href={item.href}
                                     className={`flex items-center gap-4 rounded-3xl px-5 py-4 text-md font-bold transition-all duration-200
                   ${isActive
-                                            ? "bg-brand-primari text-brand-secoundry"
-                                            : "text-brand-secoundry hover:bg-brand-primari hover:text-brand-secoundry"
+                                            ? "bg-brand-primari text-brand-secoundry dark:text-slate-900"
+                                            : "text-brand-secoundry dark:text-slate-300 hover:bg-brand-primari hover:text-brand-secoundry dark:hover:text-slate-900"
                                         }`}
                                 >
                                     <Icon
                                         size={28}
-                                        className={isActive ? "text-brand-secoundry" : ""}
+                                        className={isActive ? "text-brand-secoundry dark:text-slate-900" : ""}
                                     />
 
                                     <span>{item.title}</span>
@@ -98,28 +99,31 @@ export default function Sidebar() {
             </div>
 
             {/* Bottom Section */}
-            <div className="p-6">
-                <div className="rounded-3xl border border-gray-100 bg-gray-50 p-5">
-                    <div className="flex items-center gap-4">
-                        <div className="relative h-10 w-10 md:h-12 md:w-12 rounded-full overflow-hidden shadow-md border-2 border-brand-primari/20 hover:border-brand-primari transition-all">
-                            <Image
-                                src={
-                                    user?.image?.startsWith("http")
-                                        ? user.image
-                                        : "/myphoto.png"
-                                }
-                                alt={user?.name ?? "User profile"}
-                                fill
-                                className="object-cover"
-                                sizes="48px"
-                            />
+            <div className="p-6 w-full">
+                <div className="rounded-3xl border border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-5 flex flex-col gap-4">
+                    <div className="flex items-center justify-between w-full">
+                        <div className="flex items-center gap-4">
+                            <div className="relative h-10 w-10 md:h-12 md:w-12 rounded-full overflow-hidden shadow-md border-2 border-brand-primari/20 hover:border-brand-primari transition-all">
+                                <Image
+                                    src={
+                                        user?.image?.startsWith("http")
+                                            ? user.image
+                                            : "/myphoto.png"
+                                    }
+                                    alt={user?.name ?? "User profile"}
+                                    fill
+                                    className="object-cover"
+                                    sizes="48px"
+                                />
+                            </div>
+                            <h4 className="mt-1 text-md font-semibold text-brand-secoundry dark:text-white">
+                                {user?.name}
+                            </h4>
                         </div>
-                        <h4 className="mt-1 text-md font-semibold text-brand-secoundry">
-                            {user?.name}
-                        </h4>
+                        <ThemeToggle />
                     </div>
 
-                    <p className="text-sm font-medium text-slate-500">
+                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                         {user?.email}
                     </p>
                 </div>

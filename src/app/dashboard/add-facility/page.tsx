@@ -97,7 +97,7 @@ function AddFacility() {
           Add Facility
         </h1>
 
-        <p className="text-sm sm:text-base text-slate-500 mt-3 max-w-2xl leading-relaxed">
+        <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-3 max-w-2xl leading-relaxed">
           Create and manage your sports facility with detailed information,
           pricing, availability, and booking slots.
         </p>
@@ -215,7 +215,7 @@ function AddFacility() {
 
           {/* Available Slots */}
           <div className="md:col-span-2">
-            <Label className="text-sm font-medium mb-2 block text-gray-500 uppercase tracking-widest">
+            <Label className="text-sm font-medium mb-2 block text-gray-500 dark:text-slate-400 uppercase tracking-widest">
               Available Time Slots *
             </Label>
 
@@ -251,15 +251,14 @@ function AddFacility() {
                 {availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className="group flex items-center gap-2 bg-cyan-50 text-cyan-700 px-4 py-2 rounded-full border border-cyan-200 text-sm font-medium transition-all duration-300 hover:shadow-md"
+                    className="group flex items-center gap-2 bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 px-4 py-2 rounded-full border border-cyan-200 dark:border-cyan-700/50 text-sm font-medium transition-all duration-300 hover:shadow-md"
                   >
                     {slot}
 
                     <button
                       type="button"
                       onClick={() => handleRemoveSlot(index)}
-                      className="text-cyan-700 hover:text-red-500 transition-all duration-300 cursor-pointer
-                      "
+                      className="text-cyan-700 dark:text-cyan-400 hover:text-red-500 transition-all duration-300 cursor-pointer"
                     >
                       <X size={14} />
                     </button>
