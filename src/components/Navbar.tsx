@@ -35,6 +35,8 @@ export default function Navbar() {
     "/dashboard/my-bookings",
     "/dashboard/add-facility",
     "/dashboard/manage-facilities",
+    "/auth/login",
+    "/auth/signup",
   ];
   const isWhiteBgPage = whiteBgPages.some((p) => pathname.startsWith(p));
   const isLight = scrolled || isWhiteBgPage;

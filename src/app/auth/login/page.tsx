@@ -57,13 +57,13 @@ const Login = () => {
 
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4 py-12">
+    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4 py-20 mt-10">
       <div className="relative z-10 w-full max-w-lg p-8 sm:p-12 bg-white border border-slate-100 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] flex flex-col gap-8 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]">
-        
+
         {/* Header */}
         <div className="text-center space-y-3 w-full">
           <div className="w-16 h-16 bg-brand-primari/5 rounded-2xl mx-auto flex items-center justify-center mb-6 border border-brand-primari/10 shadow-sm">
-             <Check className="w-8 h-8 text-brand-primari" />
+            <Check className="w-8 h-8 text-brand-primari" />
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
             Welcome <span className="text-brand-secoundry">Back</span>
@@ -95,7 +95,7 @@ const Login = () => {
             <Input placeholder="Enter your email" className={inputStyles} />
             <FieldError className="text-red-400 text-xs mt-1.5 ml-1" />
           </TextField>
-          
+
           {/* password */}
           <TextField
             isRequired
@@ -124,23 +124,23 @@ const Login = () => {
 
           {/* login button  */}
           <div className="pt-4">
-            <Button type="submit" className="w-full bg-brand-primari text-brand-secoundry font-bold text-lg h-14 rounded-2xl hover:scale-[1.02] hover:shadow-lg hover:shadow-brand-primari/20 transition-all duration-300">
+            <Button type="submit" className="w-full bg-brand-primari text-brand-secoundry font-bold text-lg h-14 rounded-2xl hover:shadow-lg hover:shadow-brand-primari/20 transition-all duration-300">
               Sign In to Dashboard
             </Button>
           </div>
         </Form>
 
         <div className="relative flex items-center justify-center w-full">
-            <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200"></div>
-            </div>
-            <div className="relative bg-white px-4 text-xs font-bold uppercase tracking-widest text-slate-400">
-                Or continue with
-            </div>
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-slate-200"></div>
+          </div>
+          <div className="relative bg-white px-4 text-xs font-bold uppercase tracking-widest text-slate-400">
+            Or continue with
+          </div>
         </div>
 
-        <Button 
-          className="flex items-center justify-center w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-base h-14 rounded-2xl transition-all duration-300" 
+        <Button
+          className="flex items-center justify-center w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-base h-14 rounded-2xl transition-all duration-300"
           onPress={handleSocialSignup}
         >
           <Icon icon="devicon:google" className="w-5 h-5 mr-2" />
