@@ -64,7 +64,7 @@ export function ModalForm({ facility }: { facility: any }) {
 
     return (
         <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
-            <Button onPress={() => setIsOpen(true)} variant="secondary" className="text-lg font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-50 cursor-pointer bg-brand-primari/30"><Pencil size={20} /> Edit</Button>
+            <Button onPress={() => setIsOpen(true)} variant="secondary" className="flex items-center justify-center gap-2 text-lg font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-50 cursor-pointer bg-brand-primari/30 w-full sm:w-auto"><Pencil size={20} /> Edit</Button>
             <Modal.Backdrop>
                 <Modal.Container placement="auto">
                     <Modal.Dialog className="sm:max-w-md">
@@ -100,7 +100,7 @@ export function ModalForm({ facility }: { facility: any }) {
                                             <Label>Facility Type *</Label>
 
                                             <Select.Trigger className="rounded-2xl border border-slate-200 transition-all duration-300 focus:border-brand-primari">
-                                                <Select.Value placeholder={facility?.facility_type || "Select type"} />
+                                                <Select.Value />
                                                 <Select.Indicator />
                                             </Select.Trigger>
 

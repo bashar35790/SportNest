@@ -145,7 +145,7 @@ export default async function ManageFacilities() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-4 xl:flex-col xl:items-start">
+                <div className="flex flex-col sm:flex-row gap-4 xl:flex-col w-full xl:w-auto">
                   {/* Edit */}
                   <ModalForm facility={facility} />
 

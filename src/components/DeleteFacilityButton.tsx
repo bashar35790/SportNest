@@ -20,7 +20,7 @@ export function DeleteFacilityButton({ facilityId }: { facilityId: string }) {
     return (
         <button
             onClick={handleDelete}
-            className="flex items-center gap-2 rounded-2xl px-4 py-3 text-lg font-semibold text-red-500 transition-all duration-300 hover:bg-red-50 cursor-pointer"
+            className="flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-lg font-semibold text-red-500 transition-all duration-300 hover:bg-red-50 cursor-pointer w-full sm:w-auto"
         >
             <Trash2 size={20} />
             Delete
