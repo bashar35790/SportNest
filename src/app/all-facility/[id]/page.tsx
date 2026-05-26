@@ -16,12 +16,12 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
     console.log(typeof id);
     console.log(data);
     return (
-        <div className="min-h-screen bg-gray-50 font-sans py-30">
+        <div className="min-h-screen bg-gray-50 dark:bg-slate-900 font-sans py-30 transition-colors duration-300">
             {/* Top Nav  */}
             <div className="">
                 <div className="max-w-6xl mx-auto px-6 py-4">
                     <Link href="/all-facility">
-                        <button className="flex items-center gap-2 text-sm font-semibol transition-colors group cursor-pointer text-brand-secoundry hover:text-brand-primari">
+                        <button className="flex items-center gap-2 text-sm font-semibol transition-colors group cursor-pointer text-brand-secoundry dark:text-slate-300 hover:text-brand-primari">
                             <ArrowLeft
                                 size={16}
                                 className="group-hover:-translate-x-0.5 transition-transform "
@@ -56,7 +56,7 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
 
                         {/* Facility Title */}
                         <div>
-                            <h1 className="text-3xl font-normal text-brand-secoundry text-left tracking-tight">
+                            <h1 className="text-3xl font-normal text-brand-secoundry dark:text-white text-left tracking-tight">
                                 {data?.name}
                             </h1>
                         </div>
@@ -86,11 +86,11 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
                         </div>
 
                         {/* About */}
-                        <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-                            <h2 className="text-base font-normal text-brand-secoundry text-left mb-2">
+                        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-6 shadow-sm">
+                            <h2 className="text-base font-normal text-brand-secoundry dark:text-white text-left mb-2">
                                 About this facility
                             </h2>
-                            <p className="text-sm text-brand-secoundry text-left leading-relaxed">
+                            <p className="text-sm text-brand-secoundry dark:text-slate-400 text-left leading-relaxed">
                                 {data.description}
                             </p>
                         </div>
@@ -114,12 +114,12 @@ function InfoCard({
     value: string;
 }) {
     return (
-        <div className="bg-white rounded-xl border border-gray-100 px-4 py-3.5 shadow-sm">
-            <div className="flex items-center gap-1.5 text-gray-400 text-xs mb-1">
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-100 dark:border-white/10 px-4 py-3.5 shadow-sm">
+            <div className="flex items-center gap-1.5 text-gray-400 dark:text-slate-500 text-xs mb-1">
                 {icon}
                 <span>{label}</span>
             </div>
-            <p className="text-sm font-bold text-gray-800">{value}</p>
+            <p className="text-sm font-bold text-gray-800 dark:text-slate-200">{value}</p>
         </div>
     );
 }

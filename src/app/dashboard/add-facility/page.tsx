@@ -285,7 +285,7 @@ function AddFacility() {
         </div>
 
         {/* Hidden Owner Email */}
-        <input type="hidden" name="owner_email" value={user?.email} />
+        <input type="hidden" name="owner_email" value={user?.email || ""} />
 
         {/* Submit Button */}
         <Button

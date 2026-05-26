@@ -62,11 +62,11 @@ export default function AllFacilityPage() {
   const displayedFacilities = filteredFacilities.slice(0, visibleCount);
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] pt-36 pb-20">
+    <main className="min-h-screen bg-[#f8fafc] dark:bg-slate-900 pt-36 pb-20 transition-colors duration-300">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
 
         {/* Search & Filter Bar */}
-        <div className="mb-10 rounded-2xl bg-white p-4 shadow-sm border border-slate-100">
+        <div className="mb-10 rounded-2xl bg-white dark:bg-slate-800 p-4 shadow-sm border border-slate-100 dark:border-white/10 transition-colors duration-300">
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
             {/* Search Input */}
             <div className="relative flex-1 group">
@@ -76,7 +76,7 @@ export default function AllFacilityPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search by name or location..."
-                className="w-full rounded-xl bg-slate-50/80 py-3.5 pl-12 pr-4 text-slate-700 outline-none ring-1 ring-slate-200 transition focus:bg-white focus:ring-2 focus:ring-brand-primari/50 hover:ring-slate-300"
+                className="w-full rounded-xl bg-slate-50/80 dark:bg-slate-700 dark:text-slate-200 dark:placeholder:text-slate-400 dark:ring-white/10 py-3.5 pl-12 pr-4 text-slate-700 outline-none ring-1 ring-slate-200 transition focus:bg-white dark:focus:bg-slate-700 focus:ring-2 focus:ring-brand-primari/50 hover:ring-slate-300"
               />
             </div>
 
@@ -88,7 +88,7 @@ export default function AllFacilityPage() {
                   setSelectedSport(e.target.value);
                   setVisibleCount(6);
                 }}
-                className="w-full cursor-pointer appearance-none rounded-xl bg-white py-3.5 pl-4 pr-10 text-slate-700 outline-none ring-1 ring-slate-200 transition focus:ring-2 focus:ring-brand-primari/50 hover:ring-slate-300"
+                className="w-full cursor-pointer appearance-none rounded-xl bg-white dark:bg-slate-700 dark:text-slate-200 dark:ring-white/10 py-3.5 pl-4 pr-10 text-slate-700 outline-none ring-1 ring-slate-200 transition focus:ring-2 focus:ring-brand-primari/50 hover:ring-slate-300"
               >
                 <option value="All Sports">All Sports</option>
                 <option value="Football">Football</option>
@@ -113,10 +113,10 @@ export default function AllFacilityPage() {
         {/* Page Header */}
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div className='text-left'>
-            <h1 className="text-4xl font-bold text-brand-secoundry tracking-tight font-bebasNeue">
+            <h1 className="text-4xl font-bold text-brand-secoundry dark:text-white tracking-tight font-bebasNeue">
               Discover <span className='text-brand-primari'>Facilities</span>
             </h1>
-            <p className="mt-1.5 text-[15px] text-brand-secoundry font-medium">
+            <p className="mt-1.5 text-[15px] text-brand-secoundry dark:text-slate-400 font-medium">
               Found {loading ? '...' : filteredFacilities.length} venues near you
             </p>
           </div>
@@ -126,8 +126,8 @@ export default function AllFacilityPage() {
             <button
               onClick={() => setViewMode("grid")}
               className={`flex h-10 w-10 items-center justify-center rounded-xl transition cursor-pointer ${viewMode === "grid"
-                ? "bg-blue-50 text-brand-primari ring-1 ring-blue-100"
-                : "text-slate-400 hover:bg-slate-100 hover:text-brand-primari"
+                ? "bg-blue-50 dark:bg-brand-primari/20 text-brand-primari ring-1 ring-blue-100 dark:ring-brand-primari/30"
+                : "text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-brand-primari"
                 }`}
             >
               <LayoutGrid className="h-5 w-5" />
@@ -135,8 +135,8 @@ export default function AllFacilityPage() {
             <button
               onClick={() => setViewMode("list")}
               className={`flex h-10 w-10 items-center justify-center rounded-xl transition cursor-pointer ${viewMode === "list"
-                ? "bg-blue-50 text-brand-primari ring-1 ring-blue-100"
-                : "text-slate-400 hover:bg-slate-100 hover:text-brand-primari"
+                ? "bg-blue-50 dark:bg-brand-primari/20 text-brand-primari ring-1 ring-blue-100 dark:ring-brand-primari/30"
+                : "text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10 hover:text-brand-primari"
                 }`}
             >
               <List className="h-5 w-5" />
@@ -149,7 +149,7 @@ export default function AllFacilityPage() {
           {displayedFacilities.map((facility: Facility) => (
             <div
               key={facility._id}
-              className={`bg-white rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 flex group hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(0,0,0,0.15)] hover:ring-1 hover:ring-brand-primari/20 ${viewMode === 'grid' ? 'flex-col' : 'flex-col md:flex-row'}`}
+              className={`bg-white dark:bg-slate-800 rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/10 flex group hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(0,0,0,0.15)] hover:ring-1 hover:ring-brand-primari/20 ${viewMode === 'grid' ? 'flex-col' : 'flex-col md:flex-row'}`}
             >
               {/* Image Box */}
               <div className={`relative overflow-hidden ${viewMode === 'grid' ? 'h-64 w-full' : 'w-full md:w-2/5 min-h-[220px]'}`}>
@@ -168,33 +168,33 @@ export default function AllFacilityPage() {
               {/* Content */}
               <div className={`p-6 flex flex-col grow ${viewMode === 'list' ? 'justify-center' : ''}`}>
                 <div className="flex justify-between items-start mb-2 gap-4">
-                  <h3 className="text-xl font-light tracking-wider text-brand-secoundry leading-tight">
+                  <h3 className="text-xl font-light tracking-wider text-brand-secoundry dark:text-white leading-tight">
                     {facility.name}
                   </h3>
                   <div className="text-right whitespace-nowrap">
                     <span className="text-lg font-bold text-brand-primari">
                       $ {facility.price_per_hour}
                     </span>
-                    <span className="text-xs text-gray-500 font-medium">
+                    <span className="text-xs text-gray-500 dark:text-slate-400 font-medium">
                       /hr
                     </span>
                   </div>
                 </div>
 
                 <div className={`flex flex-col gap-2 ${viewMode === 'list' ? 'my-4' : 'mb-5'}`}>
-                  <div className="flex items-center text-gray-500 text-sm">
+                  <div className="flex items-center text-gray-500 dark:text-slate-400 text-sm">
                     <Users className="w-4 h-4 mr-1.5 shrink-0 text-brand-primari" />
                     <span className="truncate">Up to {facility.capacity} people</span>
                   </div>
 
-                  <div className="flex items-center text-gray-500 text-sm">
+                  <div className="flex items-center text-gray-500 dark:text-slate-400 text-sm">
                     <MapPin className="w-4 h-4 mr-1.5 shrink-0 text-brand-primari" />
                     <span className="truncate">{facility.location}</span>
                   </div>
 
-                  <div className="flex items-center text-gray-500 text-sm">
+                  <div className="flex items-center text-gray-500 dark:text-slate-400 text-sm">
                     <Clock className="w-4 h-4 mr-1.5 shrink-0 text-brand-primari" />
-                    <span className="truncate ">
+                    <span className="truncate">
                       {facility.available_slots ? facility.available_slots.length : 0} slots available
                     </span>
                   </div>
@@ -220,7 +220,7 @@ export default function AllFacilityPage() {
         )}
 
         {!loading && filteredFacilities.length === 0 && (
-          <div className="text-center py-20 text-slate-500 font-medium">
+          <div className="text-center py-20 text-slate-500 dark:text-slate-400 font-medium">
             No facilities found matching your search and filter criteria.
           </div>
         )}
@@ -230,17 +230,17 @@ export default function AllFacilityPage() {
           <div className="mt-14 mb-8 flex flex-col items-center gap-5">
             <button
               onClick={loadMore}
-              className="group flex items-center gap-2 rounded-full border border-slate-200 bg-white px-7 py-3 text-[15px] font-semibold text-slate-600 shadow-sm transition-all hover:border-brand-primari hover:bg-slate-50 hover:text-brand-primari cursor-pointer hover:shadow-md"
+              className="group flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-7 py-3 text-[15px] font-semibold text-slate-600 dark:text-slate-300 shadow-sm transition-all hover:border-brand-primari hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-brand-primari cursor-pointer hover:shadow-md"
             >
               Load More Facilities
               <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
             </button>
 
             <div className="flex flex-col items-center gap-3">
-              <span className="text-[13px] font-medium text-slate-400">
+              <span className="text-[13px] font-medium text-slate-400 dark:text-slate-500">
                 Showing {visibleCount} of {filteredFacilities.length} facilities
               </span>
-              <div className="h-1.5 w-[280px] rounded-full bg-slate-100 overflow-hidden shadow-inner">
+              <div className="h-1.5 w-[280px] rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden shadow-inner">
                 <div
                   className="h-full rounded-full bg-[#065f46] transition-all duration-500"
                   style={{ width: `${(visibleCount / filteredFacilities.length) * 100}%` }}

@@ -17,7 +17,7 @@ export default function NotFound() {
         {/* Button */}
         <Link
           href="/"
-          className="mt-6 inline-block rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:scale-105"
+          className="mt-6 inline-block rounded-2xl bg-brand-primari  px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition hover:scale-105"
         >
           Go Back Home
         </Link>

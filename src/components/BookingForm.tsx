@@ -76,15 +76,15 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
 
 
     return (
-        <div className="flex items-center justify-center rounded-3xl bg-surface p-6 text-left shadow-sm">
-            <Surface className="w-full min-w-[380px]">
+        <div className="flex items-center justify-center rounded-3xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-white/10 p-6 text-left shadow-sm transition-colors duration-300">
+            <Surface className="w-full min-w-[380px] bg-transparent dark:bg-transparent">
                 <Form onSubmit={onSubmit}>
                     <Fieldset className="w-full">
                         <div>
-                            <h3 className="text-brand-secoundry text-3xl font-normal mb-2">
+                            <h3 className="text-brand-secoundry dark:text-white text-3xl font-normal mb-2">
                                 Book This Facility
                             </h3>
-                            <p className="text-gray-600">Fill in your details to reserve this spot</p>
+                            <p className="text-gray-600 dark:text-slate-400">Fill in your details to reserve this spot</p>
                         </div>
 
                         <Fieldset.Group>
@@ -204,17 +204,17 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
                         </Fieldset.Group>
 
                         {/* Price Summary */}
-                        <div className="bg-brand-primari/20 rounded-xl px-4 py-3.5 border border-green-100 w-full">
-                            <div className="flex justify-between items-center text-sm text-gray-500 mb-1">
+                        <div className="bg-brand-primari/10 dark:bg-brand-primari/20 rounded-xl px-4 py-3.5 border border-brand-primari/20 dark:border-brand-primari/30 w-full">
+                            <div className="flex justify-between items-center text-sm text-gray-500 dark:text-slate-400 mb-1">
                                 <span>
                                     ${PRICE_PER_HOUR}/hr × {duration ?? 1} hr
                                     {(duration ?? 1) > 1 ? "s" : ""}
                                 </span>
-                                <span className="text-gray-700">${totalPrice}</span>
+                                <span className="text-gray-700 dark:text-slate-300">${totalPrice}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-sm font-bold text-brand-secoundry">Total Price</span>
-                                <span className="text-lg font-extrabold text-brand-secoundry">
+                                <span className="text-sm font-bold text-brand-secoundry dark:text-white">Total Price</span>
+                                <span className="text-lg font-extrabold text-brand-secoundry dark:text-brand-primari">
                                     ${totalPrice}
                                 </span>
                             </div>
