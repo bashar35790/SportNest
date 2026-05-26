@@ -3,12 +3,13 @@
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import { Button, FieldError, Form, Input, Label, TextField, InputGroup, Description } from "@heroui/react";
+import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const inputStyles =
-  "border border-gray-300 focus-within:border-brand-secoundry focus-within:ring-1 focus-within:ring-brand-secoundry focus:outline-none w-full";
+  "w-full rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 px-5 py-4 focus-within:border-brand-secoundry focus-within:bg-white focus-within:ring-1 focus-within:ring-brand-secoundry focus:outline-none transition-all duration-300 hover:bg-white hover:border-slate-300";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +21,12 @@ const Login = () => {
       router.push("/");
     }
   }, [session, router]);
+
+  const handleSocialSignup = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,17 +57,25 @@ const Login = () => {
 
 
   return (
-    <div className="py-12 md:py-16 mx-auto px-4">
-      <div className="bg-brand-primari p-6 md:p-10 rounded-2xl max-w-2xl mx-auto flex flex-col justify-center items-center gap-5 shadow-2xl">
+    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4 py-12">
+      <div className="relative z-10 w-full max-w-lg p-8 sm:p-12 bg-white border border-slate-100 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] flex flex-col gap-8 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]">
+        
         {/* Header */}
-        <div className="text-left space-y-2.5 w-full">
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight uppercase">Welcome back</h2>
-          <p className="text-white/80 font-medium">Sign in to access your professional tiles gallery.</p>
+        <div className="text-center space-y-3 w-full">
+          <div className="w-16 h-16 bg-brand-primari/5 rounded-2xl mx-auto flex items-center justify-center mb-6 border border-brand-primari/10 shadow-sm">
+             <Check className="w-8 h-8 text-brand-primari" />
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            Welcome <span className="text-brand-secoundry">Back</span>
+          </h2>
+          <p className="text-slate-500 font-medium text-sm sm:text-base">
+            Sign in to access your premium facilities
+          </p>
         </div>
 
         {/* Form */}
         <Form
-          className="flex w-full flex-col gap-4 text-left"
+          className="flex w-full flex-col gap-5 text-left"
           render={(props) => <form {...props} data-custom="foo" />}
           onSubmit={onSubmit}
         >
@@ -76,10 +91,11 @@ const Login = () => {
               return null;
             }}
           >
-            <Label className="text-white">Email</Label>
-            <Input placeholder="Enter you email" className={inputStyles} />
-            <FieldError />
+            <Label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Email Address</Label>
+            <Input placeholder="Enter your email" className={inputStyles} />
+            <FieldError className="text-red-400 text-xs mt-1.5 ml-1" />
           </TextField>
+          
           {/* password */}
           <TextField
             isRequired
@@ -87,42 +103,57 @@ const Login = () => {
             name="password"
             type="password"
           >
-            <Label className="text-white/90 text-xs font-bold uppercase tracking-widest">Password</Label>
+            <Label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Password</Label>
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter password"
-                className={`${inputStyles} rounded-xl bg-white/5 border-white/20 text-white placeholder:text-white/40 px-4 py-3`}
+                className={inputStyles}
               />
 
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold uppercase tracking-widest text-black hover:text-black transition-colors cursor-pointer"
+                className="absolute right-5 top-1/2 -translate-y-1/2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-primari transition-colors cursor-pointer"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
             </div>
-            <Description className="text-white/60 text-[10px] uppercase tracking-wider mt-1 font-medium">At least 8 chars, 1 uppercase, 1 number</Description>
-            <FieldError className="text-red-300 text-xs mt-1" />
+            <FieldError className="text-red-400 text-xs mt-1.5 ml-1" />
           </TextField>
 
           {/* login button  */}
-          <div className="flex gap-2">
-            <Button type="submit" className={"bg-brand-secoundry text-black"}>
-              <Check />
-              Submit
-            </Button>
-            <Button type="reset" variant="secondary" className={"text-brand-primari"}>
-              Reset
+          <div className="pt-4">
+            <Button type="submit" className="w-full bg-brand-primari text-brand-secoundry font-bold text-lg h-14 rounded-2xl hover:scale-[1.02] hover:shadow-lg hover:shadow-brand-primari/20 transition-all duration-300">
+              Sign In to Dashboard
             </Button>
           </div>
         </Form>
 
-        <h4 className="text-white text-center font-bold">Or</h4>
-        <div className="w-full flex gap-2 justify-center items-center mt-5">
-          <p className="text-white/80 text-sm font-medium">Don't have any account?</p>
-          <Link href="/auth/signup" className="text-white underline decoration-white/60 font-bold transition-all cursor-pointer">Sign up</Link>
+        <div className="relative flex items-center justify-center w-full">
+            <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-slate-200"></div>
+            </div>
+            <div className="relative bg-white px-4 text-xs font-bold uppercase tracking-widest text-slate-400">
+                Or continue with
+            </div>
+        </div>
+
+        <Button 
+          className="flex items-center justify-center w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-base h-14 rounded-2xl transition-all duration-300" 
+          onPress={handleSocialSignup}
+        >
+          <Icon icon="devicon:google" className="w-5 h-5 mr-2" />
+          Sign in with Google
+        </Button>
+
+        <div className="w-full flex justify-center items-center mt-2">
+          <p className="text-slate-500 text-sm font-medium">
+            New to SportNest?{" "}
+            <Link href="/auth/signup" className="text-brand-primari hover:opacity-80 font-bold transition-colors cursor-pointer">
+              Create an account
+            </Link>
+          </p>
         </div>
       </div>
     </div>
