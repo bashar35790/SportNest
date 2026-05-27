@@ -59,22 +59,22 @@ export default function Signup() {
   }
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4 py-20 mt-10">
-      <div className="relative z-10 w-full max-w-xl p-8 sm:p-12 bg-white border border-slate-100 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] flex flex-col gap-8 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]">
+    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-brand-secoundry px-4 py-20 mt-10">
+      <div className="relative z-10 w-full max-w-xl p-8 sm:p-12 bg-white border dark:bg-slate-800 border-slate-100 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] flex flex-col gap-8 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]">
 
         {/* Header */}
         <div className="text-center space-y-3 w-full">
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Create <span className="text-brand-secoundry">Account</span>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+            Create <span className="text-brand-secoundry dark:text-white">Account</span>
           </h2>
-          <p className="text-slate-500 font-medium text-sm sm:text-base">
+          <p className="text-slate-500 dark:text-white font-medium text-sm sm:text-base dark:text-whites">
             Join SportNest and elevate your sports experience
           </p>
         </div>
 
         {/* Form */}
         <Form
-          className="flex w-full flex-col gap-5 text-left"
+          className="flex w-full flex-col gap-5 text-left "
           render={(props) => <form {...props} data-custom="foo" />}
           onSubmit={onSubmit}
         >
@@ -87,8 +87,8 @@ export default function Signup() {
               return null;
             }}
           >
-            <Label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Full Name</Label>
-            <Input placeholder="Your full name" className={inputStyles} />
+            <Label className="text-slate-700 dark:text-white text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Full Name</Label>
+            <Input placeholder="Your full name" className={inputStyles}/>
             <FieldError className="text-red-400 text-xs mt-1.5 ml-1" />
           </TextField>
 
@@ -102,7 +102,7 @@ export default function Signup() {
               return null;
             }}
           >
-            <Label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Email Address</Label>
+            <Label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block dark:text-white">Email Address</Label>
             <Input placeholder="Enter your email" className={inputStyles} />
             <FieldError className="text-red-400 text-xs mt-1.5 ml-1" />
           </TextField>

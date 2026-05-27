@@ -57,16 +57,16 @@ const Login = () => {
 
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4 py-20 mt-10">
-      <div className="relative z-10 w-full max-w-lg p-8 sm:p-12 bg-white border border-slate-100 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] flex flex-col gap-8 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]">
+    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4 py-20 mt-10 dark:bg-brand-secoundry">
+      <div className="relative z-10 w-full max-w-lg p-8 sm:p-12 bg-white dark:bg-slate-800 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] flex flex-col gap-8 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]  ">
 
         {/* Header */}
         <div className="text-center space-y-3 w-full">
           <div className="w-16 h-16 bg-brand-primari/5 rounded-2xl mx-auto flex items-center justify-center mb-6 border border-brand-primari/10 shadow-sm">
             <Check className="w-8 h-8 text-brand-primari" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Welcome <span className="text-brand-secoundry">Back</span>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+            Welcome <span className="text-brand-secoundry dark:text-white">Back</span>
           </h2>
           <p className="text-slate-500 font-medium text-sm sm:text-base">
             Sign in to access your premium facilities
@@ -134,7 +134,7 @@ const Login = () => {
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-slate-200"></div>
           </div>
-          <div className="relative bg-white px-4 text-xs font-bold uppercase tracking-widest text-slate-400">
+          <div className="relative bg-white px-4 text-xs font-bold uppercase  text-slate-400">
             Or continue with
           </div>
         </div>
