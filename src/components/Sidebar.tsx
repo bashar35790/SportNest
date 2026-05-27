@@ -34,10 +34,9 @@ export default function Sidebar() {
     const pathname = usePathname();
     const { data: session, isPending: sessionPending } = authClient.useSession();
     const user = session?.user;
-    console.log(user);
 
     return (
-        <aside className="w-[320px] bg-[#fafafa] dark:bg-[#0f172a] border-r border-gray-100 dark:border-white/10 flex flex-col justify-between items-start transition-colors duration-300">
+        <aside className="w-full bg-[#fafafa] dark:bg-[#0f172a] border-r border-gray-100 dark:border-white/10 flex flex-col justify-between items-start transition-colors duration-300">
 
             {/* Top Content */}
             <div>

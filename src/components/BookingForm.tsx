@@ -77,7 +77,7 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
 
     return (
         <div className="flex items-center justify-center rounded-3xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-white/10 p-6 text-left shadow-sm transition-colors duration-300">
-            <Surface className="w-full min-w-[380px] bg-transparent dark:bg-transparent">
+            <Surface className="w-full bg-transparent dark:bg-transparent">
                 <Form onSubmit={onSubmit}>
                     <Fieldset className="w-full">
                         <div>

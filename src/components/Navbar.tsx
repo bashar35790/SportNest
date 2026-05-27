@@ -181,14 +181,18 @@ export default function Navbar() {
               </Link>
             ))}
 
-            {session ? (
-              <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari to-brand-primari/40 px-4 py-3 font-semibold text-brand-secoundry">
-                Login
-              </button>
+            {!session ? (
+              <Link href={"/auth/login"}>
+                <button className="mt-3 rounded-xl bg-brand-primari px-4 py-3 font-semibold text-brand-secoundry cursor-pointer">
+                  Login
+                </button>
+              </Link>
             ) : (
-              <button className="mt-3 rounded-xl bg-linear-to-r from-brand-primari px-4 py-3 font-semibold text-brand-secoundry" onClick={handleLogout}>
-                Logout
-              </button>
+              <Link href={"#"}>
+                <button className="mt-3 rounded-xl bg-brand-primari px-4 py-3 font-semibold text-brand-secoundry cursor-pointer" onClick={handleLogout}>
+                  Logout
+                </button>
+              </Link>
             )}
           </div>
         </div>

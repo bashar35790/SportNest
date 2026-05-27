@@ -13,7 +13,7 @@ async function DeleteBooking(bookingId: string) {
             toast.error("Failed to delete booking");
         }
     } catch (error) {
-        console.log(error);
+        toast.error("Failed to delete booking");
     }
 }
 

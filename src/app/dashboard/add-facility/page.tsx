@@ -24,7 +24,6 @@ function AddFacility() {
   const [slotInput, setSlotInput] = useState<string>("");
   const { data: session, isPending: sessionPending } = authClient.useSession();
   const user = session?.user;
-  console.log(user);
 
   // Add Time Slot
   const handleAddSlot = () => {

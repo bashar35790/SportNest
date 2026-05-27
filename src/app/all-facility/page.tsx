@@ -36,7 +36,6 @@ export default function AllFacilityPage() {
         const data = await GetAllFacilities(searchTerm);
         setFacilities(data);
         setVisibleCount(6); // reset on search
-        console.log(data);
       } catch (error) {
         console.error("Error fetching facilities:", error);
       } finally {
@@ -168,7 +167,7 @@ export default function AllFacilityPage() {
               {/* Content */}
               <div className={`p-6 flex flex-col grow ${viewMode === 'list' ? 'justify-center' : ''}`}>
                 <div className="flex justify-between items-start mb-2 gap-4">
-                  <h3 className="text-xl font-light tracking-wider text-brand-secoundry dark:text-white leading-tight">
+                  <h3 className="text-xl font-light tracking-wider text-brand-secoundry dark:text-white leading-tight text-left">
                     {facility.name}
                   </h3>
                   <div className="text-right whitespace-nowrap">

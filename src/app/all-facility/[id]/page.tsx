@@ -13,8 +13,6 @@ import Link from "next/link";
 export default async function FacilityDetailsPage({ params }: { params: { id: string } }) {
     const { id } = await params;
     const data = await GetOneFacility(id);
-    console.log(typeof id);
-    console.log(data);
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-slate-900 font-sans py-30 transition-colors duration-300">
             {/* Top Nav  */}

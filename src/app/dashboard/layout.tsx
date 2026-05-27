@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Sidebar />
         </div>
       </div>
-      <div className="grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+      <div className="grow px-4 md:px-12 py-6 md:overflow-y-auto">{children}</div>
     </div>
   );
 }

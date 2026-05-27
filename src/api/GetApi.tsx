@@ -1,3 +1,5 @@
+import { authClient } from "@/lib/auth-client";
+
 const GetFeaturedFacilities = async () => {
     try {
         const response = await fetch('http://localhost:5000/featured');
@@ -23,8 +25,14 @@ const GetAllFacilities = async (search = "") => {
 
 const GetMyBookings = async (userId: string) => {
     try {
+        const token = await authClient.token();
+        console.log("token", token);
         const url = `http://localhost:5000/my-bookings/${userId}`;
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         const data = await response.json();
         return data;
     } catch (error) {

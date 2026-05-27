@@ -1,11 +1,8 @@
-
-
 import Image from "next/image";
 import Link from "next/link";
 import {
   MapPin,
   Users,
-  Trash2,
   DollarSign,
   Plus,
 } from "lucide-react";
@@ -38,7 +35,6 @@ export default async function ManageFacilities() {
   });
   const userId = session?.user?.id;
   const addedFacilities = await GetUserAddFacilities(userId!);
-  console.log(addedFacilities);
   return (
     <section className="min-h-screen px-4 py-6 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -73,7 +69,7 @@ export default async function ManageFacilities() {
                 {/* Left Content */}
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
                   {/* Image */}
-                  <div className="relative h-[120px] w-full overflow-hidden rounded-3xl sm:w-[170px]">
+                  <div className="relative h-30 w-full overflow-hidden rounded-3xl">
                     <Image
                       src={facility?.image || "/logo.png"}
                       alt={facility.name}
