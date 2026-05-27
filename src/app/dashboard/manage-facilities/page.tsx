@@ -67,9 +67,9 @@ export default async function ManageFacilities() {
             >
               <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
                 {/* Left Content */}
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+                <div className="flex flex-col items-center justify-center gap-5 sm:flex-row sm:items-center">
                   {/* Image */}
-                  <div className="relative h-30 w-full overflow-hidden rounded-3xl">
+                  <div className="relative h-30 w-fit max-md:w-full overflow-hidden rounded-3xl">
                     <Image
                       src={facility?.image || "/logo.png"}
                       alt={facility.name}
@@ -141,7 +141,7 @@ export default async function ManageFacilities() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-4 xl:flex-col w-full xl:w-auto">
+                <div className="flex flex-col sm:flex-row gap-4 xl:flex-col w-full xl:w-auto items-center">
                   {/* Edit */}
                   <ModalForm facility={facility} />
 

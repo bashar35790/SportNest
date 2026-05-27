@@ -42,7 +42,6 @@ export default function BookingCard({
                         <h2 className="text-2xl text-slate-900 dark:text-white">
                             {facilityName}
                         </h2>
-
                         <span
                             className={`rounded-2xl border px-5 py-2 text-md font-bold uppercase tracking-wide
               ${status === "Pending"
