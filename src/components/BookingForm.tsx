@@ -33,12 +33,13 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
     const [bookingDate, setBookingDate] = React.useState<DateValue | null>(null);
     const [timeSlot, setTimeSlot] = React.useState<string>("");
     const [duration, setDuration] = React.useState<number | undefined>(1);
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
     const { data: session } = authClient.useSession();
 
     const isOutOfStock = duration !== undefined && duration > STOCK_AVAILABLE;
     const totalPrice = (duration ?? 1) * PRICE_PER_HOUR;
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Validate fields that aren't covered by HTML required
         if (!bookingDate) {
@@ -62,9 +63,17 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
             totalPrice,
         };
 
-        toast.success("Booking confirmed!");
-        PostBooking(data);
-        reset();
+        setIsSubmitting(true);
+        try {
+            await PostBooking(data);
+            toast.success("Booking confirmed!");
+            reset();
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : "Booking failed. Please try again.";
+            toast.error(message);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const reset = () => {
@@ -224,9 +233,10 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
                             <Button
                                 type="submit"
                                 className="bg-brand-primari text-brand-secoundry hover:scale-105 transition-transform"
+                                isDisabled={isSubmitting}
                             >
                                 <Save />
-                                Confirm Booking
+                                {isSubmitting ? "Confirming..." : "Confirm Booking"}
                             </Button>
                         </Fieldset.Actions>
                     </Fieldset>

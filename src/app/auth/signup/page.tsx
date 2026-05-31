@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const inputStyles =
   "w-full rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 px-5 py-4 focus-within:border-brand-secoundry focus-within:bg-white focus-within:ring-1 focus-within:ring-brand-secoundry focus:outline-none transition-all duration-300 hover:bg-white hover:border-slate-300";
@@ -34,8 +35,6 @@ export default function Signup() {
       data[key] = value.toString();
     });
 
-    alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
-
     const { error } = await authClient.signUp.email({
       name: data.name,
       email: data.email,
@@ -43,9 +42,10 @@ export default function Signup() {
       image: data.Image,
     });
     if (error) {
-      alert(`Error : ${error.message}`)
+      toast.error(`Error: ${error.message}`);
       setLoading(false);
     } else {
+      toast.success("Account created successfully!");
       router.refresh();
       router.push("/auth/login");
     }
@@ -74,8 +74,7 @@ export default function Signup() {
 
         {/* Form */}
         <Form
-          className="flex w-full flex-col gap-5 text-left "
-          render={(props) => <form {...props} data-custom="foo" />}
+          className="flex w-full flex-col gap-5 text-left"
           onSubmit={onSubmit}
         >
           {/* Name  */}

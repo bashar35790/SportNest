@@ -1,10 +1,9 @@
-
-import { GetMyBookings } from "@/api/GetApi";
-import { auth } from "@/lib/auth";
 import BookingCard from "@/utility/BookingCard";
 import { BookOpen } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { MongoClient } from "mongodb";
 
 interface Booking {
   _id: string;
@@ -17,12 +16,36 @@ interface Booking {
 }
 
 async function MyBookingPage() {
+  // Get the session server-side using the incoming request headers (includes the cookie)
   const session = await auth.api.getSession({
     headers: await headers(),
   });
   const userId = session?.user?.id;
 
-  const bookings = await GetMyBookings(userId!);
+  let bookings: Booking[] = [];
+
+  if (userId) {
+    // Query MongoDB directly from the server — avoids the cookie-on-server-fetch problem
+    // (browser cookies cannot be forwarded in server-to-server Express calls)
+    const client = new MongoClient(
+      process.env.MONGODB_URI_DIRECT || process.env.MONGODB_URI!
+    );
+    try {
+      await client.connect();
+      const db = client.db("sportnest");
+      bookings = (await db
+        .collection("Bookings")
+        .find({ userId })
+        .toArray()).map(doc => ({
+        ...doc,
+        _id: doc._id.toString(),
+      })) as unknown as Booking[];
+    } catch (err) {
+      console.error("Failed to fetch bookings:", err);
+    } finally {
+      await client.close();
+    }
+  }
 
   return (
     <section className="px-6 min-h-screen">
@@ -43,8 +66,8 @@ async function MyBookingPage() {
           <div className="space-y-6">
             {bookings.map((booking: Booking) => (
               <BookingCard
-                key={booking._id}
-                bookingId={booking._id}
+                key={booking._id.toString()}
+                bookingId={booking._id.toString()}
                 facilityName={booking.facilityName}
                 location="Dhaka, Bangladesh"
                 date={booking.date}
@@ -84,4 +107,4 @@ async function MyBookingPage() {
   )
 }
 
-export default MyBookingPage;
+export default MyBookingPage;

@@ -3,10 +3,12 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { jwt } from "better-auth/plugins/jwt";
 
-const client = new MongoClient(process.env.MONGODB_URI!);
+const client = new MongoClient(process.env.MONGODB_URI_DIRECT || process.env.MONGODB_URI!);
 const db = client.db("sportnest");
 
 export const auth = betterAuth({
+  baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
+  trustedOrigins: [process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "http://localhost:3000"],
   database: mongodbAdapter(db, {
     client,
   }),

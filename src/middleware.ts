@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "./lib/auth";
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   try {
-    const session = await auth.api.getSession({
-      headers: request.headers,
+    const baseURL = process.env.NEXT_PUBLIC_BETTER_AUTH_URL || request.nextUrl.origin;
+    const res = await fetch(`${baseURL}/api/auth/get-session`, {
+      headers: {
+        cookie: request.headers.get("cookie") || "",
+      },
     });
+
+    const session = res.ok ? await res.json().catch(() => null) : null;
 
     if (!session) {
       return NextResponse.redirect(
@@ -16,7 +20,7 @@ export async function proxy(request: NextRequest) {
 
     return NextResponse.next();
   } catch (error) {
-    console.log("Proxy Error:", error);
+    console.log("Middleware Error:", error);
 
     return NextResponse.redirect(
       new URL("/auth/login", request.url)

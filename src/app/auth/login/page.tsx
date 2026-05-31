@@ -7,11 +7,13 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const inputStyles =
   "w-full rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 px-5 py-4 focus-within:border-brand-secoundry focus-within:bg-white focus-within:ring-1 focus-within:ring-brand-secoundry focus:outline-none transition-all duration-300 hover:bg-white hover:border-slate-300";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { data: session, isPending: sessionPending } = authClient.useSession();
@@ -30,14 +32,14 @@ const Login = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
     const formData = new FormData(e.currentTarget);
     const data: Record<string, string> = {};
     // Convert FormData to plain object
     formData.forEach((value, key) => {
       data[key] = value.toString();
     });
-
-    alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
 
     const { error } = await authClient.signIn.email({
       email: data.email, // required
@@ -46,8 +48,10 @@ const Login = () => {
       callbackURL: "/",
     });
     if (error) {
-
+      toast.error(`Error: ${error.message}`);
+      setLoading(false);
     } else {
+      toast.success("Login successful!");
       router.refresh();
       router.push("/");
     }
@@ -76,7 +80,6 @@ const Login = () => {
         {/* Form */}
         <Form
           className="flex w-full flex-col gap-5 text-left"
-          render={(props) => <form {...props} data-custom="foo" />}
           onSubmit={onSubmit}
         >
           {/* email  */}
@@ -124,8 +127,13 @@ const Login = () => {
 
           {/* login button  */}
           <div className="pt-4">
-            <Button type="submit" className="w-full bg-brand-primari text-brand-secoundry font-bold text-lg h-14 rounded-2xl hover:shadow-lg hover:shadow-brand-primari/20 transition-all duration-300">
-              Sign In to Dashboard
+            <Button
+              type="submit"
+              className="w-full flex items-center justify-center bg-brand-primari text-brand-secoundry font-bold text-lg h-14 rounded-2xl hover:shadow-lg hover:shadow-brand-primari/20 transition-all duration-300"
+              isDisabled={loading}
+            >
+              {!loading && <Check className="w-5 h-5 mr-2" />}
+              {loading ? "Signing In..." : "Sign In to Dashboard"}
             </Button>
           </div>
         </Form>

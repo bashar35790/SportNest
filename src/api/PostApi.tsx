@@ -10,6 +10,7 @@ const PostBooking = async (bookingData: BookingData) => {
     try {
         const response = await fetch('http://localhost:5000/booking', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },

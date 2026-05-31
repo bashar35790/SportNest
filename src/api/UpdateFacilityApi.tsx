@@ -2,6 +2,7 @@ const UpdateFacilityApi = async (userId: string, updatedFacility: any) => {
     try {
         const response = await fetch(`http://localhost:5000/facilities/user/${userId}`, {
             method: "PATCH",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },

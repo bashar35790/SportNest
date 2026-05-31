@@ -4,6 +4,7 @@ async function DeleteBooking(bookingId: string) {
     try {
         const response = await fetch(`http://localhost:5000/my-bookings/${bookingId}`, {
             method: "DELETE",
+            credentials: "include",
         });
         const data = await response.json();
         if (data.deletedCount > 0) {
@@ -21,6 +22,7 @@ async function DeleteFacility(facilityId: string) {
     try {
         const response = await fetch(`http://localhost:5000/facilities/user/${facilityId}`, {
             method: "DELETE",
+            credentials: "include",
         });
         const data = await response.json();
         if (data.success && data.data.deletedCount > 0) {

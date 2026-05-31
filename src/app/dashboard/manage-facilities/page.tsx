@@ -6,11 +6,11 @@ import {
   DollarSign,
   Plus,
 } from "lucide-react";
-import { GetUserAddFacilities } from "@/api/GetApi";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { ModalForm } from "@/components/ModalForm";
 import { DeleteFacilityButton } from "@/components/DeleteFacilityButton";
+import { MongoClient } from "mongodb";
 
 type Facility = {
   _id: string;
@@ -34,7 +34,30 @@ export default async function ManageFacilities() {
     headers: await headers(),
   });
   const userId = session?.user?.id;
-  const addedFacilities = await GetUserAddFacilities(userId!);
+
+  let addedFacilities: Facility[] = [];
+
+  if (userId) {
+    const client = new MongoClient(
+      process.env.MONGODB_URI_DIRECT || process.env.MONGODB_URI!
+    );
+    try {
+      await client.connect();
+      const db = client.db("sportnest");
+      addedFacilities = (await db
+        .collection("Facilitys")
+        .find({ userId })
+        .toArray()).map((doc) => ({
+        ...doc,
+        _id: doc._id.toString(),
+      })) as unknown as Facility[];
+    } catch (err) {
+      console.error("Failed to fetch user facilities:", err);
+    } finally {
+      await client.close();
+    }
+  }
+
   return (
     <section className="min-h-screen px-4 py-6 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">

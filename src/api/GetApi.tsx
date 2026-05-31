@@ -3,18 +3,23 @@ import { authClient } from "@/lib/auth-client";
 const GetFeaturedFacilities = async () => {
     try {
         const response = await fetch('http://localhost:5000/featured');
+        if (!response.ok) {
+            console.error(`HTTP error! status: ${response.status}`);
+            return { facilities: [] };
+        }
         const data = await response.json();
         return data;
     } catch (error) {
         console.error('Failed to fetch featured facilities:', error);
-        return [];
+        return { facilities: [] };
     }
 }
 
 const GetAllFacilities = async (search = "") => {
     try {
         const url = search ? `http://localhost:5000/all-facility?search=${search}` : 'http://localhost:5000/all-facility';
-        const response = await fetch(url);
+        const response = await fetch(url, { credentials: "include" });
+        if (!response.ok) return [];
         const data = await response.json();
         return data;
     } catch (error) {
@@ -25,14 +30,11 @@ const GetAllFacilities = async (search = "") => {
 
 const GetMyBookings = async (userId: string) => {
     try {
-        const token = await authClient.token();
-        console.log("token", token);
         const url = `http://localhost:5000/my-bookings/${userId}`;
         const response = await fetch(url, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+            credentials: "include"
         });
+        if (!response.ok) return [];
         const data = await response.json();
         return data;
     } catch (error) {
@@ -44,7 +46,8 @@ const GetMyBookings = async (userId: string) => {
 const GetOneFacility = async (id: string) => {
     try {
         const url = `http://localhost:5000/all-facility/${id}`;
-        const response = await fetch(url);
+        const response = await fetch(url, { credentials: "include" });
+        if (!response.ok) return {};
         const data = await response.json();
         return data;
     } catch (error) {
@@ -56,9 +59,12 @@ const GetOneFacility = async (id: string) => {
 const GetUserAddFacilities = async (userId: string) => {
     try {
         const url = `http://localhost:5000/facilities/user/${userId}`;
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            credentials: "include"
+        });
+        if (!response.ok) return [];
         const data = await response.json();
-        return data.facilities;
+        return data.facilities || [];
     } catch (error) {
         console.error('Failed to fetch user facilities:', error);
         return [];
