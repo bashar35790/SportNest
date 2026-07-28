@@ -21,12 +21,12 @@ export function DeleteButton({ bookingId }: { bookingId: string }) {
                         <AlertDialog.CloseTrigger />
                         <AlertDialog.Header>
                             <AlertDialog.Icon status="danger" />
-                            <AlertDialog.Heading>Cancel Booking permanently?</AlertDialog.Heading>
+                            <AlertDialog.Heading>Cancel this booking?</AlertDialog.Heading>
                         </AlertDialog.Header>
                         <AlertDialog.Body>
                             <p>
-                                This will permanently delete <strong>My Awesome Booking</strong> and all of its
-                                data. This action cannot be undone.
+                                Your booking will be cancelled and the slot will be freed for others.
+                                This action can be undone by rebooking.
                             </p>
                         </AlertDialog.Body>
                         <AlertDialog.Footer>

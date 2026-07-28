@@ -8,14 +8,14 @@ async function DeleteBooking(bookingId: string) {
             credentials: "include",
         });
         const data = await response.json();
-        if (data.deletedCount > 0) {
-            toast.success("Booking deleted successfully");
+        if (data.success) {
+            toast.success("Booking cancelled successfully");
         }
         else {
-            toast.error("Failed to delete booking");
+            toast.error("Failed to cancel booking");
         }
     } catch (error) {
-        toast.error("Failed to delete booking");
+        toast.error("Failed to cancel booking");
     }
 }
 
