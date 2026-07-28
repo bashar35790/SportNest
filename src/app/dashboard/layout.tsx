@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Sidebar from "@/components/Sidebar";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Manage your SportNest account. Add facilities, view bookings, and track your activity.",
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
