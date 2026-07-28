@@ -1,4 +1,5 @@
 "use client";
+import { Search, Play } from "lucide-react";
 
 const STATS = [
   { value: "240+", label: "Facilities" },
@@ -62,36 +63,11 @@ export default function Hero() {
           {/* CTAs */}
           <div className="cta-group">
             <button className="btn-primary" type="button">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.35-4.35" />
-              </svg>
+              <Search size={16} aria-hidden="true" />
               Explore Facilities
             </button>
             <button className="btn-secondary" type="button">
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polygon points="5 3 19 12 5 21 5 3" />
-              </svg>
+              <Play size={15} aria-hidden="true" />
               How it works
             </button>
           </div>

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { GetOneFacility } from "@/api/GetApi";
 import { getCachedFacility } from "@/lib/data-cache";
-import { BookingForm } from "@/components/BookingForm";
+
+const BookingForm = dynamic(() => import("@/components/BookingForm").then((m) => m.BookingForm), {
+  loading: () => <div className="h-64 bg-slate-100 dark:bg-slate-800 rounded-2xl animate-pulse" />,
+});
 import {
     ArrowLeft,
     MapPin,
