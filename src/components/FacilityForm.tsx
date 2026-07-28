@@ -13,10 +13,7 @@ import {
 } from "@heroui/react";
 import { Plus, X } from "lucide-react";
 import { useState } from "react";
-
-const SPORT_TYPES = [
-  "Football", "Badminton", "Basketball", "Volleyball", "Tennis", "Swimming",
-] as const;
+import { SPORT_TYPES } from "@/lib/constants";
 
 export interface FacilityFormData {
   name: string;

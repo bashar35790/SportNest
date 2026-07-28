@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Filter, LayoutGrid, List, ChevronDown } from 'lucide-react';
 import { GetAllFacilities } from '@/api/GetApi';
 import { FacilityCard, type FacilityCardData } from '@/components/FacilityCard';
+import { SPORT_TYPES } from '@/lib/constants';
 
 interface Facility {
   _id: string;
@@ -89,13 +90,9 @@ export default function AllFacilityPage() {
                 className="w-full cursor-pointer appearance-none rounded-xl bg-white dark:bg-slate-700 dark:text-slate-200 dark:ring-white/10 py-3.5 pl-4 pr-10 text-slate-700 outline-none ring-1 ring-slate-200 transition focus:ring-2 focus:ring-brand-primari/50 hover:ring-slate-300"
               >
                 <option value="All Sports">All Sports</option>
-                <option value="Football">Football</option>
-                <option value="Tennis">Tennis</option>
-                <option value="Basketball">Basketball</option>
-                <option value="Swimming">Swimming</option>
-                <option value="Gym">Gym</option>
-                <option value="Badminton">Badminton</option>
-                <option value="Cricket">Cricket</option>
+                {SPORT_TYPES.map((sport) => (
+                  <option key={sport} value={sport}>{sport}</option>
+                ))}
               </select>
               <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 pointer-events-none group-focus-within:text-brand-primari transition-colors" />
             </div>
