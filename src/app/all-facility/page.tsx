@@ -22,43 +22,51 @@ interface Facility {
 
 
 export default function AllFacilityPage() {
-  const [facilities, setFacilities] = useState([]);
+  const [facilities, setFacilities] = useState<Facility[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSport, setSelectedSport] = useState("All Sports");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+
+  const fetchFacilities = async (search: string, pageNum: number, append = false) => {
+    if (append) setLoadingMore(true);
+    else setLoading(true);
+    try {
+      const result = await GetAllFacilities(search, pageNum, 12);
+      if (append) {
+        setFacilities((prev) => [...prev, ...result.data as unknown as Facility[]]);
+      } else {
+        setFacilities(result.data as unknown as Facility[]);
+      }
+      setTotalPages(result.totalPages);
+    } catch (error) {
+      console.error("Error fetching facilities:", error);
+    } finally {
+      setLoading(false);
+      setLoadingMore(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchFacilities = async () => {
-      setLoading(true);
-      try {
-        const data = await GetAllFacilities(searchTerm);
-        setFacilities(data);
-        setVisibleCount(6); // reset on search
-      } catch (error) {
-        console.error("Error fetching facilities:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
+    setPage(1);
     const timer = setTimeout(() => {
-      fetchFacilities();
+      fetchFacilities(searchTerm, 1);
     }, 400);
-
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
   const loadMore = () => {
-    setVisibleCount(facilities.length);
+    const nextPage = page + 1;
+    setPage(nextPage);
+    fetchFacilities(searchTerm, nextPage, true);
   };
 
   const filteredFacilities = selectedSport === "All Sports"
     ? facilities
     : facilities.filter((fac: Facility) => fac.facility_type === selectedSport);
-
-  const displayedFacilities = filteredFacilities.slice(0, visibleCount);
 
   return (
     <main className="min-h-screen bg-[#f8fafc] dark:bg-slate-900 pt-36 pb-20 transition-colors duration-300">
@@ -83,10 +91,7 @@ export default function AllFacilityPage() {
             <div className="relative w-full md:w-56 group">
               <select
                 value={selectedSport}
-                onChange={(e) => {
-                  setSelectedSport(e.target.value);
-                  setVisibleCount(6);
-                }}
+                onChange={(e) => setSelectedSport(e.target.value)}
                 className="w-full cursor-pointer appearance-none rounded-xl bg-white dark:bg-slate-700 dark:text-slate-200 dark:ring-white/10 py-3.5 pl-4 pr-10 text-slate-700 outline-none ring-1 ring-slate-200 transition focus:ring-2 focus:ring-brand-primari/50 hover:ring-slate-300"
               >
                 <option value="All Sports">All Sports</option>
@@ -141,7 +146,7 @@ export default function AllFacilityPage() {
 
         {/* Grid/List */}
         <div className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-4"}>
-          {displayedFacilities.map((facility: FacilityCardData) => (
+          {filteredFacilities.map((facility: FacilityCardData) => (
             <FacilityCard key={facility._id} facility={facility} viewMode={viewMode} />
           ))}
         </div>
@@ -160,24 +165,25 @@ export default function AllFacilityPage() {
         )}
 
         {/* Load More section */}
-        {!loading && visibleCount < filteredFacilities.length && filteredFacilities.length > 0 && (
+        {!loading && page < totalPages && filteredFacilities.length > 0 && (
           <div className="mt-14 mb-8 flex flex-col items-center gap-5">
             <button
               onClick={loadMore}
-              className="group flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-7 py-3 text-[15px] font-semibold text-slate-600 dark:text-slate-300 shadow-sm transition-all hover:border-brand-primari hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-brand-primari cursor-pointer hover:shadow-md"
+              disabled={loadingMore}
+              className="group flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-7 py-3 text-[15px] font-semibold text-slate-600 dark:text-slate-300 shadow-sm transition-all hover:border-brand-primari hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-brand-primari cursor-pointer hover:shadow-md disabled:opacity-50"
             >
-              Load More Facilities
-              <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+              {loadingMore ? "Loading..." : "Load More Facilities"}
+              {!loadingMore && <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />}
             </button>
 
             <div className="flex flex-col items-center gap-3">
               <span className="text-[13px] font-medium text-slate-400 dark:text-slate-500">
-                Showing {visibleCount} of {filteredFacilities.length} facilities
+                Showing {facilities.length} of {totalPages * 12}+ facilities
               </span>
               <div className="h-1.5 w-[280px] rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden shadow-inner">
                 <div
                   className="h-full rounded-full bg-[#065f46] transition-all duration-500"
-                  style={{ width: `${(visibleCount / filteredFacilities.length) * 100}%` }}
+                  style={{ width: `${(page / totalPages) * 100}%` }}
                 ></div>
               </div>
             </div>
