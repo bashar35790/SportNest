@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "@/lib/api-config";
+import { withCsrf } from "@/lib/csrf";
 
 export interface FacilityUpdateData {
   name?: string;
@@ -13,14 +14,14 @@ export interface FacilityUpdateData {
 
 const UpdateFacilityApi = async (userId: string, updatedFacility: FacilityUpdateData) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/facilities/user/${userId}`, {
+        const response = await fetch(`${API_BASE_URL}/facilities/user/${userId}`, withCsrf({
             method: "PATCH",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(updatedFacility),
-        });
+        }));
         const data = await response.json();
         return data;
     } catch (error) {

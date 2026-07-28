@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { API_BASE_URL } from "@/lib/api-config";
+import { withCsrf } from "@/lib/csrf";
 import { FacilityForm } from "@/components/FacilityForm";
 import type { FacilityFormData } from "@/components/FacilityForm";
 
@@ -20,12 +21,12 @@ function AddFacility() {
       booking_count: 0,
     };
 
-    const res = await fetch(`${API_BASE_URL}/add-facility`, {
+    const res = await fetch(`${API_BASE_URL}/add-facility`, withCsrf({
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
-    });
+    }));
 
     if (!res.ok) {
       throw new Error("Failed to add facility");

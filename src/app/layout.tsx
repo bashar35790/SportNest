@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { CsrfProvider } from "@/components/CsrfProvider";
 import { Toaster } from "react-hot-toast";
 
 
@@ -46,10 +47,12 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 transition-colors duration-300"
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          <main className="flex-1 text-center">{children}</main>
-          <Footer />
-          <Toaster />
+          <CsrfProvider>
+            <Navbar />
+            <main className="flex-1 text-center">{children}</main>
+            <Footer />
+            <Toaster />
+          </CsrfProvider>
         </ThemeProvider>
       </body>
     </html>

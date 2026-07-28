@@ -1,12 +1,13 @@
 import { API_BASE_URL } from "@/lib/api-config";
+import { withCsrf } from "@/lib/csrf";
 import toast from 'react-hot-toast';
 
 async function DeleteBooking(bookingId: string) {
     try {
-        const response = await fetch(`${API_BASE_URL}/my-bookings/${bookingId}`, {
+        const response = await fetch(`${API_BASE_URL}/my-bookings/${bookingId}`, withCsrf({
             method: "DELETE",
             credentials: "include",
-        });
+        }));
         const data = await response.json();
         if (data.success) {
             toast.success("Booking cancelled successfully");
@@ -21,10 +22,10 @@ async function DeleteBooking(bookingId: string) {
 
 async function DeleteFacility(facilityId: string) {
     try {
-        const response = await fetch(`${API_BASE_URL}/facilities/user/${facilityId}`, {
+        const response = await fetch(`${API_BASE_URL}/facilities/user/${facilityId}`, withCsrf({
             method: "DELETE",
             credentials: "include",
-        });
+        }));
         const data = await response.json();
         if (data.success && data.data.deletedCount > 0) {
             toast.success("Facility deleted successfully");
