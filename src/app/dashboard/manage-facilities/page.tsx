@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,6 +12,11 @@ import { headers } from "next/headers";
 import { ModalForm } from "@/components/ModalForm";
 import { DeleteFacilityButton } from "@/components/DeleteFacilityButton";
 import { API_BASE_URL } from "@/lib/api-config";
+
+export const metadata: Metadata = {
+  title: "Manage Facilities",
+  description: "View and manage your sports facilities. Add, edit, or remove facilities from your dashboard.",
+};
 
 type Facility = {
   _id: string;

@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import BookingCard from "@/utility/BookingCard";
 import { BookOpen } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { API_BASE_URL } from "@/lib/api-config";
+
+export const metadata: Metadata = {
+  title: "My Bookings",
+  description: "View and manage your facility bookings. Track confirmed, pending, and past bookings.",
+};
 
 interface Booking {
   _id: string;

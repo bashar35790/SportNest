@@ -1,4 +1,4 @@
-
+import type { Metadata } from "next";
 import { GetOneFacility } from "@/api/GetApi";
 import { BookingForm } from "@/components/BookingForm";
 import {
@@ -9,6 +9,17 @@ import {
     Clock,
 } from "lucide-react";
 import Link from "next/link";
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const { id } = await params;
+  const facility = await GetOneFacility(id).catch(() => null);
+  return {
+    title: facility?.name || "Facility Details",
+    description: facility
+      ? `Book ${facility.name} at ${facility.location}. $${facility.price_per_hour}/hr, capacity ${facility.capacity}.`
+      : "View facility details and book your slot.",
+  };
+}
 
 export default async function FacilityDetailsPage({ params }: { params: { id: string } }) {
     const { id } = await params;
