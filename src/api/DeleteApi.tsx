@@ -1,8 +1,9 @@
+import { API_BASE_URL } from "@/lib/api-config";
 import toast from 'react-hot-toast';
 
 async function DeleteBooking(bookingId: string) {
     try {
-        const response = await fetch(`http://localhost:5000/my-bookings/${bookingId}`, {
+        const response = await fetch(`${API_BASE_URL}/my-bookings/${bookingId}`, {
             method: "DELETE",
             credentials: "include",
         });
@@ -20,7 +21,7 @@ async function DeleteBooking(bookingId: string) {
 
 async function DeleteFacility(facilityId: string) {
     try {
-        const response = await fetch(`http://localhost:5000/facilities/user/${facilityId}`, {
+        const response = await fetch(`${API_BASE_URL}/facilities/user/${facilityId}`, {
             method: "DELETE",
             credentials: "include",
         });

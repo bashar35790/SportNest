@@ -16,6 +16,7 @@ import { Plus, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { API_BASE_URL } from "@/lib/api-config";
 
 function AddFacility() {
   const router = useRouter();
@@ -65,7 +66,7 @@ function AddFacility() {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/add-facility", {
+      const res = await fetch(`${API_BASE_URL}/add-facility`, {
         method: "POST",
         credentials: "include",
         headers: {

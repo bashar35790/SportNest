@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "@/lib/api-config";
+
 interface BookingData {
     facilityName: string;
     date: string;
@@ -8,7 +10,7 @@ interface BookingData {
 
 const PostBooking = async (bookingData: BookingData) => {
     try {
-        const response = await fetch('http://localhost:5000/booking', {
+        const response = await fetch(`${API_BASE_URL}/booking`, {
             method: 'POST',
             credentials: 'include',
             headers: {

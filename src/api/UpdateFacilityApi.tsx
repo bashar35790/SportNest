@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "@/lib/api-config";
+
 const UpdateFacilityApi = async (userId: string, updatedFacility: any) => {
     try {
-        const response = await fetch(`http://localhost:5000/facilities/user/${userId}`, {
+        const response = await fetch(`${API_BASE_URL}/facilities/user/${userId}`, {
             method: "PATCH",
             credentials: "include",
             headers: {

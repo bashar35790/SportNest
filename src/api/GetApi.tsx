@@ -1,8 +1,8 @@
-import { authClient } from "@/lib/auth-client";
+import { API_BASE_URL } from "@/lib/api-config";
 
 const GetFeaturedFacilities = async () => {
     try {
-        const response = await fetch('http://localhost:5000/featured');
+        const response = await fetch(`${API_BASE_URL}/featured`);
         if (!response.ok) {
             console.error(`HTTP error! status: ${response.status}`);
             return { facilities: [] };
@@ -17,7 +17,7 @@ const GetFeaturedFacilities = async () => {
 
 const GetAllFacilities = async (search = "") => {
     try {
-        const url = search ? `http://localhost:5000/all-facility?search=${search}` : 'http://localhost:5000/all-facility';
+        const url = search ? `${API_BASE_URL}/all-facility?search=${search}` : `${API_BASE_URL}/all-facility`;
         const response = await fetch(url, { credentials: "include" });
         if (!response.ok) return [];
         const data = await response.json();
@@ -30,7 +30,7 @@ const GetAllFacilities = async (search = "") => {
 
 const GetMyBookings = async (userId: string) => {
     try {
-        const url = `http://localhost:5000/my-bookings/${userId}`;
+        const url = `${API_BASE_URL}/my-bookings/${userId}`;
         const response = await fetch(url, {
             credentials: "include"
         });
@@ -45,7 +45,7 @@ const GetMyBookings = async (userId: string) => {
 
 const GetOneFacility = async (id: string) => {
     try {
-        const url = `http://localhost:5000/all-facility/${id}`;
+        const url = `${API_BASE_URL}/all-facility/${id}`;
         const response = await fetch(url, { credentials: "include" });
         if (!response.ok) return {};
         const data = await response.json();
@@ -58,7 +58,7 @@ const GetOneFacility = async (id: string) => {
 
 const GetUserAddFacilities = async (userId: string) => {
     try {
-        const url = `http://localhost:5000/facilities/user/${userId}`;
+        const url = `${API_BASE_URL}/facilities/user/${userId}`;
         const response = await fetch(url, {
             credentials: "include"
         });
