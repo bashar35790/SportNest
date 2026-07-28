@@ -25,11 +25,9 @@ import { Save } from "lucide-react";
 import React from "react";
 import toast from "react-hot-toast";
 
-const PRICE_PER_HOUR = 40;
 const STOCK_AVAILABLE = 8;
 
-export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: string, AvailableSlots: string[] }) {
-    // Controlled state for fields that don't bind to FormData 
+export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePerHour }: { FacilityName: string, FacilityId: string, AvailableSlots: string[], PricePerHour: number }) {
     const [bookingDate, setBookingDate] = React.useState<DateValue | null>(null);
     const [timeSlot, setTimeSlot] = React.useState<string>("");
     const [duration, setDuration] = React.useState<number | undefined>(1);
@@ -37,11 +35,11 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
     const { data: session } = authClient.useSession();
 
     const isOutOfStock = duration !== undefined && duration > STOCK_AVAILABLE;
-    const totalPrice = (duration ?? 1) * PRICE_PER_HOUR;
+    const totalPrice = (duration ?? 1) * PricePerHour;
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Validate fields that aren't covered by HTML required
+
         if (!bookingDate) {
             toast.error("Please select a booking date.");
             return;
@@ -51,16 +49,15 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
             return;
         }
 
-        // Build the payload manually — merge FormData + controlled state
-        const formData = new FormData(e.currentTarget);
+        const idempotencyKey = crypto.randomUUID();
 
         const data = {
-            userId: session?.user?.id,
-            facilityName: formData.get("facilityName") as string,
+            facilityId: FacilityId,
+            facilityName: FacilityName,
             date: bookingDate.toString(),
             timeSlot,
             duration: duration ?? 1,
-            totalPrice,
+            idempotencyKey,
         };
 
         setIsSubmitting(true);
@@ -82,8 +79,6 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
         setDuration(1);
     };
 
-
-
     return (
         <div className="flex items-center justify-center rounded-3xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-white/10 p-6 text-left shadow-sm transition-colors duration-300">
             <Surface className="w-full bg-transparent dark:bg-transparent">
@@ -97,7 +92,6 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
                         </div>
 
                         <Fieldset.Group>
-                            {/* FACILITY NAME (read-only, still in FormData via name prop) */}
                             <TextField isRequired name="facilityName">
                                 <Label>Facility Name</Label>
                                 <Input
@@ -109,7 +103,6 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
                                 <FieldError />
                             </TextField>
 
-                            {/*  BOOKING DATE (controlled → captured manually)  */}
                             <DatePicker
                                 className="w-full"
                                 value={bookingDate}
@@ -157,13 +150,11 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
                                 </DatePicker.Popover>
                             </DatePicker>
 
-                            {/* TIME SLOT (controlled → captured manually) */}
                             <Select
                                 className="w-full"
                                 placeholder="Select one"
                                 selectedKey={timeSlot}
                                 onSelectionChange={(key) => setTimeSlot(key as string)}
-                            // No `name` prop — same issue as DatePicker
                             >
                                 <Label>
                                     Time Slot
@@ -188,7 +179,6 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
                                 </Select.Popover>
                             </Select>
 
-                            {/* Duration */}
                             <NumberField
                                 isRequired
                                 isInvalid={isOutOfStock}
@@ -212,11 +202,10 @@ export function BookingForm({ FacilityName, AvailableSlots }: { FacilityName: st
                             </NumberField>
                         </Fieldset.Group>
 
-                        {/* Price Summary */}
                         <div className="bg-brand-primari/10 dark:bg-brand-primari/20 rounded-xl px-4 py-3.5 border border-brand-primari/20 dark:border-brand-primari/30 w-full">
                             <div className="flex justify-between items-center text-sm text-gray-500 dark:text-slate-400 mb-1">
                                 <span>
-                                    ${PRICE_PER_HOUR}/hr × {duration ?? 1} hr
+                                    ${PricePerHour}/hr × {duration ?? 1} hr
                                     {(duration ?? 1) > 1 ? "s" : ""}
                                 </span>
                                 <span className="text-gray-700 dark:text-slate-300">${totalPrice}</span>

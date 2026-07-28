@@ -95,7 +95,7 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
                     </div>
 
                     {/* right side content */}
-                    <BookingForm FacilityName={data.name} AvailableSlots={data.available_slots} />
+                    <BookingForm FacilityName={data.name} FacilityId={data._id} AvailableSlots={data.available_slots} PricePerHour={data.price_per_hour} />
                 </div>
             </div>
         </div>

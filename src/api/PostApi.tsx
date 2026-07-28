@@ -1,11 +1,12 @@
 import { API_BASE_URL } from "@/lib/api-config";
 
 interface BookingData {
+    facilityId: string;
     facilityName: string;
     date: string;
     timeSlot: string;
     duration: number;
-    totalPrice: number;
+    idempotencyKey: string;
 }
 
 const PostBooking = async (bookingData: BookingData) => {
