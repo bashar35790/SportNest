@@ -19,6 +19,7 @@ interface Booking {
   timeSlot: string;
   duration: number;
   totalPrice: number;
+  status: "pending" | "confirmed" | "cancelled" | "expired";
 }
 
 async function MyBookingPage() {
@@ -36,7 +37,8 @@ async function MyBookingPage() {
         `${API_BASE_URL}/my-bookings/${userId}`,
         { headers: { cookie: cookieHeader }, next: { revalidate: 30 } }
       );
-      bookings = (await response.json()) as Booking[];
+      const result = await response.json() as { data?: Booking[] };
+      bookings = result?.data ?? [];
     } catch (err) {
       console.error("Failed to fetch bookings:", err);
     }
@@ -59,19 +61,28 @@ async function MyBookingPage() {
         {/* Display Bookings */}
         {bookings && bookings.length > 0 ? (
           <div className="space-y-6">
-            {bookings.map((booking: Booking) => (
-              <BookingCard
-                key={booking._id.toString()}
-                bookingId={booking._id.toString()}
-                facilityName={booking.facilityName}
-                location="Dhaka, Bangladesh"
-                date={booking.date}
-                time={booking.timeSlot}
-                duration={`${booking.duration} hr`}
-                price={booking.totalPrice}
-                status="Pending"
-              />
-            ))}
+            {bookings.map((booking: Booking) => {
+              const statusMap: Record<string, "Pending" | "Confirmed" | "Cancelled"> = {
+                pending: "Pending",
+                confirmed: "Confirmed",
+                cancelled: "Cancelled",
+                expired: "Cancelled",
+              };
+              const displayStatus = statusMap[booking.status] ?? "Pending";
+              return (
+                <BookingCard
+                  key={booking._id.toString()}
+                  bookingId={booking._id.toString()}
+                  facilityName={booking.facilityName}
+                  location="—"
+                  date={booking.date}
+                  time={booking.timeSlot}
+                  duration={`${booking.duration} hr`}
+                  price={booking.totalPrice}
+                  status={displayStatus}
+                />
+              );
+            })}
           </div>
         ) : (
           /* No Bookings State */
