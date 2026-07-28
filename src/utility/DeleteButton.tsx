@@ -2,7 +2,7 @@
 
 import { AlertDialog, Button } from "@heroui/react";
 import { Trash2 } from "lucide-react";
-import { DeleteBooking } from "../api/DeleteApi";
+import { DeleteBooking } from "@/api/DeleteApi";
 import { useRouter } from "next/navigation";
 
 export function DeleteButton({ bookingId }: { bookingId: string }) {
