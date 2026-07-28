@@ -52,6 +52,7 @@ export default function AllFacilityPage() {
 
   useEffect(() => {
     setPage(1);
+    if (searchTerm.length > 0 && searchTerm.length < 3) return;
     const timer = setTimeout(() => {
       fetchFacilities(searchTerm, 1);
     }, 400);
