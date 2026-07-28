@@ -27,8 +27,8 @@ export default async function Feature() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {facilities.map((facility: FacilityCardData) => (
-            <FacilityCard key={facility._id} facility={facility} />
+          {facilities.map((facility: FacilityCardData, index: number) => (
+            <FacilityCard key={facility._id} facility={facility} priority={index < 3} />
           ))}
         </div>
       </div>

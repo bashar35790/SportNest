@@ -31,6 +31,7 @@ export default function SportsSection() {
         alt="Sports Facility"
         fill
         unoptimized
+        sizes="100vw"
         className="object-cover transition-transform duration-700 group-hover:scale-110 z-0 opacity-80"
       />
       {/* Section Header */}

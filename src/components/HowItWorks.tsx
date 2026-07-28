@@ -33,6 +33,7 @@ export default function HowItWorks() {
         alt="Sports Facility"
         fill
         unoptimized
+        sizes="100vw"
         className="object-cover transition-transform duration-700 group-hover:scale-110 z-0 opacity-50"
       />
       <div className="max-w-7xl mx-auto z-10 relative">

@@ -87,6 +87,7 @@ export default function Footer() {
         alt="Sports Facility"
         fill
         unoptimized
+        sizes="100vw"
         className="object-cover transition-transform duration-700 group-hover:scale-110"
       />
       <div className="mx-auto max-w-7xl px-4 lg:px-8 z-10 relative">

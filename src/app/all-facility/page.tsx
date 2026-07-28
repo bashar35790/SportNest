@@ -146,8 +146,8 @@ export default function AllFacilityPage() {
 
         {/* Grid/List */}
         <div className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" : "flex flex-col gap-4"}>
-          {filteredFacilities.map((facility: FacilityCardData) => (
-            <FacilityCard key={facility._id} facility={facility} viewMode={viewMode} />
+          {filteredFacilities.map((facility: FacilityCardData, index) => (
+            <FacilityCard key={facility._id} facility={facility} viewMode={viewMode} priority={index < 3} />
           ))}
         </div>
 

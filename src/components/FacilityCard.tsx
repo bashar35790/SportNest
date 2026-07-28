@@ -28,9 +28,11 @@ function badgeBg(type: string): string {
 export function FacilityCard({
   facility,
   viewMode = "grid",
+  priority = false,
 }: {
   facility: FacilityCardData;
   viewMode?: "grid" | "list";
+  priority?: boolean;
 }) {
   return (
     <div
@@ -44,6 +46,8 @@ export function FacilityCard({
           alt={facility.name}
           height={400}
           width={400}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={priority}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div

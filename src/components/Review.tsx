@@ -131,6 +131,7 @@ export default function Review() {
                       className="w-12 h-12 rounded-full object-cover shadow-sm"
                       width={48}
                       height={48}
+                      sizes="48px"
                     />
                     <div className=" text-left">
                       <h4 className="font-bold text-[#2A4365] text-sm md:text-base">

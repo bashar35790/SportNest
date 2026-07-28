@@ -131,6 +131,7 @@ export default function Navbar() {
                     }
                     alt={user?.name ?? "User profile"}
                     fill
+                    priority
                     className="object-cover"
                     sizes="48px"
                   />
