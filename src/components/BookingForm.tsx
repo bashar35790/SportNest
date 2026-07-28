@@ -32,7 +32,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
     const [timeSlot, setTimeSlot] = React.useState<string>("");
     const [duration, setDuration] = React.useState<number | undefined>(1);
     const [isSubmitting, setIsSubmitting] = React.useState(false);
-    const { data: session } = authClient.useSession();
+    authClient.useSession();
 
     const isOutOfStock = duration !== undefined && duration > STOCK_AVAILABLE;
     const totalPrice = (duration ?? 1) * PricePerHour;

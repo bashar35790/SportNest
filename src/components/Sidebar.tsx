@@ -32,7 +32,7 @@ const sidebarLinks = [
 
 export default function Sidebar() {
     const pathname = usePathname();
-    const { data: session, isPending: sessionPending } = authClient.useSession();
+    const { data: session } = authClient.useSession();
     const user = session?.user;
 
     return (
