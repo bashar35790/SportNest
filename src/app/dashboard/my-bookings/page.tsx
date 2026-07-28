@@ -42,7 +42,7 @@ async function MyBookingPage() {
 
         {/* Page Header */}
         <div className="text-start mb-12">
-          <h2 className="text-4xl font-bold text-brand-secoundry dark:text-white">
+          <h2 className="text-4xl font-bold text-brand-secondary dark:text-white">
             My <span className="text-gradient">Bookings</span>
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-lg mb-2">
@@ -74,7 +74,7 @@ async function MyBookingPage() {
               <BookOpen size={64} />
             </div>
 
-            <h3 className="text-2xl font-bold text-brand-secoundry dark:text-white mb-2">
+            <h3 className="text-2xl font-bold text-brand-secondary dark:text-white mb-2">
               No Bookings Found
             </h3>
 

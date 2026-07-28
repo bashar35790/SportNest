@@ -101,7 +101,7 @@ export default function AllFacilityPage() {
             </div>
 
             {/* Filter Button */}
-            <button className="flex items-center justify-center gap-2 rounded-xl bg-brand-primari px-6 py-3.5 font-medium text-white shadow-lg shadow-brand-secoundry/20 transition hover:bg-brand-Cyan400 cursor-pointer active:translate-y-0">
+            <button className="flex items-center justify-center gap-2 rounded-xl bg-brand-primari px-6 py-3.5 font-medium text-white shadow-lg shadow-brand-secondary/20 transition hover:bg-brand-Cyan400 cursor-pointer active:translate-y-0">
               <Filter className="h-5 w-5" />
               Filters
             </button>
@@ -111,10 +111,10 @@ export default function AllFacilityPage() {
         {/* Page Header */}
         <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div className='text-left'>
-            <h1 className="text-4xl font-bold text-brand-secoundry dark:text-white tracking-tight font-bebasNeue">
+            <h1 className="text-4xl font-bold text-brand-secondary dark:text-white tracking-tight font-bebasNeue">
               Discover <span className='text-brand-primari'>Facilities</span>
             </h1>
-            <p className="mt-1.5 text-[15px] text-brand-secoundry dark:text-slate-400 font-medium">
+            <p className="mt-1.5 text-[15px] text-brand-secondary dark:text-slate-400 font-medium">
               Found {loading ? '...' : filteredFacilities.length} venues near you
             </p>
           </div>

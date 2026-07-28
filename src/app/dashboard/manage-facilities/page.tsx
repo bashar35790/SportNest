@@ -68,7 +68,7 @@ export default async function ManageFacilities() {
 
           <Link
             href="/dashboard/add-facility"
-            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-primari px-6 py-4 text-base font-semibold text-brand-secoundry shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-brand-primari cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-primari px-6 py-4 text-base font-semibold text-brand-secondary shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-brand-primari cursor-pointer"
           >
             <Plus size={20} />
             Add New
@@ -99,7 +99,7 @@ export default async function ManageFacilities() {
                   <div className="flex-1">
                     {/* Top */}
                     <div className="flex flex-wrap items-center gap-3">
-                      <h2 className="text-2xl sm:text-3xl font-black text-brand-secoundry dark:text-white">
+                      <h2 className="text-2xl sm:text-3xl font-black text-brand-secondary dark:text-white">
                         {facility.name}
                       </h2>
 

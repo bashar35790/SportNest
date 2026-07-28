@@ -94,7 +94,7 @@ export default function Footer() {
           {/* Brand & Description */}
           <div className="space-y-4 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-r from-brand-primari to-brand-Cyan600 text-xl font-bold shadow-lg shadow-cyan-500/20 text-brand-secoundry">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-r from-brand-primari to-brand-Cyan600 text-xl font-bold shadow-lg shadow-cyan-500/20 text-brand-secondary">
                 S
               </div>
               <div>

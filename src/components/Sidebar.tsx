@@ -57,7 +57,7 @@ export default function Sidebar() {
                     {/* Back Home */}
                     <Link
                         href="/"
-                        className="mb-12 flex items-center gap-4 rounded-2xl px-4 py-4 text-[18px] font-semibold text-brand-secoundry transition-all hover:bg-brand-primari hover:text-brand-secoundry"
+                        className="mb-12 flex items-center gap-4 rounded-2xl px-4 py-4 text-[18px] font-semibold text-brand-secondary transition-all hover:bg-brand-primari hover:text-brand-secondary"
                     >
                         <Home size={26} />
                         <span>Back to Home</span>
@@ -80,13 +80,13 @@ export default function Sidebar() {
                                     href={item.href}
                                     className={`flex items-center gap-4 rounded-3xl px-5 py-4 text-md font-bold transition-all duration-200
                   ${isActive
-                                            ? "bg-brand-primari text-brand-secoundry dark:text-slate-900"
-                                            : "text-brand-secoundry dark:text-slate-300 hover:bg-brand-primari hover:text-brand-secoundry dark:hover:text-slate-900"
+                                            ? "bg-brand-primari text-brand-secondary dark:text-slate-900"
+                                            : "text-brand-secondary dark:text-slate-300 hover:bg-brand-primari hover:text-brand-secondary dark:hover:text-slate-900"
                                         }`}
                                 >
                                     <Icon
                                         size={28}
-                                        className={isActive ? "text-brand-secoundry dark:text-slate-900" : ""}
+                                        className={isActive ? "text-brand-secondary dark:text-slate-900" : ""}
                                     />
 
                                     <span>{item.title}</span>
@@ -115,7 +115,7 @@ export default function Sidebar() {
                                     sizes="48px"
                                 />
                             </div>
-                            <h4 className="mt-1 text-md font-semibold text-brand-secoundry dark:text-white">
+                            <h4 className="mt-1 text-md font-semibold text-brand-secondary dark:text-white">
                                 {user?.name}
                             </h4>
                         </div>

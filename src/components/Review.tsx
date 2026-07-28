@@ -90,7 +90,7 @@ export default function Review() {
           <div className="flex gap-4">
             <button
               onClick={prevSlide}
-              className="w-12 h-12 rounded-full bg-brand-secoundry hover:bg-gray-600 text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer"
+              className="w-12 h-12 rounded-full bg-brand-secondary hover:bg-gray-600 text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer"
               aria-label="Previous review"
             >
               <ArrowLeft className="w-5 h-5" />

@@ -23,7 +23,7 @@ export default function SportsSection() {
   const proxyImageUrl = `https://wsrv.nl/?url=${encodeURIComponent("https://i.ibb.co.com/PsQF2Bpq/sports-equipment-green-grass-top-view.jpg")}&w=800&q=80&output=webp`;
 
   return (
-    <section className="relative isolate overflow-hidden mx-auto  px-5 py-20 sm:px-8 lg:px-14 bg-brand-secoundry">
+    <section className="relative isolate overflow-hidden mx-auto  px-5 py-20 sm:px-8 lg:px-14 bg-brand-secondary">
       <div className="overlay z-0"></div>
 
       {/* Background Image */}

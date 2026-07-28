@@ -19,7 +19,7 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
             <div className="">
                 <div className="max-w-6xl mx-auto px-6 py-4">
                     <Link href="/all-facility">
-                        <button className="flex items-center gap-2 text-sm font-semibol transition-colors group cursor-pointer text-brand-secoundry dark:text-slate-300 hover:text-brand-primari">
+                        <button className="flex items-center gap-2 text-sm font-semibol transition-colors group cursor-pointer text-brand-secondary dark:text-slate-300 hover:text-brand-primari">
                             <ArrowLeft
                                 size={16}
                                 className="group-hover:-translate-x-0.5 transition-transform "
@@ -54,7 +54,7 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
 
                         {/* Facility Title */}
                         <div>
-                            <h1 className="text-3xl font-normal text-brand-secoundry dark:text-white text-left tracking-tight">
+                            <h1 className="text-3xl font-normal text-brand-secondary dark:text-white text-left tracking-tight">
                                 {data?.name}
                             </h1>
                         </div>
@@ -85,10 +85,10 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
 
                         {/* About */}
                         <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-white/10 p-6 shadow-sm">
-                            <h2 className="text-base font-normal text-brand-secoundry dark:text-white text-left mb-2">
+                            <h2 className="text-base font-normal text-brand-secondary dark:text-white text-left mb-2">
                                 About this facility
                             </h2>
-                            <p className="text-sm text-brand-secoundry dark:text-slate-400 text-left leading-relaxed">
+                            <p className="text-sm text-brand-secondary dark:text-slate-400 text-left leading-relaxed">
                                 {data.description}
                             </p>
                         </div>

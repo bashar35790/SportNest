@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const inputStyles =
-  "w-full rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 px-5 py-4 focus-within:border-brand-secoundry focus-within:bg-white focus-within:ring-1 focus-within:ring-brand-secoundry focus:outline-none transition-all duration-300 hover:bg-white hover:border-slate-300";
+  "w-full rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 px-5 py-4 focus-within:border-brand-secondary focus-within:bg-white focus-within:ring-1 focus-within:ring-brand-secondary focus:outline-none transition-all duration-300 hover:bg-white hover:border-slate-300";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -61,7 +61,7 @@ const Login = () => {
 
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4 py-20 mt-10 dark:bg-brand-secoundry">
+    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 px-4 py-20 mt-10 dark:bg-brand-secondary">
       <div className="relative z-10 w-full max-w-lg p-8 sm:p-12 bg-white dark:bg-slate-800 rounded-[3rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] flex flex-col gap-8 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)]  ">
 
         {/* Header */}
@@ -70,7 +70,7 @@ const Login = () => {
             <Check className="w-8 h-8 text-brand-primari" />
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
-            Welcome <span className="text-brand-secoundry dark:text-white">Back</span>
+            Welcome <span className="text-brand-secondary dark:text-white">Back</span>
           </h2>
           <p className="text-slate-500 font-medium text-sm sm:text-base">
             Sign in to access your premium facilities
@@ -129,7 +129,7 @@ const Login = () => {
           <div className="pt-4">
             <Button
               type="submit"
-              className="w-full flex items-center justify-center bg-brand-primari text-brand-secoundry font-bold text-lg h-14 rounded-2xl hover:shadow-lg hover:shadow-brand-primari/20 transition-all duration-300"
+              className="w-full flex items-center justify-center bg-brand-primari text-brand-secondary font-bold text-lg h-14 rounded-2xl hover:shadow-lg hover:shadow-brand-primari/20 transition-all duration-300"
               isDisabled={loading}
             >
               {!loading && <Check className="w-5 h-5 mr-2" />}

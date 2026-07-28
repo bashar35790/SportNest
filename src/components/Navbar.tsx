@@ -88,7 +88,7 @@ export default function Navbar() {
           <h2
             className={`text-3xl font-bold tracking-tight transition-all duration-300 ${
               isLight
-                ? "text-brand-secoundry dark:text-white"
+                ? "text-brand-secondary dark:text-white"
                 : "text-white"
             }`}
           >
@@ -106,7 +106,7 @@ export default function Navbar() {
                 pathname === link.href
                   ? "font-bold text-brand-primari"
                   : isLight
-                    ? "text-brand-secoundry dark:text-slate-300"
+                    ? "text-brand-secondary dark:text-slate-300"
                     : "text-slate-300"
               }`}
             >
@@ -150,7 +150,7 @@ export default function Navbar() {
               </button>
 
               {/* Dropdown */}
-              <div className="invisible absolute right-0 top-16 w-64 translate-y-3 rounded-2xl border border-white/10 bg-brand-secoundry p-3 opacity-0 shadow-2xl transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="invisible absolute right-0 top-16 w-64 translate-y-3 rounded-2xl border border-white/10 bg-brand-secondary p-3 opacity-0 shadow-2xl transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
                 <div className="mb-3 border-b border-white/10 pb-3">
                   <p className="font-semibold uppercase text-white">
                     {user?.name}
@@ -184,7 +184,7 @@ export default function Navbar() {
                   </Link>
 
                   <button
-                    className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-brand-primari px-4 py-2 text-sm font-semibold text-brand-secoundry transition"
+                    className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-brand-primari px-4 py-2 text-sm font-semibold text-brand-secondary transition"
                     onClick={handleLogout}
                   >
                     <LogOutIcon className="h-4 w-4" />
@@ -198,8 +198,8 @@ export default function Navbar() {
               <button
                 className={`cursor-pointer rounded-2xl px-6 py-3 text-sm font-semibold shadow-lg shadow-brand-primari/20 transition hover:scale-[1.03] ${
                   scrolled
-                    ? "bg-brand-primari text-brand-secoundry"
-                    : "bg-brand-secoundry text-white"
+                    ? "bg-brand-primari text-brand-secondary"
+                    : "bg-brand-secondary text-white"
                 }`}
               >
                 Login
@@ -216,7 +216,7 @@ export default function Navbar() {
             onClick={() => setMobileMenu(!mobileMenu)}
             className={`rounded-xl border border-brand-primari p-2 transition-all duration-300 ${
               isLight
-                ? "text-brand-secoundry dark:text-white"
+                ? "text-brand-secondary dark:text-white"
                 : "text-brand-primari"
             }`}
           >
@@ -246,13 +246,13 @@ export default function Navbar() {
 
             {!session ? (
               <Link href="/auth/login">
-                <button className="mt-3 cursor-pointer rounded-xl bg-brand-primari px-4 py-3 font-semibold text-brand-secoundry">
+                <button className="mt-3 cursor-pointer rounded-xl bg-brand-primari px-4 py-3 font-semibold text-brand-secondary">
                   Login
                 </button>
               </Link>
             ) : (
               <button
-                className="mt-3 cursor-pointer rounded-xl bg-brand-primari px-4 py-3 font-semibold text-brand-secoundry"
+                className="mt-3 cursor-pointer rounded-xl bg-brand-primari px-4 py-3 font-semibold text-brand-secondary"
                 onClick={handleLogout}
               >
                 Logout

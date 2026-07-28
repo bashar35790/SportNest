@@ -85,7 +85,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                 <Form onSubmit={onSubmit}>
                     <Fieldset className="w-full">
                         <div>
-                            <h3 className="text-brand-secoundry dark:text-white text-3xl font-normal mb-2">
+                            <h3 className="text-brand-secondary dark:text-white text-3xl font-normal mb-2">
                                 Book This Facility
                             </h3>
                             <p className="text-gray-600 dark:text-slate-400">Fill in your details to reserve this spot</p>
@@ -211,8 +211,8 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                                 <span className="text-gray-700 dark:text-slate-300">${totalPrice}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-sm font-bold text-brand-secoundry dark:text-white">Total Price</span>
-                                <span className="text-lg font-extrabold text-brand-secoundry dark:text-brand-primari">
+                                <span className="text-sm font-bold text-brand-secondary dark:text-white">Total Price</span>
+                                <span className="text-lg font-extrabold text-brand-secondary dark:text-brand-primari">
                                     ${totalPrice}
                                 </span>
                             </div>
@@ -221,7 +221,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                         <Fieldset.Actions>
                             <Button
                                 type="submit"
-                                className="bg-brand-primari text-brand-secoundry hover:scale-105 transition-transform"
+                                className="bg-brand-primari text-brand-secondary hover:scale-105 transition-transform"
                                 isDisabled={isSubmitting}
                             >
                                 <Save />

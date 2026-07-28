@@ -22,7 +22,7 @@ const badgeColors: Record<string, string> = {
 };
 
 function badgeBg(type: string): string {
-  return badgeColors[type] || "bg-brand-secoundry";
+  return badgeColors[type] || "bg-brand-secondary";
 }
 
 export function FacilityCard({
@@ -55,7 +55,7 @@ export function FacilityCard({
 
       <div className={`p-6 flex flex-col grow ${viewMode === "list" ? "justify-center" : ""}`}>
         <div className="flex justify-between items-start mb-2 gap-4">
-          <h3 className="text-xl font-light tracking-wider text-brand-secoundry dark:text-white leading-tight text-left">
+          <h3 className="text-xl font-light tracking-wider text-brand-secondary dark:text-white leading-tight text-left">
             {facility.name}
           </h3>
           <div className="text-right whitespace-nowrap">
@@ -89,7 +89,7 @@ export function FacilityCard({
 
         <div className={`mt-auto ${viewMode === "list" ? "max-w-[200px]" : ""}`}>
           <Link href={`/all-facility/${facility._id}`}>
-            <button className="w-full flex items-center justify-center gap-2 bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-brand-secoundry font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
+            <button className="w-full flex items-center justify-center gap-2 bg-brand-primari cursor-pointer hover:bg-brand-Cyan400 text-brand-secondary font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
               Book Now <Calendar className="h-4 w-4 ml-0.5" />
             </button>
           </Link>

@@ -14,7 +14,7 @@ export default async function Feature() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 tracking-tight text-left highlight-text">
               Featured Facilities
             </h2>
-            <p className="text-brand-secoundry text-lg">
+            <p className="text-brand-secondary text-lg">
               Top-rated premium venues for peak performance.
             </p>
           </div>
