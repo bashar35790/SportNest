@@ -3,7 +3,7 @@ import { BookOpen } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { auth } from "@/lib/auth";
-import { MongoClient } from "mongodb";
+import { API_BASE_URL } from "@/lib/api-config";
 
 interface Booking {
   _id: string;
@@ -16,7 +16,6 @@ interface Booking {
 }
 
 async function MyBookingPage() {
-  // Get the session server-side using the incoming request headers (includes the cookie)
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -25,25 +24,15 @@ async function MyBookingPage() {
   let bookings: Booking[] = [];
 
   if (userId) {
-    // Query MongoDB directly from the server — avoids the cookie-on-server-fetch problem
-    // (browser cookies cannot be forwarded in server-to-server Express calls)
-    const client = new MongoClient(
-      process.env.MONGODB_URI_DIRECT || process.env.MONGODB_URI!
-    );
     try {
-      await client.connect();
-      const db = client.db("sportnest");
-      bookings = (await db
-        .collection("Bookings")
-        .find({ userId })
-        .toArray()).map(doc => ({
-        ...doc,
-        _id: doc._id.toString(),
-      })) as unknown as Booking[];
+      const cookieHeader = (await headers()).get("cookie") || "";
+      const response = await fetch(
+        `${API_BASE_URL}/my-bookings/${userId}`,
+        { headers: { cookie: cookieHeader } }
+      );
+      bookings = (await response.json()) as Booking[];
     } catch (err) {
       console.error("Failed to fetch bookings:", err);
-    } finally {
-      await client.close();
     }
   }
 

@@ -10,7 +10,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { ModalForm } from "@/components/ModalForm";
 import { DeleteFacilityButton } from "@/components/DeleteFacilityButton";
-import { MongoClient } from "mongodb";
+import { API_BASE_URL } from "@/lib/api-config";
 
 type Facility = {
   _id: string;
@@ -38,23 +38,16 @@ export default async function ManageFacilities() {
   let addedFacilities: Facility[] = [];
 
   if (userId) {
-    const client = new MongoClient(
-      process.env.MONGODB_URI_DIRECT || process.env.MONGODB_URI!
-    );
     try {
-      await client.connect();
-      const db = client.db("sportnest");
-      addedFacilities = (await db
-        .collection("Facilitys")
-        .find({ userId })
-        .toArray()).map((doc) => ({
-        ...doc,
-        _id: doc._id.toString(),
-      })) as unknown as Facility[];
+      const cookieHeader = (await headers()).get("cookie") || "";
+      const response = await fetch(
+        `${API_BASE_URL}/facilities/user/${userId}`,
+        { headers: { cookie: cookieHeader } }
+      );
+      const data = await response.json();
+      addedFacilities = (data?.facilities || []) as Facility[];
     } catch (err) {
       console.error("Failed to fetch user facilities:", err);
-    } finally {
-      await client.close();
     }
   }
 
