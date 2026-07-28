@@ -48,7 +48,7 @@ export default async function ManageFacilities() {
       const cookieHeader = (await headers()).get("cookie") || "";
       const response = await fetch(
         `${API_BASE_URL}/facilities/user/${userId}`,
-        { headers: { cookie: cookieHeader } }
+        { headers: { cookie: cookieHeader }, next: { revalidate: 30 } }
       );
       const data = await response.json();
       addedFacilities = (data?.facilities || []) as Facility[];

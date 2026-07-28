@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GetOneFacility } from "@/api/GetApi";
+import { getCachedFacility } from "@/lib/data-cache";
 import { BookingForm } from "@/components/BookingForm";
 import {
     ArrowLeft,
@@ -12,7 +13,7 @@ import Link from "next/link";
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const { id } = await params;
-  const facility = await GetOneFacility(id).catch(() => null);
+  const facility = await getCachedFacility(id);
   return {
     title: facility?.name || "Facility Details",
     description: facility
@@ -23,7 +24,16 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
 export default async function FacilityDetailsPage({ params }: { params: { id: string } }) {
     const { id } = await params;
-    const data = await GetOneFacility(id);
+    const facility = await getCachedFacility(id);
+
+    if (!facility) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-slate-900">
+                <p className="text-slate-500 dark:text-slate-400 text-lg">Facility not found</p>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-slate-900 font-sans py-30 transition-colors duration-300">
             {/* Top Nav  */}
@@ -53,20 +63,20 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
                         <div className="relative rounded-2xl overflow-hidden shadow-sm aspect-[16/9] bg-gray-200">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                                src={data?.image}
-                                alt={data?.name}
+                                src={facility.image}
+                                alt={facility.name}
                                 className="w-full h-full object-cover"
                             />
                             {/* Sport badge */}
                             <span className="absolute top-4 left-4 bg-green-600 text-white text-xs font-bold tracking-widest px-3 py-1.5 rounded-full uppercase">
-                                {data?.facility_type}
+                                {facility.facility_type}
                             </span>
                         </div>
 
                         {/* Facility Title */}
                         <div>
                             <h1 className="text-3xl font-normal text-brand-secondary dark:text-white text-left tracking-tight">
-                                {data?.name}
+                                {facility.name}
                             </h1>
                         </div>
 
@@ -75,22 +85,22 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
                             <InfoCard
                                 icon={<MapPin size={15} className="text-brand-primari" />}
                                 label="Location"
-                                value={data?.location}
+                                value={facility.location}
                             />
                             <InfoCard
                                 icon={<Users size={15} className="text-brand-primari" />}
                                 label="Capacity"
-                                value={data?.capacity}
+                                value={String(facility.capacity)}
                             />
                             <InfoCard
                                 icon={<DollarSign size={15} className="text-brand-primari" />}
                                 label="Price"
-                                value={`$${data?.price_per_hour}/hour`}
+                                value={`$${facility.price_per_hour}/hour`}
                             />
                             <InfoCard
                                 icon={<Clock size={15} className="text-brand-primari" />}
                                 label="Slots"
-                                value={`${data?.available_slots?.length} available`}
+                                value={`${facility.available_slots.length} available`}
                             />
                         </div>
 
@@ -100,13 +110,13 @@ export default async function FacilityDetailsPage({ params }: { params: { id: st
                                 About this facility
                             </h2>
                             <p className="text-sm text-brand-secondary dark:text-slate-400 text-left leading-relaxed">
-                                {data.description}
+                                {facility.description}
                             </p>
                         </div>
                     </div>
 
                     {/* right side content */}
-                    <BookingForm FacilityName={data.name} FacilityId={data._id} AvailableSlots={data.available_slots} PricePerHour={data.price_per_hour} />
+                    <BookingForm FacilityName={facility.name} FacilityId={facility._id} AvailableSlots={facility.available_slots} PricePerHour={facility.price_per_hour} />
                 </div>
             </div>
         </div>
