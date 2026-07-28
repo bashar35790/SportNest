@@ -1,6 +1,17 @@
 import { API_BASE_URL } from "@/lib/api-config";
 
-const UpdateFacilityApi = async (userId: string, updatedFacility: any) => {
+export interface FacilityUpdateData {
+  name?: string;
+  facility_type?: string;
+  image?: string;
+  location?: string;
+  price_per_hour?: number;
+  capacity?: number;
+  available_slots?: string[];
+  description?: string;
+}
+
+const UpdateFacilityApi = async (userId: string, updatedFacility: FacilityUpdateData) => {
     try {
         const response = await fetch(`${API_BASE_URL}/facilities/user/${userId}`, {
             method: "PATCH",
