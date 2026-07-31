@@ -116,11 +116,11 @@ export default function Signup() {
           {/* password */}
           <TextField
             isRequired
-            minLength={6}
+            minLength={8}
             name="password"
             type="password"
             validate={(value) => {
-              if (value.length < 6) return "Password must be at least 6 characters";
+              if (value.length < 8) return "Password must be at least 8 characters";
               if (!/[A-Z]/.test(value)) return "Password must contain at least one uppercase letter";
               if (!/[a-z]/.test(value)) return "Password must contain at least one lowercase letter";
               return null;
@@ -142,7 +142,7 @@ export default function Signup() {
               </button>
             </div>
             <Description className="text-slate-400 text-[10px] uppercase tracking-wider mt-2 ml-1 font-medium block">
-              At least 6 chars, 1 uppercase, 1 lowercase
+              At least 8 chars, 1 uppercase, 1 lowercase
             </Description>
             <FieldError className="text-red-400 text-xs mt-1.5 ml-1" />
           </TextField>

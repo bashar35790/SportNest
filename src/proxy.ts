@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   try {
     const baseURL = process.env.NEXT_PUBLIC_BETTER_AUTH_URL || request.nextUrl.origin;
     const res = await fetch(`${baseURL}/api/auth/get-session`, {
@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
 
     return NextResponse.next();
   } catch (error) {
-    console.log("Middleware Error:", error);
+    console.log("Proxy Error:", error);
 
     return NextResponse.redirect(
       new URL("/auth/login", request.url)
