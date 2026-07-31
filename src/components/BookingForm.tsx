@@ -36,6 +36,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
 
     const isOutOfStock = duration !== undefined && duration > STOCK_AVAILABLE;
     const totalPrice = (duration ?? 1) * PricePerHour;
+    const hasAvailableSlots = AvailableSlots.length > 0;
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -150,34 +151,43 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                                 </DatePicker.Popover>
                             </DatePicker>
 
-                            <Select
-                                className="w-full"
-                                placeholder="Select one"
-                                selectedKey={timeSlot}
-                                onSelectionChange={(key) => setTimeSlot(key as string)}
-                            >
-                                <Label>
-                                    Time Slot
-                                    <span className="text-red-500 ml-0.5">*</span>
-                                </Label>
-                                <Select.Trigger>
-                                    <Select.Value />
-                                    <Select.Indicator className="size-3">
-                                        <ChevronsExpandVertical />
-                                    </Select.Indicator>
-                                </Select.Trigger>
-                                <Select.Popover>
-                                    <ListBox>
-                                        {
-                                            AvailableSlots?.map((slot) => (
-                                                <ListBox.Item key={slot} id={slot} textValue={slot}>
-                                                    {slot} <ListBox.ItemIndicator />
-                                                </ListBox.Item>
-                                            ))
-                                        }
-                                    </ListBox>
-                                </Select.Popover>
-                            </Select>
+                            {hasAvailableSlots ? (
+                                <Select
+                                    className="w-full"
+                                    placeholder="Select one"
+                                    selectedKey={timeSlot}
+                                    onSelectionChange={(key) => setTimeSlot(key as string)}
+                                >
+                                    <Label>
+                                        Time Slot
+                                        <span className="text-red-500 ml-0.5">*</span>
+                                    </Label>
+                                    <Select.Trigger>
+                                        <Select.Value />
+                                        <Select.Indicator className="size-3">
+                                            <ChevronsExpandVertical />
+                                        </Select.Indicator>
+                                    </Select.Trigger>
+                                    <Select.Popover>
+                                        <ListBox>
+                                            {
+                                                AvailableSlots?.map((slot) => (
+                                                    <ListBox.Item key={slot} id={slot} textValue={slot}>
+                                                        {slot} <ListBox.ItemIndicator />
+                                                    </ListBox.Item>
+                                                ))
+                                            }
+                                        </ListBox>
+                                    </Select.Popover>
+                                </Select>
+                            ) : (
+                                <div className="rounded-2xl border border-amber-200 dark:border-amber-700/50 bg-amber-50 dark:bg-amber-950/30 px-4 py-3.5 text-left">
+                                    <Label>Time Slot</Label>
+                                    <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
+                                        No time slots available for this facility
+                                    </p>
+                                </div>
+                            )}
 
                             <NumberField
                                 isRequired
@@ -222,7 +232,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                             <Button
                                 type="submit"
                                 className="bg-brand-primari text-brand-secondary hover:scale-105 transition-transform"
-                                isDisabled={isSubmitting}
+                                isDisabled={isSubmitting || !hasAvailableSlots}
                             >
                                 <Save />
                                 {isSubmitting ? "Confirming..." : "Confirm Booking"}
