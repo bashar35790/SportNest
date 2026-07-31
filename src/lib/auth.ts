@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { jwt } from "better-auth/plugins/jwt";
 
-const mongoUri = process.env.MONGODB_URI_DIRECT || process.env.MONGODB_URI;
+const mongoUri = process.env.MONGODB_URI;
 if (!mongoUri) {
   throw new Error("MONGODB_URI_DIRECT or MONGODB_URI must be set");
 }
@@ -12,7 +12,9 @@ const db = client.db("sportnest");
 
 export const auth = betterAuth({
   baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
-  trustedOrigins: [process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "http://localhost:3000"],
+  trustedOrigins: [
+    process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "http://localhost:3000",
+  ],
   database: mongodbAdapter(db, {
     client,
   }),
