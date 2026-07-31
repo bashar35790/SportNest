@@ -1,6 +1,6 @@
 import { MapPin, Clock, Users, Calendar } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import { FacilityImage } from "@/components/FacilityImage";
 
 export interface FacilityCardData {
   _id: string;
@@ -41,7 +41,7 @@ export function FacilityCard({
       <div
         className={`relative overflow-hidden ${viewMode === "grid" ? "h-64 w-full" : "w-full md:w-2/5 min-h-[220px]"}`}
       >
-        <Image
+        <FacilityImage
           src={facility.image}
           alt={facility.name}
           height={400}
