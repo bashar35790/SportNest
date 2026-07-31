@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import Feature from "@/components/Feature";
 import CTASection from "@/components/Cta";
 import SportsSection from "@/components/SportsSection";
+import Faq from "@/components/Faq";
 
 const Review = dynamic(() => import("@/components/Review"), {
   loading: () => <div className="h-64 bg-slate-100 dark:bg-slate-800 animate-pulse rounded-2xl mx-4" />,
@@ -24,6 +25,7 @@ export default function Home() {
       <Feature />
       <HowItWorks></HowItWorks>
       <Review />
+      <Faq />
       <CTASection></CTASection>
     </div>
   );

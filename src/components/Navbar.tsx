@@ -76,21 +76,19 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full text-center transition-all duration-300 ${
-        isLight
-          ? "bg-white shadow-sm dark:bg-slate-900"
-          : "bg-transparent dark:bg-transparent"
-      }`}
+      className={`fixed top-0 z-50 w-full text-center transition-all duration-300 ${isLight
+        ? "bg-white shadow-sm dark:bg-slate-900"
+        : "bg-transparent dark:bg-transparent"
+        }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <h2
-            className={`text-3xl font-bold tracking-tight transition-all duration-300 ${
-              isLight
-                ? "text-brand-secondary dark:text-white"
-                : "text-white"
-            }`}
+            className={`text-3xl font-bold tracking-tight transition-all duration-300 ${isLight
+              ? "text-brand-secondary dark:text-white"
+              : "text-white"
+              }`}
           >
             Sport<span className="text-gradient">Nest</span>
           </h2>
@@ -102,13 +100,12 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:opacity-80 ${
-                pathname === link.href
-                  ? "font-bold text-brand-primari"
-                  : isLight
-                    ? "text-brand-secondary dark:text-slate-300"
-                    : "text-slate-300"
-              }`}
+              className={`rounded-xl px-4 py-2 text-md font-medium transition-all duration-300 hover:opacity-80 ${pathname === link.href
+                ? "font-bold text-brand-primari"
+                : isLight
+                  ? "text-brand-secondary dark:text-slate-300"
+                  : "text-slate-300"
+                }`}
             >
               {link.name}
             </Link>
@@ -197,11 +194,10 @@ export default function Navbar() {
           ) : (
             <Link href="/auth/login">
               <button
-                className={`cursor-pointer rounded-2xl px-6 py-3 text-sm font-semibold shadow-lg shadow-brand-primari/20 transition hover:scale-[1.03] ${
-                  scrolled
-                    ? "bg-brand-primari text-brand-secondary"
-                    : "bg-brand-secondary text-white"
-                }`}
+                className={`cursor-pointer rounded-2xl px-6 py-3 text-sm font-semibold shadow-lg shadow-brand-primari/20 transition hover:scale-[1.03] ${scrolled
+                  ? "bg-brand-primari text-brand-secondary"
+                  : "bg-brand-primari text-brand-secondary"
+                  }`}
               >
                 Login
               </button>
@@ -215,11 +211,10 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileMenu(!mobileMenu)}
-            className={`rounded-xl border border-brand-primari p-2 transition-all duration-300 ${
-              isLight
-                ? "text-brand-secondary dark:text-white"
-                : "text-brand-primari"
-            }`}
+            className={`rounded-xl border border-brand-primari p-2 transition-all duration-300 ${isLight
+              ? "text-brand-secondary dark:text-white"
+              : "text-brand-primari"
+              }`}
           >
             {mobileMenu ? <X /> : <Menu />}
           </button>
@@ -234,11 +229,10 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-white/10 hover:text-brand-primari ${
-                  pathname === link.href
-                    ? "bg-white/5 text-brand-primari"
-                    : "text-slate-300"
-                }`}
+                className={`rounded-xl px-4 py-3 text-sm font-medium transition hover:bg-white/10 hover:text-brand-primari ${pathname === link.href
+                  ? "bg-white/5 text-brand-primari"
+                  : "text-slate-300"
+                  }`}
                 onClick={() => setMobileMenu(false)}
               >
                 {link.name}
