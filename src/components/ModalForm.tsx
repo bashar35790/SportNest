@@ -5,6 +5,7 @@ import { Button, Modal } from "@heroui/react";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FacilityForm } from "@/components/FacilityForm";
 import type { FacilityFormData } from "@/components/FacilityForm";
 
@@ -25,9 +26,14 @@ export function ModalForm({ facility }: { facility: FacilityShape }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = async (formData: FacilityFormData) => {
-    await UpdateFacilityApi(facility._id, formData);
-    setIsOpen(false);
-    router.refresh();
+    const data = await UpdateFacilityApi(facility._id, formData);
+    if (data.success) {
+      toast.success("Facility updated successfully");
+      setIsOpen(false);
+      router.refresh();
+    } else {
+      toast.error(data.message || "Failed to update facility");
+    }
   };
 
   return (

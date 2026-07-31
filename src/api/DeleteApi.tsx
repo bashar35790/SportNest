@@ -27,7 +27,7 @@ async function DeleteFacility(facilityId: string) {
             credentials: "include",
         }));
         const data = await response.json();
-        if (data.success && data.data.deletedCount > 0) {
+        if (data.success && data.data) {
             toast.success("Facility deleted successfully");
             return true;
         } else {
