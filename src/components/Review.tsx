@@ -77,11 +77,11 @@ export default function Review() {
   };
 
   return (
-    <section className="py-24 bg-[#F4F5F7] overflow-hidden">
+    <section className="py-24 bg-[#F4F5F7] dark:bg-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 flex items-center gap-3 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white flex items-center gap-3 tracking-tight">
             A little <span className="text-pink-500">💖</span>{" "}
             <span className=" text-gradient">from our community</span>
           </h2>
@@ -119,8 +119,8 @@ export default function Review() {
                 className="w-full shrink-0 px-3"
                 style={{ width: `${100 / cardsToShow}%` }}
               >
-                <div className="bg-white p-8 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] h-full flex flex-col justify-between">
-                  <p className="text-gray-500 leading-relaxed mb-10 text-[15px]">
+                <div className="bg-white dark:bg-slate-800 dark:border dark:border-white/10 p-8 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] h-full flex flex-col justify-between">
+                  <p className="text-gray-500 dark:text-slate-400 leading-relaxed mb-10 text-[15px]">
                     {review.text}
                   </p>
 
@@ -134,10 +134,10 @@ export default function Review() {
                       sizes="48px"
                     />
                     <div className=" text-left">
-                      <h4 className="font-bold text-[#2A4365] text-sm md:text-base">
+                      <h4 className="font-bold text-[#2A4365] dark:text-white text-sm md:text-base">
                         {review.name}
                       </h4>
-                      <p className="text-sm text-gray-400">{review.handle}</p>
+                      <p className="text-sm text-gray-400 dark:text-slate-500">{review.handle}</p>
                     </div>
                   </div>
                 </div>

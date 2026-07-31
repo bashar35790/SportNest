@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const inputStyles =
-  "w-full rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 px-5 py-4 focus-within:border-brand-secondary focus-within:bg-white focus-within:ring-1 focus-within:ring-brand-secondary focus:outline-none transition-all duration-300 hover:bg-white hover:border-slate-300";
+  "w-full rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 px-5 py-4 focus-within:border-brand-secondary focus-within:bg-white focus-within:ring-1 focus-within:ring-brand-secondary focus:outline-none transition-all duration-300 hover:bg-white hover:border-slate-300 dark:bg-slate-700 dark:border-white/10 dark:text-white dark:placeholder:text-slate-400 dark:focus-within:bg-slate-700 dark:hover:bg-slate-600";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -72,7 +72,7 @@ const Login = () => {
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
             Welcome <span className="text-brand-secondary dark:text-white">Back</span>
           </h2>
-          <p className="text-slate-500 font-medium text-sm sm:text-base">
+          <p className="text-slate-500 dark:text-slate-400 font-medium text-sm sm:text-base">
             Sign in to access your premium facilities
           </p>
         </div>
@@ -94,7 +94,7 @@ const Login = () => {
               return null;
             }}
           >
-            <Label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Email Address</Label>
+            <Label className="text-slate-700 dark:text-slate-200 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Email Address</Label>
             <Input placeholder="Enter your email" className={inputStyles} />
             <FieldError className="text-red-400 text-xs mt-1.5 ml-1" />
           </TextField>
@@ -106,7 +106,7 @@ const Login = () => {
             name="password"
             type="password"
           >
-            <Label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Password</Label>
+            <Label className="text-slate-700 dark:text-slate-200 text-xs font-bold uppercase tracking-widest mb-1.5 ml-1 block">Password</Label>
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
@@ -117,7 +117,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute right-5 top-1/2 -translate-y-1/2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-primari transition-colors cursor-pointer"
+                className="absolute right-5 top-1/2 -translate-y-1/2 text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-brand-primari transition-colors cursor-pointer"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
@@ -140,15 +140,15 @@ const Login = () => {
 
         <div className="relative flex items-center justify-center w-full">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-200"></div>
+            <div className="w-full border-t border-slate-200 dark:border-white/10"></div>
           </div>
-          <div className="relative bg-white px-4 text-xs font-bold uppercase  text-slate-400">
+          <div className="relative bg-white dark:bg-slate-800 px-4 text-xs font-bold uppercase  text-slate-400">
             Or continue with
           </div>
         </div>
 
         <Button
-          className="flex items-center justify-center w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-base h-14 rounded-2xl transition-all duration-300"
+          className="flex items-center justify-center w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 font-semibold text-base h-14 rounded-2xl transition-all duration-300 dark:bg-slate-700 dark:hover:bg-slate-600 dark:border-white/10 dark:text-white"
           onPress={handleSocialSignup}
         >
           <Icon icon="devicon:google" className="w-5 h-5 mr-2" />
@@ -156,7 +156,7 @@ const Login = () => {
         </Button>
 
         <div className="w-full flex justify-center items-center mt-2">
-          <p className="text-slate-500 text-sm font-medium">
+          <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
             New to SportNest?{" "}
             <Link href="/auth/signup" className="text-brand-primari hover:opacity-80 font-bold transition-colors cursor-pointer">
               Create an account
