@@ -172,6 +172,8 @@
   text-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 .hero-title .accent {
+  position: relative;
+  display: inline-block;
   color: transparent;
   background: linear-gradient(135deg, #22d3ee, #0284c7);
   -webkit-background-clip: text;
