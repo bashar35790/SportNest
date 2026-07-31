@@ -57,6 +57,22 @@ const GetOneFacility = async (id: string) => {
     }
 }
 
+const GetFacilityAvailability = async (facilityId: string, date: string) => {
+    try {
+        const url = `${API_BASE_URL}/all-facility/${facilityId}/availability?date=${encodeURIComponent(date)}`;
+        const response = await fetch(url);
+        if (!response.ok) return { availableSlots: [] as string[], bookedSlots: [] as string[] };
+        const data = await response.json();
+        return {
+            availableSlots: (data.availableSlots as string[]) || [],
+            bookedSlots: (data.bookedSlots as string[]) || [],
+        };
+    } catch (error) {
+        console.error('Failed to fetch facility availability:', error);
+        return { availableSlots: [] as string[], bookedSlots: [] as string[] };
+    }
+}
+
 const GetUserAddFacilities = async (userId: string) => {
     try {
         const url = `${API_BASE_URL}/facilities/user/${userId}`;
@@ -72,4 +88,4 @@ const GetUserAddFacilities = async (userId: string) => {
     }
 }
 
-export { GetFeaturedFacilities, GetAllFacilities, GetOneFacility, GetMyBookings, GetUserAddFacilities };
+export { GetFeaturedFacilities, GetAllFacilities, GetOneFacility, GetMyBookings, GetUserAddFacilities, GetFacilityAvailability };

@@ -1,6 +1,7 @@
 "use client";
 
 import { PostBooking } from "@/api/PostApi";
+import { GetFacilityAvailability } from "@/api/GetApi";
 import { authClient } from "@/lib/auth-client";
 import { ChevronsExpandVertical } from "@gravity-ui/icons";
 import {
@@ -32,11 +33,40 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
     const [timeSlot, setTimeSlot] = React.useState<string>("");
     const [duration, setDuration] = React.useState<number | undefined>(1);
     const [isSubmitting, setIsSubmitting] = React.useState(false);
+    const [slots, setSlots] = React.useState<string[]>([]);
+    const [slotsDate, setSlotsDate] = React.useState<string | null>(null);
     authClient.useSession();
 
     const isOutOfStock = duration !== undefined && duration > STOCK_AVAILABLE;
     const totalPrice = (duration ?? 1) * PricePerHour;
-    const hasAvailableSlots = AvailableSlots.length > 0;
+    const facilityHasSlots = AvailableSlots.length > 0;
+    const hasBookingDate = Boolean(bookingDate);
+    const currentDateStr = bookingDate ? bookingDate.toString() : null;
+    const isLoadingSlots = hasBookingDate && slotsDate !== currentDateStr;
+    const availableSlotsForDate = hasBookingDate && slotsDate === currentDateStr ? slots : [];
+
+    React.useEffect(() => {
+        if (!bookingDate) return;
+
+        const dateStr = bookingDate.toString();
+        let stale = false;
+
+        GetFacilityAvailability(FacilityId, dateStr)
+            .then(({ availableSlots }) => {
+                if (stale) return;
+                setSlots(availableSlots);
+                setSlotsDate(dateStr);
+            });
+
+        return () => {
+            stale = true;
+        };
+    }, [bookingDate, FacilityId]);
+
+    const handleDateChange = (value: DateValue | null) => {
+        setBookingDate(value);
+        setTimeSlot("");
+    };
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -107,7 +137,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                             <DatePicker
                                 className="w-full"
                                 value={bookingDate}
-                                onChange={setBookingDate}
+                                onChange={handleDateChange}
                                 minValue={today(getLocalTimeZone())}
                             >
                                 <Label>
@@ -151,10 +181,25 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                                 </DatePicker.Popover>
                             </DatePicker>
 
-                            {hasAvailableSlots ? (
+                            {!facilityHasSlots ? (
+                                <div className="rounded-2xl border border-amber-200 dark:border-amber-700/50 bg-amber-50 dark:bg-amber-950/30 px-4 py-3.5 text-left">
+                                    <Label>Time Slot</Label>
+                                    <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
+                                        No time slots available for this facility
+                                    </p>
+                                </div>
+                            ) : hasBookingDate && !isLoadingSlots && availableSlotsForDate.length === 0 ? (
+                                <div className="rounded-2xl border border-amber-200 dark:border-amber-700/50 bg-amber-50 dark:bg-amber-950/30 px-4 py-3.5 text-left">
+                                    <Label>Time Slot</Label>
+                                    <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
+                                        No time slots available for this date
+                                    </p>
+                                </div>
+                            ) : (
                                 <Select
                                     className="w-full"
-                                    placeholder="Select one"
+                                    placeholder={!hasBookingDate ? "Select a date first" : isLoadingSlots ? "Loading available slots..." : "Select a time slot"}
+                                    isDisabled={!hasBookingDate || isLoadingSlots || availableSlotsForDate.length === 0}
                                     selectedKey={timeSlot}
                                     onSelectionChange={(key) => setTimeSlot(key as string)}
                                 >
@@ -171,7 +216,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                                     <Select.Popover>
                                         <ListBox>
                                             {
-                                                AvailableSlots?.map((slot) => (
+                                                availableSlotsForDate.map((slot) => (
                                                     <ListBox.Item key={slot} id={slot} textValue={slot}>
                                                         {slot} <ListBox.ItemIndicator />
                                                     </ListBox.Item>
@@ -180,13 +225,6 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                                         </ListBox>
                                     </Select.Popover>
                                 </Select>
-                            ) : (
-                                <div className="rounded-2xl border border-amber-200 dark:border-amber-700/50 bg-amber-50 dark:bg-amber-950/30 px-4 py-3.5 text-left">
-                                    <Label>Time Slot</Label>
-                                    <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
-                                        No time slots available for this facility
-                                    </p>
-                                </div>
                             )}
 
                             <NumberField
@@ -232,7 +270,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
                             <Button
                                 type="submit"
                                 className="bg-brand-primari text-brand-secondary hover:scale-105 transition-transform"
-                                isDisabled={isSubmitting || !hasAvailableSlots}
+                                isDisabled={isSubmitting || !facilityHasSlots || !hasBookingDate || isLoadingSlots || availableSlotsForDate.length === 0}
                             >
                                 <Save />
                                 {isSubmitting ? "Confirming..." : "Confirm Booking"}
