@@ -35,7 +35,7 @@ async function MyBookingPage() {
       const cookieHeader = (await headers()).get("cookie") || "";
       const response = await fetch(
         `${API_BASE_URL}/my-bookings/${userId}`,
-        { headers: { cookie: cookieHeader }, next: { revalidate: 30 } }
+        { headers: { cookie: cookieHeader }, cache: "no-store" }
       );
       const result = await response.json() as { data?: Booking[] };
       bookings = result?.data ?? [];
