@@ -24,6 +24,18 @@ The app includes:
 | State / UX     | [next-themes](https://github.com/pacocoursey/next-themes) (dark mode), [react-hot-toast](https://react-hot-toast.com/) (toasts), [lucide-react](https://lucide.dev/), `@iconify/react`, `@gravity-ui/icons` |
 | Data access    | React `cache()` + ISR (`next: { revalidate: 60 }`)                              |
 
+## Tools Used
+
+| Tool                    | Purpose                                                             |
+| ----------------------- | ------------------------------------------------------------------- |
+| [Node.js](https://nodejs.org/) + [npm](https://www.npmjs.com/) | Runtime and package manager                                        |
+| [Turbopack](https://turbo.build/) | Next.js development bundler (used by `next dev` / `next build`)   |
+| [TypeScript](https://www.typescriptlang.org/) (`tsc`) 5 | Static typing and type-checking                                   |
+| [ESLint](https://eslint.org/) 9 + `eslint-config-next` | Linting (`npm run lint`)                                          |
+| [Tailwind CSS](https://tailwindcss.com/) v4 | Utility-first styling with `@tailwindcss/postcss`                 |
+| [better-auth CLI](https://www.better-auth.com/) | Generates/manages auth config and types                          |
+| Git + [GitHub](https://github.com/) | Version control and remote hosting                                |
+
 ## Pages & Features
 
 | Route                          | Feature                                                                                          |
