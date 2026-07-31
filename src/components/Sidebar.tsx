@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
+import { useSyncExternalStore } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const sidebarLinks = [
@@ -39,6 +40,11 @@ export default function Sidebar() {
     const router = useRouter();
     const { data: session } = authClient.useSession();
     const user = session?.user;
+    const mounted = useSyncExternalStore(
+        () => () => {},
+        () => true,
+        () => false
+    );
 
     const handleLogout = async () => {
         await authClient.signOut();
@@ -131,33 +137,43 @@ export default function Sidebar() {
 
                 {/* User Card */}
                 <div className="rounded-2xl border border-slate-200/70 bg-white p-3.5 shadow-sm dark:border-white/10 dark:bg-white/5">
-                    <div className="flex items-center gap-3">
-                        <div className="relative shrink-0">
-                            <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-brand-primari/40 ring-offset-2 ring-offset-slate-50 dark:ring-offset-slate-950">
-                                <Image
-                                    src={
-                                        user?.image?.startsWith("http")
-                                            ? user.image
-                                            : "/myphoto.png"
-                                    }
-                                    alt={user?.name ?? "User profile"}
-                                    fill
-                                    className="object-cover"
-                                    sizes="40px"
-                                />
+                    {!mounted ? (
+                        <div className="flex items-center gap-3">
+                            <div className="h-10 w-10 shrink-0 animate-pulse rounded-full bg-slate-200/70 dark:bg-white/10" />
+                            <div className="min-w-0 flex-1 space-y-2">
+                                <div className="h-3 w-24 animate-pulse rounded-full bg-slate-200/70 dark:bg-white/10" />
+                                <div className="h-2.5 w-32 animate-pulse rounded-full bg-slate-200/60 dark:bg-white/5" />
                             </div>
-                            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-emerald-400 dark:border-slate-950" />
                         </div>
+                    ) : (
+                        <div className="flex items-center gap-3">
+                            <div className="relative shrink-0">
+                                <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-brand-primari/40 ring-offset-2 ring-offset-slate-50 dark:ring-offset-slate-950">
+                                    <Image
+                                        src={
+                                            user?.image?.startsWith("http")
+                                                ? user.image
+                                                : "/myphoto.png"
+                                        }
+                                        alt={user?.name ?? "User profile"}
+                                        fill
+                                        className="object-cover"
+                                        sizes="40px"
+                                    />
+                                </div>
+                                <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-emerald-400 dark:border-slate-950" />
+                            </div>
 
-                        <div className="min-w-0 flex-1">
-                            <p className="truncate text-sm font-bold text-slate-900 dark:text-white">
-                                {user?.name ?? "Guest"}
-                            </p>
-                            <p className="truncate text-xs font-medium text-slate-500 dark:text-slate-400">
-                                {user?.email ?? "Not signed in"}
-                            </p>
+                            <div className="min-w-0 flex-1">
+                                <p className="truncate text-sm font-bold text-slate-900 dark:text-white">
+                                    {user?.name ?? "Guest"}
+                                </p>
+                                <p className="truncate text-xs font-medium text-slate-500 dark:text-slate-400">
+                                    {user?.email ?? "Not signed in"}
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     <div className="mt-3 flex items-center gap-2">
                         <ThemeToggle />
