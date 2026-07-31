@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
-    Calendar,
+    Activity,
+    ArrowUpRight,
+    CalendarDays,
+    ChevronRight,
     Home,
-    PlusSquare,
-    Settings,
+    LogOut,
+    PlusCircle,
+    Settings2,
 } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
@@ -16,60 +20,63 @@ const sidebarLinks = [
     {
         title: "My Bookings",
         href: "/dashboard/my-bookings",
-        icon: Calendar,
+        icon: CalendarDays,
     },
     {
         title: "Add Facility",
         href: "/dashboard/add-facility",
-        icon: PlusSquare,
+        icon: PlusCircle,
     },
     {
         title: "Manage Facilities",
         href: "/dashboard/manage-facilities",
-        icon: Settings,
+        icon: Settings2,
     },
 ];
 
 export default function Sidebar() {
     const pathname = usePathname();
+    const router = useRouter();
     const { data: session } = authClient.useSession();
     const user = session?.user;
 
+    const handleLogout = async () => {
+        await authClient.signOut();
+        router.refresh();
+        router.push("/auth/login");
+    };
+
     return (
-        <aside className="w-full bg-[#fafafa] dark:bg-[#0f172a] border-r border-gray-100 dark:border-white/10 flex flex-col justify-between items-start transition-colors duration-300">
+        <aside className="flex h-full w-full flex-col justify-between border-r border-slate-200/70 bg-slate-50/80 dark:border-white/10 dark:bg-slate-950 transition-colors duration-300">
 
             {/* Top Content */}
-            <div>
+            <div className="px-5 pt-6">
 
                 {/* Logo */}
-                <div className="border-b border-gray-100 px-8 py-10">
-                    <Link href="/" className="flex items-center gap-4">
-                        <h1 className="text-5xl font-extrabold tracking-tight">
-                            <span className="text-slate-900 dark:text-white">Sport</span>
-                            <span className="text-gradient">Nest</span>
+                <Link href="/" className="group flex items-center gap-3">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-Cyan400 to-brand-primari shadow-lg shadow-brand-primari/30 transition-transform duration-300 group-hover:scale-105">
+                        <Activity className="h-6 w-6 text-white" strokeWidth={2.4} />
+                    </div>
+                    <div className="leading-none">
+                        <h1 className="text-3xl font-normal tracking-tight text-slate-900 dark:text-white">
+                            Sport<span className="text-gradient">Nest</span>
                         </h1>
-                    </Link>
-                </div>
+                        <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500">
+                            Owner Panel
+                        </p>
+                    </div>
+                </Link>
 
                 {/* Navigation */}
-                <div className="px-6 py-8">
-
-                    {/* Back Home */}
-                    <Link
-                        href="/"
-                        className="mb-12 flex items-center gap-4 rounded-2xl px-4 py-4 text-[18px] font-semibold text-brand-secondary transition-all hover:bg-brand-primari hover:text-brand-secondary"
-                    >
-                        <Home size={26} />
-                        <span>Back to Home</span>
-                    </Link>
-
-                    {/* Section Title */}
-                    <p className="mb-6 px-4 text-sm font-extrabold uppercase tracking-[0.35em] text-slate-400">
-                        Management
+                <nav className="mt-9">
+                    <p className="mb-3 flex items-center gap-2 px-1">
+                        <span className="h-1.5 w-1.5 rounded-full bg-brand-primari" />
+                        <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-slate-400 dark:text-slate-500">
+                            Management
+                        </span>
                     </p>
 
-                    {/* Sidebar Links */}
-                    <div className="space-y-3">
+                    <div className="space-y-1.5">
                         {sidebarLinks.map((item) => {
                             const isActive = pathname === item.href;
                             const Icon = item.icon;
@@ -78,31 +85,55 @@ export default function Sidebar() {
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className={`flex items-center gap-4 rounded-3xl px-5 py-4 text-md font-bold transition-all duration-200
-                  ${isActive
-                                            ? "bg-brand-primari text-brand-secondary dark:text-slate-900"
-                                            : "text-brand-secondary dark:text-slate-300 hover:bg-brand-primari hover:text-brand-secondary dark:hover:text-slate-900"
-                                        }`}
+                                    aria-current={isActive ? "page" : undefined}
+                                    className={`group relative flex items-center gap-3 rounded-xl px-2.5 py-2.5 text-sm font-semibold transition-all duration-200 ${
+                                        isActive
+                                            ? "bg-gradient-to-r from-brand-Cyan400 to-brand-primari text-white shadow-lg shadow-brand-primari/30"
+                                            : "text-slate-600 hover:bg-brand-primari/10 hover:text-brand-primari dark:text-slate-300 dark:hover:bg-brand-primari/10 dark:hover:text-brand-primari"
+                                    }`}
                                 >
-                                    <Icon
-                                        size={28}
-                                        className={isActive ? "text-brand-secondary dark:text-slate-900" : ""}
-                                    />
+                                    <span
+                                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-200 ${
+                                            isActive
+                                                ? "bg-white/20 text-white"
+                                                : "bg-white text-slate-500 shadow-sm ring-1 ring-slate-200/70 group-hover:text-brand-primari dark:bg-white/5 dark:ring-white/10 dark:text-slate-400 dark:group-hover:text-brand-primari"
+                                        }`}
+                                    >
+                                        <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+                                    </span>
 
-                                    <span>{item.title}</span>
+                                    <span className="flex-1 truncate text-left">{item.title}</span>
+
+                                    {isActive && (
+                                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20">
+                                            <ChevronRight className="h-3.5 w-3.5 text-white" />
+                                        </span>
+                                    )}
                                 </Link>
                             );
                         })}
                     </div>
-                </div>
+                </nav>
             </div>
 
             {/* Bottom Section */}
-            <div className="p-6 w-full">
-                <div className="rounded-3xl border border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-5 flex flex-col gap-4">
-                    <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-4">
-                            <div className="relative h-10 w-10 md:h-12 md:w-12 rounded-full overflow-hidden shadow-md border-2 border-brand-primari/20 hover:border-brand-primari transition-all">
+            <div className="px-5 py-5">
+                <Link
+                    href="/"
+                    className="group mb-3 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-500 transition-colors hover:text-brand-primari dark:text-slate-400 dark:hover:text-brand-primari"
+                >
+                    <Home className="h-[18px] w-[18px]" />
+                    <span>Back to Home</span>
+                    <ArrowUpRight className="ml-auto h-4 w-4 -translate-x-1 text-slate-300 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 dark:text-slate-600" />
+                </Link>
+
+                <div className="my-3 h-px bg-slate-200/70 dark:bg-white/10" />
+
+                {/* User Card */}
+                <div className="rounded-2xl border border-slate-200/70 bg-white p-3.5 shadow-sm dark:border-white/10 dark:bg-white/5">
+                    <div className="flex items-center gap-3">
+                        <div className="relative shrink-0">
+                            <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-brand-primari/40 ring-offset-2 ring-offset-slate-50 dark:ring-offset-slate-950">
                                 <Image
                                     src={
                                         user?.image?.startsWith("http")
@@ -112,19 +143,34 @@ export default function Sidebar() {
                                     alt={user?.name ?? "User profile"}
                                     fill
                                     className="object-cover"
-                                    sizes="48px"
+                                    sizes="40px"
                                 />
                             </div>
-                            <h4 className="mt-1 text-md font-semibold text-brand-secondary dark:text-white">
-                                {user?.name}
-                            </h4>
+                            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-emerald-400 dark:border-slate-950" />
                         </div>
-                        <ThemeToggle />
+
+                        <div className="min-w-0 flex-1">
+                            <p className="truncate text-sm font-bold text-slate-900 dark:text-white">
+                                {user?.name ?? "Guest"}
+                            </p>
+                            <p className="truncate text-xs font-medium text-slate-500 dark:text-slate-400">
+                                {user?.email ?? "Not signed in"}
+                            </p>
+                        </div>
                     </div>
 
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-                        {user?.email}
-                    </p>
+                    <div className="mt-3 flex items-center gap-2">
+                        <ThemeToggle />
+
+                        <button
+                            type="button"
+                            onClick={handleLogout}
+                            className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-red-50 hover:text-red-500 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-red-500/10 dark:hover:text-red-400"
+                        >
+                            <LogOut className="h-3.5 w-3.5" />
+                            Sign out
+                        </button>
+                    </div>
                 </div>
             </div>
         </aside>
