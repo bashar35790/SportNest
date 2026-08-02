@@ -20,7 +20,7 @@ The app includes:
 | UI library     | [React](https://react.dev/) 19                                                  |
 | Language       | TypeScript 5                                                                   |
 | Styling        | [Tailwind CSS](https://tailwindcss.com/) v4 + [HeroUI](https://heroui.com/) v3 (`@heroui/react`, custom theme tokens) |
-| Auth           | [better-auth](https://www.better-auth.com/) 1.6 (email/password + Google OAuth, [MongoDB adapter](https://github.com/better-auth/better-auth/tree/main/packages/mongo-adapter), JWT session-cookie cache) |
+| Auth           | [better-auth](https://www.better-auth.com/) 1.6 (email/password + Google OAuth, [MongoDB adapter](https://github.com/better-auth/better-auth/tree/main/packages/mongo-adapter), JWT plugin + session-cookie cache) |
 | State / UX     | [next-themes](https://github.com/pacocoursey/next-themes) (dark mode), [react-hot-toast](https://react-hot-toast.com/) (toasts), [lucide-react](https://lucide.dev/), `@iconify/react`, `@gravity-ui/icons` |
 | Data access    | React `cache()` + ISR (`next: { revalidate: 60 }`)                              |
 
@@ -53,7 +53,7 @@ The app includes:
 ## Key Mechanics
 
 - **Route protection** — `src/proxy.ts` (Next.js `proxy`) redirects unauthenticated visitors to `/auth/login` for `/dashboard/:path*` and `/all-facility/:path`. Sessions are resolved through better-auth's `get-session` endpoint using the request cookies.
-- **Auth** — better-auth is configured in `src/lib/auth.ts` (server, with MongoDB adapter) and consumed via `src/lib/auth-client.ts`. Sessions are written to MongoDB and the signed `better-auth.session_token` cookie is verified independently by the backend.
+- **Auth** — better-auth is configured in `src/lib/auth.ts` (server, with MongoDB adapter) and consumed via `src/lib/auth-client.ts`. Server pages read the session via `auth.api.getSession` / get an API token via `auth.api.getToken`. Mutating API calls attach the resulting JWT as `Authorization: Bearer`, which the backend verifies against this app's `/api/auth/jwks`. The `auth.ts` JWT plugin sets a 1-day token expiry.
 - **Data fetching** — server components use `getCachedFacility` (`src/lib/data-cache.ts`, React `cache()` + 60s ISR); client components use typed helpers in `src/api/` (`GetApi`, `PostApi`, `DeleteApi`, `UpdateFacilityApi`) pointing at the API base from `src/lib/api-config.ts`.
 - **CSRF** — `CsrfProvider` fetches a token from the backend (`/csrf-token`) and `withCsrf` attaches it to every mutating request (double-submit cookie pattern).
 - **Booking flow** — date picker → availability request → price preview (`price_per_hour × duration`) → create booking with an `idempotencyKey` to prevent double-bookings on retry.
@@ -73,6 +73,7 @@ cp .env.example .env
 | `NEXT_PUBLIC_BETTER_AUTH_URL`| No       | Public base URL of this app (defaults to the request origin)                 |
 | `MONGODB_URI`                | Optional | Only needed if reading the DB directly from server components                |
 | `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Optional | Google OAuth credentials from Google Cloud Console          |
+| `NEXT_PUBLIC_API_URL`| No       | `http://localhost:5000` | Backend API base URL (see `src/lib/api-config.ts`)
 
 Generate the shared secret with: `openssl rand -hex 32`.
 
@@ -85,6 +86,16 @@ npm install
 cp .env.example .env   # then edit .env
 npm run dev            # http://localhost:3000
 ```
+
+## Deployment
+
+The app is deployed to **Vercel** via the Git integration or the CLI:
+
+```bash
+vercel --prod
+```
+
+Set the production `BETTER_AUTH_SECRET`, `MONGODB_URI`, `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET`, `NEXT_PUBLIC_BETTER_AUTH_URL` (the deployed frontend URL), and `NEXT_PUBLIC_API_URL` (the deployed backend URL) in the Vercel project. The backend must share the same `BETTER_AUTH_SECRET` and its `NEXT_PUBLIC_BETTER_AUTH_URL` must point back to this app so it can reach `/api/auth/jwks`.
 
 ## Scripts
 
