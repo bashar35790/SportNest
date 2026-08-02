@@ -18,7 +18,7 @@ const PostBooking = async (bookingData: BookingData) => {
         const headers: Record<string, string> = {
             'Content-Type': 'application/json',
         };
-        if (sessionToken) headers['x-session-token'] = sessionToken;
+        if (sessionToken) headers['Authorization'] = `Bearer ${sessionToken}`;
         const response = await fetch(`${API_BASE_URL}/booking`, withCsrf({
             method: 'POST',
             credentials: 'include',

@@ -20,7 +20,7 @@ const UpdateFacilityApi = async (userId: string, updatedFacility: FacilityUpdate
         const headers: Record<string, string> = {
             "Content-Type": "application/json",
         };
-        if (sessionToken) headers['x-session-token'] = sessionToken;
+        if (sessionToken) headers['Authorization'] = `Bearer ${sessionToken}`;
         const response = await fetch(`${API_BASE_URL}/facilities/user/${userId}`, withCsrf({
             method: "PATCH",
             credentials: "include",

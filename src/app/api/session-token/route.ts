@@ -1,9 +1,15 @@
-import { getSessionCookie } from "better-auth/cookies";
-import type { NextRequest } from "next/server";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export const dynamic = "force-dynamic";
 
-export function GET(request: NextRequest) {
-  const token = getSessionCookie(request);
-  return Response.json({ token: token ?? null });
+export async function GET() {
+  try {
+    const { token } = await auth.api.getToken({
+      headers: await headers(),
+    });
+    return Response.json({ token: token ?? null });
+  } catch {
+    return Response.json({ token: null });
+  }
 }

@@ -34,5 +34,5 @@ export const auth = betterAuth({
       maxAge: 60 * 60 * 24 * 7, // 1 week
     },
   },
-  plugins: [jwt()],
+  plugins: [jwt({ jwt: { expirationTime: "1d" } })],
 });

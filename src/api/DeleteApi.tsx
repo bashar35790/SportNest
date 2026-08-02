@@ -8,7 +8,7 @@ async function DeleteBooking(bookingId: string) {
         await ensureCsrfToken();
         const sessionToken = await getSessionToken();
         const headers: Record<string, string> = {};
-        if (sessionToken) headers['x-session-token'] = sessionToken;
+        if (sessionToken) headers['Authorization'] = `Bearer ${sessionToken}`;
         const response = await fetch(`${API_BASE_URL}/my-bookings/${bookingId}`, withCsrf({
             method: "DELETE",
             credentials: "include",
@@ -31,7 +31,7 @@ async function DeleteFacility(facilityId: string) {
         await ensureCsrfToken();
         const sessionToken = await getSessionToken();
         const headers: Record<string, string> = {};
-        if (sessionToken) headers['x-session-token'] = sessionToken;
+        if (sessionToken) headers['Authorization'] = `Bearer ${sessionToken}`;
         const response = await fetch(`${API_BASE_URL}/facilities/user/${facilityId}`, withCsrf({
             method: "DELETE",
             credentials: "include",
