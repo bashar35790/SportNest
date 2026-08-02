@@ -1,14 +1,22 @@
 import { API_BASE_URL } from "./api-config";
 
+let cachedCsrfToken: string | null = null;
+
 export async function fetchCsrfToken(): Promise<string | null> {
   try {
     const res = await fetch(`${API_BASE_URL}/csrf-token`, { credentials: "include" });
     if (!res.ok) return null;
     const data = await res.json();
-    return data.csrfToken ?? null;
+    cachedCsrfToken = data.csrfToken ?? null;
+    return cachedCsrfToken;
   } catch {
     return null;
   }
+}
+
+export async function ensureCsrfToken(): Promise<string | null> {
+  if (cachedCsrfToken) return cachedCsrfToken;
+  return fetchCsrfToken();
 }
 
 export function getCsrfTokenFromCookie(): string | null {
@@ -18,7 +26,7 @@ export function getCsrfTokenFromCookie(): string | null {
 }
 
 export function withCsrf(init?: RequestInit): RequestInit {
-  const token = getCsrfTokenFromCookie();
+  const token = cachedCsrfToken ?? getCsrfTokenFromCookie();
   if (!token) return init ?? {};
   return {
     ...init,

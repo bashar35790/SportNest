@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "@/lib/api-config";
-import { withCsrf } from "@/lib/csrf";
+import { ensureCsrfToken, withCsrf } from "@/lib/csrf";
 
 export interface FacilityUpdateData {
   name?: string;
@@ -14,6 +14,7 @@ export interface FacilityUpdateData {
 
 const UpdateFacilityApi = async (userId: string, updatedFacility: FacilityUpdateData) => {
     try {
+        await ensureCsrfToken();
         const response = await fetch(`${API_BASE_URL}/facilities/user/${userId}`, withCsrf({
             method: "PATCH",
             credentials: "include",

@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "@/lib/api-config";
-import { withCsrf } from "@/lib/csrf";
+import { ensureCsrfToken, withCsrf } from "@/lib/csrf";
 
 interface BookingData {
     facilityId: string;
@@ -12,6 +12,7 @@ interface BookingData {
 
 const PostBooking = async (bookingData: BookingData) => {
     try {
+        await ensureCsrfToken();
         const response = await fetch(`${API_BASE_URL}/booking`, withCsrf({
             method: 'POST',
             credentials: 'include',
