@@ -1,13 +1,18 @@
 import { API_BASE_URL } from "@/lib/api-config";
 import { ensureCsrfToken, withCsrf } from "@/lib/csrf";
+import { getSessionToken } from "@/lib/session-token";
 import toast from 'react-hot-toast';
 
 async function DeleteBooking(bookingId: string) {
     try {
         await ensureCsrfToken();
+        const sessionToken = await getSessionToken();
+        const headers: Record<string, string> = {};
+        if (sessionToken) headers['x-session-token'] = sessionToken;
         const response = await fetch(`${API_BASE_URL}/my-bookings/${bookingId}`, withCsrf({
             method: "DELETE",
             credentials: "include",
+            headers,
         }));
         const data = await response.json();
         if (data.success) {
@@ -24,9 +29,13 @@ async function DeleteBooking(bookingId: string) {
 async function DeleteFacility(facilityId: string) {
     try {
         await ensureCsrfToken();
+        const sessionToken = await getSessionToken();
+        const headers: Record<string, string> = {};
+        if (sessionToken) headers['x-session-token'] = sessionToken;
         const response = await fetch(`${API_BASE_URL}/facilities/user/${facilityId}`, withCsrf({
             method: "DELETE",
             credentials: "include",
+            headers,
         }));
         const data = await response.json();
         if (data.success && data.data) {

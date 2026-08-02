@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "@/lib/api-config";
 import { ensureCsrfToken, withCsrf } from "@/lib/csrf";
+import { getSessionToken } from "@/lib/session-token";
 
 interface BookingData {
     facilityId: string;
@@ -13,12 +14,15 @@ interface BookingData {
 const PostBooking = async (bookingData: BookingData) => {
     try {
         await ensureCsrfToken();
+        const sessionToken = await getSessionToken();
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+        };
+        if (sessionToken) headers['x-session-token'] = sessionToken;
         const response = await fetch(`${API_BASE_URL}/booking`, withCsrf({
             method: 'POST',
             credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify(bookingData),
         }));
         const data = await response.json();
