@@ -32,10 +32,13 @@ async function MyBookingPage() {
 
   if (userId) {
     try {
-      const cookieHeader = (await headers()).get("cookie") || "";
+      const { token } = await auth.api.getToken({ headers: await headers() });
       const response = await fetch(
         `${API_BASE_URL}/my-bookings/${userId}`,
-        { headers: { cookie: cookieHeader }, cache: "no-store" }
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+          cache: "no-store",
+        }
       );
       const result = await response.json() as { data?: Booking[] };
       bookings = result?.data ?? [];
