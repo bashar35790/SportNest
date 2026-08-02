@@ -3,6 +3,7 @@
 import { PostBooking } from "@/api/PostApi";
 import { GetFacilityAvailability } from "@/api/GetApi";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 import { ChevronsExpandVertical } from "@gravity-ui/icons";
 import {
     Button,
@@ -35,6 +36,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     const [slots, setSlots] = React.useState<string[]>([]);
     const [slotsDate, setSlotsDate] = React.useState<string | null>(null);
+    const router = useRouter();
     authClient.useSession();
 
     const isOutOfStock = duration !== undefined && duration > STOCK_AVAILABLE;
@@ -95,6 +97,7 @@ export function BookingForm({ FacilityName, FacilityId, AvailableSlots, PricePer
         try {
             await PostBooking(data);
             toast.success("Booking confirmed!");
+            router.push("/dashboard/my-bookings");
             reset();
         } catch (error: unknown) {
             const message = error instanceof Error ? error.message : "Booking failed. Please try again.";
