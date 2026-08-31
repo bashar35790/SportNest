@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 
 const FAQS = [
   {
@@ -43,25 +45,29 @@ export default function Faq() {
     <section className="py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight">
+          <Reveal as="h2" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight">
             Frequently Asked <span className="text-gradient">Questions</span>
-          </h2>
-          <p className="mt-4 text-lg text-brand-secondary dark:text-slate-400">
+          </Reveal>
+          <Reveal as="p" delay={0.12} className="mt-4 text-lg text-brand-secondary dark:text-slate-400">
             Everything you need to know about booking on SportNest.
-          </p>
+          </Reveal>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
+        <StaggerGroup
+          stagger={0.08}
+          y={20}
+          className="max-w-3xl mx-auto space-y-4"
+        >
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
 
             return (
-              <div
-                key={index}
-                className={`bg-[#F4F5F7] dark:bg-slate-800 dark:border dark:border-white/10 rounded-xl overflow-hidden transition-colors ${
-                  isOpen ? "border border-cyan-500/40" : ""
-                }`}
-              >
+              <StaggerItem key={index}>
+                <div
+                  className={`bg-[#F4F5F7] dark:bg-slate-800 dark:border dark:border-white/10 rounded-xl overflow-hidden transition-colors ${
+                    isOpen ? "border border-cyan-500/40" : ""
+                  }`}
+                >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left cursor-pointer"
@@ -97,10 +103,11 @@ export default function Faq() {
                     </p>
                   </div>
                 </div>
-              </div>
+                </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );

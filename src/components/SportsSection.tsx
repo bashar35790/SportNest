@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { Reveal } from "@/components/motion/Reveal";
+import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 
 type Sport = {
   name: string;
@@ -36,48 +38,55 @@ export default function SportsSection() {
       />
       {/* Section Header */}
       <div className="mb-14 z-10 relative text-center">
-        <span className="inline-block rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1 text-sm font-medium text-cyan-300">
-          Browse by Sport
-        </span>
+        <Reveal delay={0.05}>
+          <span className="inline-block rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1 text-sm font-medium text-cyan-300">
+            Browse by Sport
+          </span>
+        </Reveal>
 
-        <h2 className="mt-5 text-4xl font-light tracking-tight text-white sm:text-5xl">
+        <Reveal as="h2" delay={0.15} className="mt-5 text-4xl font-light tracking-tight text-white sm:text-5xl">
           Choose Your <span className="text-gradient">Arena</span>
-        </h2>
+        </Reveal>
 
-        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base">
+        <Reveal as="p" delay={0.25} className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base">
           From football turfs to swimming lanes — every sport has a premium home
           on SportNest.
-        </p>
+        </Reveal>
       </div>
 
       {/* Sports Grid */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 max-w-7xl mx-auto z-10 relative">
+      <StaggerGroup
+        stagger={0.1}
+        y={22}
+        className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 max-w-7xl mx-auto z-10 relative"
+      >
         {SPORTS.map((sport, index) => (
-          <button
-            key={sport.name}
-            className="group rounded-2xl border border-white/10 bg-slate-900/20 p-6 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-slate-900"
-          >
-            {/* Icon */}
-            <div
-              className="mb-3 text-4xl animate-bounce"
-              style={{
-                animationDuration: "3s",
-                animationDelay: `${index * 0.2}s`,
-              }}
+          <StaggerItem key={sport.name}>
+            <button
+              className="group h-full w-full rounded-2xl border border-white/10 bg-slate-900/20 p-6 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-slate-900"
             >
-              {sport.icon}
-            </div>
+              {/* Icon */}
+              <div
+                className="mb-3 text-4xl animate-bounce"
+                style={{
+                  animationDuration: "3s",
+                  animationDelay: `${index * 0.2}s`,
+                }}
+              >
+                {sport.icon}
+              </div>
 
-            {/* Name */}
-            <h3 className="text-sm font-light lowercase text-white sm:text-base">
-              {sport.name}
-            </h3>
+              {/* Name */}
+              <h3 className="text-sm font-light lowercase text-white sm:text-base">
+                {sport.name}
+              </h3>
 
-            {/* Count */}
-            <p className="mt-1 text-xs text-slate-400">{sport.count} venues</p>
-          </button>
+              {/* Count */}
+              <p className="mt-1 text-xs text-slate-400">{sport.count} venues</p>
+            </button>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
     </section>
   );
 }

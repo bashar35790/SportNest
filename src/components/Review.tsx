@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { Reveal } from "@/components/motion/Reveal";
 
 const REVIEWS = [
   {
@@ -81,13 +82,13 @@ export default function Review() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white flex items-center gap-3 tracking-tight">
+          <Reveal as="h2" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white flex items-center gap-3 tracking-tight">
             A little <span className="text-pink-500">💖</span>{" "}
             <span className=" text-gradient">from our community</span>
-          </h2>
+          </Reveal>
 
           {/* Controls */}
-          <div className="flex gap-4">
+          <Reveal delay={0.12} className="flex gap-4">
             <button
               onClick={prevSlide}
               className="w-12 h-12 rounded-full bg-brand-secondary hover:bg-gray-600 text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer"
@@ -102,11 +103,11 @@ export default function Review() {
             >
               <ArrowRight className="w-5 h-5" />
             </button>
-          </div>
+          </Reveal>
         </div>
 
         {/* Slider */}
-        <div className="relative w-full">
+        <Reveal delay={0.1} y={34} className="relative w-full">
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
@@ -144,7 +145,7 @@ export default function Review() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Image from "next/image";
+import { Reveal } from "@/components/motion/Reveal";
+import { StaggerGroup, StaggerItem } from "@/components/motion/Stagger";
 
 const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -91,9 +93,13 @@ export default function Footer() {
         className="object-cover transition-transform duration-700 group-hover:scale-110"
       />
       <div className="mx-auto max-w-7xl px-4 lg:px-8 z-10 relative">
-        <div className="grid gap-8 lg:grid-cols-4 lg:gap-12">
+        <StaggerGroup
+          stagger={0.12}
+          y={26}
+          className="grid gap-8 lg:grid-cols-4 lg:gap-12"
+        >
           {/* Brand & Description */}
-          <div className="space-y-4 lg:col-span-1">
+          <StaggerItem className="space-y-4 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-linear-to-r from-brand-primari to-brand-Cyan600 text-xl font-bold shadow-lg shadow-cyan-500/20 text-brand-secondary">
                 S
@@ -135,10 +141,10 @@ export default function Footer() {
                 <LinkedinIcon className="h-5 w-5" />
               </a>
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Quick Links */}
-          <div className="space-y-4">
+          <StaggerItem className="space-y-4">
             <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
               Quick Links
             </h3>
@@ -176,10 +182,10 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </StaggerItem>
 
           {/* Support */}
-          <div className="space-y-4">
+          <StaggerItem className="space-y-4">
             <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
               Support
             </h3>
@@ -217,10 +223,10 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </StaggerItem>
 
           {/* Contact Info */}
-          <div className="space-y-4">
+          <StaggerItem className="space-y-4">
             <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
               Contact Us
             </h3>
@@ -242,32 +248,34 @@ export default function Footer() {
                 <span>support@sportnest.com</span>
               </li>
             </ul>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerGroup>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-50 md:flex-row">
-          <p>© {new Date().getFullYear()} SportNest. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link
-              href="/terms"
-              className="transition-colors hover:text-cyan-400"
-            >
-              Terms
-            </Link>
-            <Link
-              href="/privacy"
-              className="transition-colors hover:text-cyan-400"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/cookies"
-              className="transition-colors hover:text-cyan-400"
-            >
-              Cookies
-            </Link>
+        <Reveal delay={0.1} y={20} className="mt-12">
+          <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-50 md:flex-row">
+            <p>© {new Date().getFullYear()} SportNest. All rights reserved.</p>
+            <div className="flex gap-6">
+              <Link
+                href="/terms"
+                className="transition-colors hover:text-cyan-400"
+              >
+                Terms
+              </Link>
+              <Link
+                href="/privacy"
+                className="transition-colors hover:text-cyan-400"
+              >
+                Privacy
+              </Link>
+              <Link
+                href="/cookies"
+                className="transition-colors hover:text-cyan-400"
+              >
+                Cookies
+              </Link>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </footer>
   );
