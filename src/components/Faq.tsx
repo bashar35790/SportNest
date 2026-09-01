@@ -43,7 +43,7 @@ export default function Faq() {
 
   return (
     <section className="py-24 bg-white dark:bg-slate-900">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="text-center mb-14">
           <Reveal as="h2" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight">
             Frequently Asked <span className="text-gradient">Questions</span>

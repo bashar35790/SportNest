@@ -79,7 +79,7 @@ export default function Review() {
 
   return (
     <section className="py-24 bg-[#F4F5F7] dark:bg-slate-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl px-4 lg:px-8 mx-auto ">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
           <Reveal as="h2" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white flex items-center gap-3 tracking-tight">

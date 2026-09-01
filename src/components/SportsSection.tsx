@@ -24,7 +24,7 @@ export default function SportsSection() {
   const proxyImageUrl = `https://wsrv.nl/?url=${encodeURIComponent("https://i.ibb.co.com/PsQF2Bpq/sports-equipment-green-grass-top-view.jpg")}&w=800&q=80&output=webp`;
 
   return (
-    <section className="relative isolate overflow-hidden mx-auto  px-5 py-20 sm:px-8 lg:px-14 bg-brand-secondary">
+    <section className="relative isolate overflow-hidden mx-auto py-20 bg-brand-secondary">
       <div className="overlay z-0"></div>
 
       {/* Background Image */}
@@ -37,7 +37,7 @@ export default function SportsSection() {
         className="object-cover transition-transform duration-700 group-hover:scale-110 z-0 opacity-80"
       />
       {/* Section Header */}
-      <div className="mb-14 z-10 relative text-center">
+      <div className="mb-14 z-10 max-w-7xl mx-auto px-4 lg:px-8 relative text-center">
         <Reveal delay={0.05}>
           <span className="inline-block rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1 text-sm font-medium text-cyan-300">
             Browse by Sport
@@ -58,7 +58,7 @@ export default function SportsSection() {
       <StaggerGroup
         stagger={0.1}
         y={22}
-        className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 max-w-7xl mx-auto z-10 relative"
+        className="grid grid-cols-2 max-w-7xl mx-auto px-4 lg:px-8 gap-4 sm:grid-cols-3 lg:grid-cols-6 z-10 relative"
       >
         {SPORTS.map((sport, index) => (
           <StaggerItem key={sport.name}>

@@ -10,7 +10,7 @@ export default async function Feature() {
   const facilities = data?.facilities || [];
   return (
     <section className="py-24 bg-[#f8fafc] dark:bg-slate-900">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <Reveal as="div" className="flex flex-col items-start">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight text-left highlight-text">

@@ -8,7 +8,7 @@ export default function CTASection() {
   const proxyImageUrl = `https://wsrv.nl/?url=${encodeURIComponent("https://i.ibb.co.com/gLMq8BLF/sports-equipment-green-grass.jpg")}&w=800&q=80&output=webp`;
 
   return (
-    <section className="mx-auto  px-5 py-20 sm:px-8 lg:px-14 relative isolate overflow-hidden">
+    <section className="mx-auto max-w-7xl px-4 lg:px-8 py-20 relative isolate overflow-hidden">
       {/* Background Image */}
        <div className="overlay2 z-0"></div>
       <Image

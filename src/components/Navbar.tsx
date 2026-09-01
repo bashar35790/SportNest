@@ -81,7 +81,7 @@ export default function Navbar() {
         : "bg-transparent dark:bg-transparent"
         }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl px-4 items-center justify-between  py-3 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <h2

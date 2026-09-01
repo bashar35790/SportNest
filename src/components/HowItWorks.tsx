@@ -49,7 +49,7 @@ export default function HowItWorks() {
   const proxyImageUrl = `https://wsrv.nl/?url=${encodeURIComponent("https://i.ibb.co.com/q3J6SWmn/sports-man-football-baseball.jpg")}&w=800&q=80&output=webp`;
 
   return (
-    <section className="relative isolate overflow-hidden w-full bg-[#031B2E]  py-24 px-6">
+    <section className="relative isolate overflow-hidden w-full bg-[#031B2E] py-20">
       <div className="overlay z-0"></div>
       {/* Background Image */}
       <Image
@@ -61,7 +61,7 @@ export default function HowItWorks() {
         className="object-cover transition-transform duration-700 group-hover:scale-110 z-0 opacity-20"
       />
 
-      <div className="max-w-7xl mx-auto z-10 relative">
+      <div className="max-w-7xl px-4 lg:px-8 mx-auto z-10 relative">
         {/* ── Header ── */}
         <div className="text-center mb-16">
           <Reveal delay={0.05}>
