@@ -44,9 +44,9 @@ export default function RootLayout({
       className={`${bebasNeue.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body
-        className="min-h-full flex flex-col bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 transition-colors duration-300"
+        className="min-h-full flex flex-col bg-slate-900 text-slate-50 transition-colors duration-300"
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" forcedTheme="dark">
           <CsrfProvider>
             <Navbar />
             <main className="flex-1 text-center">{children}</main>

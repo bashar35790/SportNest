@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { ThemeToggle } from "./ThemeToggle";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -114,8 +113,6 @@ export default function Navbar() {
 
         {/* Right Side */}
         <div className="hidden items-center gap-4 lg:flex">
-          <ThemeToggle />
-
           {session ? (
             <div className="group relative">
               <button className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 transition hover:bg-white/10">
@@ -207,8 +204,6 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
-
           <button
             onClick={() => setMobileMenu(!mobileMenu)}
             className={`rounded-xl border border-brand-primari p-2 transition-all duration-300 ${isLight

@@ -81,7 +81,8 @@ export default function Footer() {
   const proxyImageUrl = `https://wsrv.nl/?url=${encodeURIComponent("https://i.ibb.co.com/xqFQYbSJ/variety-sports-equipment-lush-green-setting.jpg")}&w=800&q=80&output=webp`;
 
   return (
-    <footer className=" pt-16 pb-8 text-slate-300 relative isolate overflow-hidden">
+    <footer className="relative isolate overflow-hidden border-t border-white/5 pt-20 pb-10 text-slate-300">
+      <div className="absolute inset-0 z-0 bg-linear-to-b from-[#040d1a]/85 via-[#071120]/95 to-[#0a1a33]"></div>
       <div className="overlay z-0"></div>
       {/* Background Image */}
       <Image
@@ -118,25 +119,25 @@ export default function Footer() {
             <div className="flex gap-4 pt-2">
               <a
                 href="#"
-                className="rounded-full bg-white/5 p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-cyan-400"
+                className="rounded-full border border-white/10 bg-white/5 p-2.5 text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-300 hover:shadow-[0_4px_15px_-4px_rgba(34,211,238,0.4)]"
               >
                 <FacebookIcon className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="rounded-full bg-white/5 p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-cyan-400"
+                className="rounded-full border border-white/10 bg-white/5 p-2.5 text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-300 hover:shadow-[0_4px_15px_-4px_rgba(34,211,238,0.4)]"
               >
                 <TwitterIcon className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="rounded-full bg-white/5 p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-cyan-400"
+                className="rounded-full border border-white/10 bg-white/5 p-2.5 text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-300 hover:shadow-[0_4px_15px_-4px_rgba(34,211,238,0.4)]"
               >
                 <InstagramIcon className="h-5 w-5" />
               </a>
               <a
                 href="#"
-                className="rounded-full bg-white/5 p-2 text-slate-50 transition-colors hover:bg-white/10 hover:text-cyan-400"
+                className="rounded-full border border-white/10 bg-white/5 p-2.5 text-slate-50 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-300 hover:shadow-[0_4px_15px_-4px_rgba(34,211,238,0.4)]"
               >
                 <LinkedinIcon className="h-5 w-5" />
               </a>
@@ -145,14 +146,15 @@ export default function Footer() {
 
           {/* Quick Links */}
           <StaggerItem className="space-y-4">
-            <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300/90">
               Quick Links
+              <span className="mt-2 block h-px w-8 bg-gradient-to-r from-brand-primari to-transparent"></span>
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
                   href="/facilities"
-                  className="transition-colors hover:text-cyan-400"
+                  className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
                 >
                   All Facilities
                 </Link>
@@ -160,7 +162,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="transition-colors hover:text-cyan-400"
+                  className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
                 >
                   About Us
                 </Link>
@@ -168,7 +170,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/how-it-works"
-                  className="transition-colors hover:text-cyan-400"
+                  className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
                 >
                   How It Works
                 </Link>
@@ -176,7 +178,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/pricing"
-                  className="transition-colors hover:text-cyan-400"
+                  className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
                 >
                   Pricing
                 </Link>
@@ -186,14 +188,15 @@ export default function Footer() {
 
           {/* Support */}
           <StaggerItem className="space-y-4">
-            <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300/90">
               Support
+              <span className="mt-2 block h-px w-8 bg-gradient-to-r from-brand-primari to-transparent"></span>
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
                   href="/help"
-                  className="transition-colors hover:text-cyan-400"
+                  className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
                 >
                   Help Center
                 </Link>
@@ -201,7 +204,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/terms"
-                  className="transition-colors hover:text-cyan-400"
+                  className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
                 >
                   Terms of Service
                 </Link>
@@ -209,7 +212,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/privacy"
-                  className="transition-colors hover:text-cyan-400"
+                  className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
                 >
                   Privacy Policy
                 </Link>
@@ -217,7 +220,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/faq"
-                  className="transition-colors hover:text-cyan-400"
+                  className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
                 >
                   FAQ
                 </Link>
@@ -227,12 +230,15 @@ export default function Footer() {
 
           {/* Contact Info */}
           <StaggerItem className="space-y-4">
-            <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300/90">
               Contact Us
+              <span className="mt-2 block h-px w-8 bg-gradient-to-r from-brand-primari to-transparent"></span>
             </h3>
             <ul className="space-y-4 text-sm text-slate-400">
               <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 shrink-0 text-cyan-400" />
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-400/20 bg-cyan-400/10">
+                  <MapPin className="h-4 w-4 text-cyan-300" />
+                </span>
                 <span>
                   123 Sports Avenue, Suite 100
                   <br />
@@ -240,11 +246,15 @@ export default function Footer() {
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 shrink-0 text-cyan-400" />
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-400/20 bg-cyan-400/10">
+                  <Phone className="h-4 w-4 text-cyan-300" />
+                </span>
                 <span>+1 (555) 123-4567</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-5 w-5 shrink-0 text-cyan-400" />
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-400/20 bg-cyan-400/10">
+                  <Mail className="h-4 w-4 text-cyan-300" />
+                </span>
                 <span>support@sportnest.com</span>
               </li>
             </ul>
@@ -252,24 +262,24 @@ export default function Footer() {
         </StaggerGroup>
 
         <Reveal delay={0.1} y={20} className="mt-12">
-          <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-50 md:flex-row">
-            <p>© {new Date().getFullYear()} SportNest. All rights reserved.</p>
+          <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 md:flex-row">
+            <p className="text-slate-400">© {new Date().getFullYear()} SportNest. All rights reserved.</p>
             <div className="flex gap-6">
               <Link
                 href="/terms"
-                className="transition-colors hover:text-cyan-400"
+                className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
               >
                 Terms
               </Link>
               <Link
                 href="/privacy"
-                className="transition-colors hover:text-cyan-400"
+                className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
               >
                 Privacy
               </Link>
               <Link
                 href="/cookies"
-                className="transition-colors hover:text-cyan-400"
+                className="transition-all duration-300 hover:pl-1 hover:text-cyan-300"
               >
                 Cookies
               </Link>

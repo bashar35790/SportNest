@@ -15,7 +15,6 @@ import {
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import { useSyncExternalStore } from "react";
-import { ThemeToggle } from "./ThemeToggle";
 
 const sidebarLinks = [
     {
@@ -176,8 +175,6 @@ export default function Sidebar() {
                     )}
 
                     <div className="mt-3 flex items-center gap-2">
-                        <ThemeToggle />
-
                         <button
                             type="button"
                             onClick={handleLogout}

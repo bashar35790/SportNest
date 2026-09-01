@@ -8,7 +8,7 @@ export default function CTASection() {
   const proxyImageUrl = `https://wsrv.nl/?url=${encodeURIComponent("https://i.ibb.co.com/gLMq8BLF/sports-equipment-green-grass.jpg")}&w=800&q=80&output=webp`;
 
   return (
-    <section className="mx-auto max-w-7xl px-4 lg:px-8 py-20 relative isolate overflow-hidden">
+    <section className="relative isolate overflow-hidden w-full py-20">
       {/* Background Image */}
        <div className="overlay2 z-0"></div>
       <Image
@@ -19,13 +19,9 @@ export default function CTASection() {
         sizes="100vw"
         className="object-cover transition-transform duration-700 group-hover:scale-110"
       />
-      <div className="max-w-7xl mx-auto rounded-[32px] border border-white/10 bg-slate-950">
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-black/55" />
-
-        {/* Glow Effects */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.18),transparent_30%)]" />
-
+      <div className="absolute inset-0 z-0 bg-slate-950/75"></div>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
+        <div>
         <div className="absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-3xl" />
 
         <div className="absolute -right-20 top-0 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" />
@@ -62,6 +58,7 @@ export default function CTASection() {
             </button>
           </Reveal>
         </div>
+      </div>
       </div>
     </section>
   );
