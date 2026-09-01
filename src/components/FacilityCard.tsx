@@ -36,10 +36,10 @@ export function FacilityCard({
 }) {
   return (
     <div
-      className={`bg-white dark:bg-slate-800 rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/10 flex group hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(0,0,0,0.15)] hover:ring-1 hover:ring-brand-primari/20 ${viewMode === "grid" ? "flex-col" : "flex-col md:flex-row"}`}
+      className={`h-full bg-white dark:bg-slate-800 rounded-2xl overflow-hidden transition-all duration-300 border border-gray-100 dark:border-white/10 flex group hover:-translate-y-1 hover:shadow-[0_8px_25px_-8px_rgba(0,0,0,0.15)] hover:ring-1 hover:ring-brand-primari/20 ${viewMode === "grid" ? "flex-col" : "flex-col md:flex-row"}`}
     >
       <div
-        className={`relative overflow-hidden ${viewMode === "grid" ? "h-64 w-full" : "w-full md:w-2/5 min-h-[220px]"}`}
+        className={`relative overflow-hidden ${viewMode === "grid" ? "h-64 w-full" : "w-full md:w-2/5 min-h-55"}`}
       >
         <FacilityImage
           src={facility.image}

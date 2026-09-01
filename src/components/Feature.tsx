@@ -36,7 +36,7 @@ export default async function Feature() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {facilities.map((facility: FacilityCardData, index: number) => (
-            <StaggerItem key={facility._id}>
+            <StaggerItem key={facility._id} className="h-full">
               <FacilityCard facility={facility} priority={index < 3} />
             </StaggerItem>
           ))}
