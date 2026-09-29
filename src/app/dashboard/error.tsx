@@ -8,18 +8,19 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center px-4">
-      <div className="text-center max-w-md">
-        <h1 className="text-6xl font-bold text-cyan-500 mb-4">Oops!</h1>
-        <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-200 mb-2">
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="mx-auto w-full max-w-md rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 p-8 text-center shadow-sm">
+        <h1 className="text-5xl font-bold tracking-tight text-slate-900 dark:text-white">Oops!</h1>
+        <span className="mx-auto mt-4 block h-1 w-12 rounded-full bg-gradient-to-r from-brand-primari to-transparent" />
+        <h2 className="mt-4 font-sans text-xl font-semibold text-slate-900 dark:text-white">
           Dashboard error
         </h2>
-        <p className="text-slate-500 dark:text-slate-400 mb-8">
+        <p className="mt-2 text-base text-slate-500 dark:text-slate-400">
           {error.message || "Something went wrong in the dashboard."}
         </p>
         <button
           onClick={reset}
-          className="px-8 py-3 bg-cyan-500 text-white rounded-2xl font-semibold hover:bg-cyan-600 transition-all duration-300 cursor-pointer"
+          className="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-brand-primari px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition-colors hover:bg-cyan-600 cursor-pointer"
         >
           Try Again
         </button>

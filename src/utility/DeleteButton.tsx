@@ -14,7 +14,7 @@ export function DeleteButton({ bookingId }: { bookingId: string }) {
 
     return (
         <AlertDialog>
-            <Button variant="outline" className="flex items-center gap-2 text-orange-700"> <Trash2 size={24} /> Cancel Booking</Button>
+            <Button variant="outline" className="flex shrink-0 items-center justify-center gap-2 rounded-xl border border-red-200 dark:border-red-500/20 bg-red-50 dark:bg-red-500/10 px-4 py-2.5 text-sm font-semibold text-red-600 dark:text-red-400 transition-colors hover:bg-red-100 dark:hover:bg-red-500/20"> <Trash2 size={18} /> Cancel Booking</Button>
             <AlertDialog.Backdrop>
                 <AlertDialog.Container>
                     <AlertDialog.Dialog className="sm:max-w-[400px]">

@@ -238,7 +238,7 @@ export function FacilityForm({
             <TextArea
               name="description"
               placeholder="Describe the facility..."
-              className="rounded-3xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
+              className="rounded-2xl border border-slate-200 focus-within:border-brand-primari transition-all duration-300"
             />
             <FieldError />
           </TextField>
@@ -247,7 +247,7 @@ export function FacilityForm({
 
       <Button
         type="submit"
-        className="w-full bg-cyan-500 text-white rounded-2xl h-14 text-lg"
+        className="h-12 w-full rounded-xl bg-brand-primari text-base font-semibold text-white shadow-lg shadow-cyan-500/20 transition-colors hover:bg-cyan-600"
         isDisabled={isPending}
       >
         {isPending ? submitPendingLabel : submitLabel}

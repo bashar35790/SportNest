@@ -41,13 +41,14 @@ export function ModalForm({ facility }: { facility: FacilityShape }) {
       <Button
         onPress={() => setIsOpen(true)}
         variant="secondary"
-        className="flex items-center justify-center gap-2 text-lg font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-50 cursor-pointer bg-brand-primari/30 w-full sm:w-auto"
+        aria-label={`Edit ${facility.name}`}
+        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 transition-colors hover:border-brand-primari/40 hover:text-brand-primari sm:w-auto"
       >
-        <Pencil size={20} /> Edit
+        <Pencil size={18} /> Edit
       </Button>
       <Modal.Backdrop>
         <Modal.Container placement="auto">
-          <Modal.Dialog className="sm:max-w-md">
+          <Modal.Dialog className="sm:max-w-2xl">
             <Modal.CloseTrigger />
             <Modal.Header>
               <Modal.Heading>Edit Facility</Modal.Heading>

@@ -29,21 +29,21 @@ export default function BookingCard({
 }: BookingCardProps) {
 
     return (
-        <div className="flex flex-col sm:flex-row items-start justify-between gap-4 rounded-[32px] border border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800 p-6 sm:p-8 shadow-sm transition-colors duration-300">
+        <div className="flex min-w-0 flex-col items-stretch justify-between gap-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 p-6 sm:p-8 shadow-sm transition-colors duration-300 sm:flex-row sm:items-start">
 
             {/* Left Content */}
-            <div className="flex gap-10">
+            <div className="flex min-w-0 flex-1 gap-6">
 
                 {/* Info */}
-                <div className="space-y-5">
+                <div className="min-w-0 flex-1 space-y-4">
 
                     {/* Title + Badge */}
-                    <div className="flex flex-wrap items-center gap-4">
-                        <h2 className="text-2xl text-slate-900 dark:text-white">
+                    <div className="flex flex-wrap items-center gap-3">
+                        <h3 className="font-sans text-xl font-semibold text-slate-900 dark:text-white">
                             {facilityName}
-                        </h2>
+                        </h3>
                         <span
-                            className={`rounded-2xl border px-5 py-2 text-md font-bold uppercase tracking-wide
+                            className={`rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-wider
               ${status === "Pending"
                                     ? "border-yellow-200 bg-yellow-100 text-yellow-700"
                                     : status === "Confirmed"
@@ -56,7 +56,7 @@ export default function BookingCard({
                     </div>
 
                     {/* Details */}
-                    <div className="flex flex-wrap items-center gap-4 text-[18px] text-slate-500 dark:text-slate-400">
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm sm:text-base text-slate-500 dark:text-slate-400">
 
                         {/* Location */}
                         <div className="flex items-center gap-2">
@@ -81,7 +81,7 @@ export default function BookingCard({
                         {/* Price */}
                         <div className="flex items-center gap-1">
                             <DollarSign size={20} className="text-brand-primari" />
-                            <span className="text-2xl font-bold text-brand-primari">
+                            <span className="text-xl font-bold text-brand-primari">
                                 {price}
                             </span>
                         </div>

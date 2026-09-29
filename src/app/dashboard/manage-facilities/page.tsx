@@ -58,64 +58,84 @@ export default async function ManageFacilities() {
   }
 
   return (
-    <section className="min-h-screen px-4 py-6 sm:px-6 lg:px-10">
-      <div className="mx-auto max-w-7xl">
+    <section className="min-h-screen">
         {/* Header */}
-        <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between text-left">
+        <div className="mb-8 sm:mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between text-left">
           <div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-slate-900 dark:text-white">
-              Manage My Facilities
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Manage My <span className="text-gradient">Facilities</span>
             </h1>
 
-            <p className="mt-2 text-base sm:text-lg text-slate-500 dark:text-slate-400">
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-500 dark:text-slate-400">
               Edit or remove your listed venues
             </p>
           </div>
 
           <Link
             href="/dashboard/add-facility"
-            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-primari px-6 py-4 text-base font-semibold text-brand-secondary shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-brand-primari cursor-pointer"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-primari px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition-colors hover:bg-cyan-600 cursor-pointer"
           >
-            <Plus size={20} />
+            <Plus size={18} />
             Add New
           </Link>
         </div>
         {/* Facility Cards */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
+          {addedFacilities.length === 0 ? (
+            <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-800 px-6 py-16 text-center">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-500 dark:text-cyan-300">
+                <Plus size={32} />
+              </div>
+              <h3 className="mb-2 font-sans text-xl font-semibold text-slate-900 dark:text-white">
+                No facilities yet
+              </h3>
+              <p className="mb-6 max-w-md text-base text-slate-500 dark:text-slate-400">
+                You haven&apos;t listed any venues. Add your first facility to start receiving bookings.
+              </p>
+              <Link
+                href="/dashboard/add-facility"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primari px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition-colors hover:bg-cyan-600"
+              >
+                <Plus size={18} />
+                Add your first facility
+              </Link>
+            </div>
+          ) : (
+          <>
           {addedFacilities.map((facility: Facility) => (
             <div
               key={facility._id}
-              className="group rounded-[32px] border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 p-4 shadow-sm transition-all duration-300"
+              className="group rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 p-6 sm:p-8 shadow-sm transition-colors duration-300"
             >
               <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
                 {/* Left Content */}
-                <div className="flex flex-col items-center justify-center gap-5 sm:flex-row sm:items-center">
+                <div className="flex min-w-0 flex-1 flex-col gap-5 sm:flex-row sm:items-center">
                   {/* Image */}
-                  <div className="relative h-30 w-fit max-md:w-full overflow-hidden rounded-3xl">
+                  <div className="relative h-28 w-full shrink-0 overflow-hidden rounded-2xl sm:h-32 sm:w-40">
                     <Image
                       src={facility?.image || "/logo.png"}
                       alt={facility.name}
-                      width={150}
-                      height={150}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 160px"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 
                   {/* Info */}
-                  <div className="flex-1">
+                  <div className="min-w-0 flex-1">
                     {/* Top */}
                     <div className="flex flex-wrap items-center gap-3">
-                      <h2 className="text-2xl sm:text-3xl font-black text-brand-secondary dark:text-white">
+                      <h2 className="font-sans text-xl font-semibold text-slate-900 dark:text-white">
                         {facility.name}
                       </h2>
 
-                      <span className="rounded-xl border border-brand-primari/20 bg-brand-primari/5 px-4 py-2 text-sm font-bold tracking-wide text-brand-primari">
+                      <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-700 dark:text-cyan-300">
                         {facility.facility_type}
                       </span>
                     </div>
 
                     {/* Bottom Info */}
-                    <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-4 text-slate-500 dark:text-slate-400">
+                    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm sm:text-base text-slate-500 dark:text-slate-400">
                       {/* Location */}
                       <div className="flex items-center gap-2">
                         <MapPin
@@ -123,7 +143,7 @@ export default async function ManageFacilities() {
                           className="text-brand-primari"
                         />
 
-                        <span className="text-base sm:text-lg">
+                        <span>
                           {facility.location}
                         </span>
                       </div>
@@ -135,7 +155,7 @@ export default async function ManageFacilities() {
                           className="text-brand-primari"
                         />
 
-                        <span className="text-base sm:text-lg">
+                        <span>
                           ${facility.price_per_hour}/hr
                         </span>
                       </div>
@@ -147,14 +167,14 @@ export default async function ManageFacilities() {
                           className="text-brand-primari"
                         />
 
-                        <span className="text-base sm:text-lg">
+                        <span>
                           {facility.capacity} players
                         </span>
                       </div>
 
                       {/* Bookings */}
-                      <div className="rounded-2xl border border-brand-primari/20 bg-brand-primari/5 px-4 py-2">
-                        <span className="text-lg font-bold text-brand-primari">
+                      <div className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1">
+                        <span className="text-sm font-semibold text-cyan-700 dark:text-cyan-300">
                           {facility.booking_count} Bookings
                         </span>
                       </div>
@@ -163,7 +183,7 @@ export default async function ManageFacilities() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-4 xl:flex-col w-full xl:w-auto items-center">
+                <div className="flex shrink-0 flex-col gap-3 sm:flex-row xl:w-44 xl:flex-col items-stretch">
                   {/* Edit */}
                   <ModalForm facility={facility} />
 
@@ -173,8 +193,9 @@ export default async function ManageFacilities() {
               </div>
             </div>
           ))}
+          </>
+          )}
         </div>
-      </div>
     </section>
   );
 }

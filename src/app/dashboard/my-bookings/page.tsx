@@ -48,22 +48,23 @@ async function MyBookingPage() {
   }
 
   return (
-    <section className="px-6 min-h-screen">
-      <div className="max-w-6xl mx-auto">
-
+    <section className="min-h-screen">
         {/* Page Header */}
-        <div className="text-start mb-12">
-          <h2 className="text-4xl font-bold text-brand-secondary dark:text-white">
+        <div className="mb-8 sm:mb-10">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
             My <span className="text-gradient">Bookings</span>
-          </h2>
-          <p className="text-slate-500 dark:text-slate-400 text-lg mb-2">
+          </h1>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-500 dark:text-slate-400">
             Track, manage, and cancel your upcoming sports sessions.
           </p>
         </div>
 
         {/* Display Bookings */}
         {bookings && bookings.length > 0 ? (
-          <div className="space-y-6">
+          <div aria-live="polite" className="space-y-4 sm:space-y-6">
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+              {bookings.length} upcoming session{bookings.length === 1 ? "" : "s"}
+            </p>
             {bookings.map((booking: Booking) => {
               const statusMap: Record<string, "Pending" | "Confirmed" | "Cancelled"> = {
                 pending: "Pending",
@@ -89,29 +90,28 @@ async function MyBookingPage() {
           </div>
         ) : (
           /* No Bookings State */
-          <div className="flex flex-col items-center justify-center py-16 bg-gray-50 dark:bg-slate-800 rounded-3xl border border-gray-100 dark:border-white/10">
-            <div className="mb-6 text-gray-400 dark:text-slate-500">
-              <BookOpen size={64} />
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-800 px-6 py-16 text-center">
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-500 dark:text-cyan-300">
+              <BookOpen size={32} />
             </div>
 
-            <h3 className="text-2xl font-bold text-brand-secondary dark:text-white mb-2">
+            <h3 className="mb-2 font-sans text-xl font-semibold text-slate-900 dark:text-white">
               No Bookings Found
             </h3>
 
-            <p className="text-gray-500 dark:text-slate-400 mb-6">
+            <p className="mb-6 max-w-md text-base text-slate-500 dark:text-slate-400">
               You haven&apos;t booked any facilities yet. Start exploring now!
             </p>
 
             <Link
               href="/all-facility"
-              className="px-8 py-3 bg-brand-primari text-white font-bold rounded-xl hover:bg-brand-primari/90 transition-colors"
+              className="inline-flex items-center justify-center rounded-xl bg-brand-primari px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition-colors hover:bg-cyan-600"
             >
               Explore Facilities
             </Link>
           </div>
         )}
 
-      </div>
     </section>
   )
 }
