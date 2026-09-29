@@ -181,7 +181,7 @@ export default function AllFacilityPage() {
               <span className="text-[13px] font-medium text-slate-400 dark:text-slate-500">
                 Showing {facilities.length} of {totalPages * 12}+ facilities
               </span>
-              <div className="h-1.5 w-[280px] rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden shadow-inner">
+              <div className="h-1.5 w-70 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden shadow-inner">
                 <div
                   className="h-full rounded-full bg-[#065f46] transition-all duration-500"
                   style={{ width: `${(page / totalPages) * 100}%` }}
