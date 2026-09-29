@@ -65,15 +65,21 @@ export default function Review() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const maxIndex = Math.max(0, REVIEWS.length - cardsToShow);
+
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
+
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex >= REVIEWS.length - cardsToShow ? 0 : prevIndex + 1,
+      prevIndex >= maxIndex ? 0 : prevIndex + 1,
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? REVIEWS.length - cardsToShow : prevIndex - 1,
+      prevIndex === 0 ? maxIndex : prevIndex - 1,
     );
   };
 
@@ -107,20 +113,23 @@ export default function Review() {
         </div>
 
         {/* Slider */}
-        <Reveal delay={0.1} y={34} className="relative w-full">
+        <Reveal
+          delay={0.1}
+          y={34}
+          className="relative w-full max-w-full min-w-0 overflow-hidden"
+        >
           <div
-            className="flex transition-transform duration-500 ease-in-out"
+            className="flex -mx-3 transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
+              transform: `translateX(-${currentIndex * (100 / REVIEWS.length)}%)`,
             }}
           >
             {REVIEWS.map((review) => (
               <div
                 key={review.id}
-                className="w-full shrink-0 px-3"
-                style={{ width: `${100 / cardsToShow}%` }}
+                className="min-w-0 shrink-0 grow-0 basis-full px-3 md:basis-1/2 lg:basis-1/3"
               >
-                <div className="bg-white dark:bg-slate-800 dark:border dark:border-white/10 p-8 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] h-full flex flex-col justify-between">
+                <div className="bg-white dark:bg-slate-800 dark:border dark:border-white/10 p-8 rounded-xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] h-full max-w-full overflow-hidden flex flex-col justify-between">
                   <p className="text-gray-500 dark:text-slate-400 leading-relaxed mb-10 text-[15px]">
                     {review.text}
                   </p>
